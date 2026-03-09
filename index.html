@@ -1,623 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChrisFlix - Premium Streaming</title>
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #0b0b0b;
-      color: #fff;
-      line-height: 1.5;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>imovercovidmaylee</title>
 
-    /* header */
-    header {
-      background: linear-gradient(180deg, #141414 0%, #0f0f0f 100%);
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-    }
-    header h1 {
-      color: #e50914;
-      font-size: 28px;
-      letter-spacing: -0.5px;
-      font-weight: 700;
-    }
-    header nav a {
-      color: #e5e5e5;
-      margin-left: 25px;
-      text-decoration: none;
-      font-size: 16px;
-      transition: color 0.2s;
-    }
-    header nav a:hover {
-      color: #fff;
-    }
-    #adminDots {
-      font-size: 28px;
-      cursor: pointer;
-      user-select: none;
-      color: #fff;
-      transition: opacity 0.2s;
-    }
-    #adminDots:hover {
-      opacity: 0.8;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    /* purchase banner */
-    #purchaseBanner {
-      background: #1a1a1a;
-      padding: 12px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #e50914;
-    }
-    #purchaseBanner p {
-      font-size: 18px;
-      font-weight: 500;
-    }
-    #purchaseBanner button {
-      background: #e50914;
-      color: #fff;
-      border: none;
-      padding: 10px 25px;
-      border-radius: 5px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    #purchaseBanner button:hover {
-      background: #b2070f;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-    /* admin panel */
-    #adminPanel {
-      display: none;
-      position: fixed;
-      top: 80px;
-      right: 30px;
-      width: 320px;
-      background: #1f1f1f;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-      z-index: 200;
-      border: 1px solid #333;
-    }
-    #adminPanel h3 {
-      margin-bottom: 20px;
-      color: #e50914;
-      font-weight: 500;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    #adminPanel .close-admin {
-      cursor: pointer;
-      font-size: 22px;
-      color: #aaa;
-    }
-    #adminPanel .close-admin:hover {
-      color: #fff;
-    }
-    #adminPanel input,
-    #adminPanel select {
-      margin-bottom: 15px;
-      padding: 12px;
-      width: 100%;
-      border-radius: 6px;
-      border: none;
-      background: #2c2c2c;
-      color: #fff;
-      font-size: 14px;
-    }
-    #adminPanel input::placeholder {
-      color: #777;
-    }
-    #adminPanel button {
-      padding: 12px;
-      background: #e50914;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 16px;
-      width: 100%;
-      transition: background 0.2s;
-    }
-    #adminPanel button:hover {
-      background: #b2070f;
-    }
+body{
+font-family:'Segoe UI',Arial,sans-serif;
+background:#0b0b0b;
+color:#fff;
+line-height:1.5;
+}
 
-    /* main container */
-    .container {
-      padding: 20px 30px;
-    }
+/* header */
 
-    /* video rows */
-    .row {
-      margin-bottom: 50px;
-    }
-    .row h2 {
-      margin-bottom: 15px;
-      font-size: 22px;
-      font-weight: 500;
-      border-left: 5px solid #e50914;
-      padding-left: 15px;
-    }
-    .videos {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      padding-bottom: 15px;
-      scrollbar-width: thin;
-      scrollbar-color: #e50914 #2c2c2c;
-    }
-    .videos::-webkit-scrollbar {
-      height: 8px;
-    }
-    .videos::-webkit-scrollbar-track {
-      background: #2c2c2c;
-      border-radius: 10px;
-    }
-    .videos::-webkit-scrollbar-thumb {
-      background: #e50914;
-      border-radius: 10px;
-    }
+header{
+background:linear-gradient(180deg,#141414 0%,#0f0f0f 100%);
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:100;
+box-shadow:0 4px 10px rgba(0,0,0,0.6);
+}
 
-    /* video card */
-    .video-card {
-      min-width: 220px;
-      position: relative;
-      cursor: pointer;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .video-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
-    }
-    .video-card img {
-      width: 100%;
-      height: 130px;
-      object-fit: cover;
-      display: block;
-      border-radius: 8px;
-    }
-    .video-card .vip-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: gold;
-      color: #111;
-      padding: 4px 8px;
-      font-weight: bold;
-      border-radius: 4px;
-      font-size: 12px;
-      z-index: 2;
-    }
-    .video-card .delete-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      cursor: pointer;
-      border: 1px solid #e50914;
-      transition: background 0.2s;
-      z-index: 5;
-    }
-    .video-card .delete-btn:hover {
-      background: #e50914;
-    }
+header h1{
+color:#e50914;
+font-size:28px;
+letter-spacing:-0.5px;
+font-weight:700;
+}
 
-    /* modal */
-    #videoModal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.95);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    #videoModal video {
-      max-width: 90%;
-      max-height: 85%;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(229, 9, 20, 0.3);
-    }
-    #videoModal .close {
-      position: absolute;
-      top: 25px;
-      right: 35px;
-      font-size: 40px;
-      cursor: pointer;
-      color: #aaa;
-      transition: color 0.2s;
-    }
-    #videoModal .close:hover {
-      color: #fff;
-    }
+header nav a{
+color:#e5e5e5;
+margin-left:25px;
+text-decoration:none;
+font-size:16px;
+transition:color 0.2s;
+}
 
-    /* payment modal (simple alert alternative) */
-    .payment-prompt {
-      background: #222;
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 400px;
-    }
-    .payment-prompt h3 { color: #e50914; margin-bottom: 15px; }
-    .payment-prompt p { margin-bottom: 20px; }
-    .payment-prompt button {
-      background: #e50914;
-      color: #fff;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 6px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-    }
-    .payment-prompt button.cancel {
-      background: #555;
-    }
+header nav a:hover{
+color:#fff;
+}
 
-    /* footer */
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #0f0f0f;
-      border-top: 1px solid #222;
-      margin-top: 40px;
-    }
-    footer a {
-      color: #e50914;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    footer a:hover {
-      text-decoration: underline;
-    }
+#adminDots{
+font-size:28px;
+cursor:pointer;
+user-select:none;
+color:#fff;
+}
 
-    /* default thumbnail fallback */
-    .default-thumb {
-      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
+/* purchase banner */
 
-<header>
-  <h1>ChrisFlix</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">VIP</a>
-    <a href="#">Login</a>
-  </nav>
-  <div id="adminDots" onclick="toggleAdmin()">⋮</div>
-</header>
+#purchaseBanner{
+background:#1a1a1a;
+padding:12px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:2px solid #e50914;
+}
 
-<!-- Purchase Banner (shown only if not paid) -->
-<div id="purchaseBanner" style="display: flex;">
-  <p>🌟 Get unlimited access to all VIP videos for a one‑time fee of <strong>$100</strong>!</p>
-  <button onclick="purchasePackage()">Buy Full Access</button>
-</div>
+#purchaseBanner button{
+background:#e50914;
+color:#fff;
+border:none;
+padding:10px 25px;
+border-radius:5px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
 
-<div id="adminPanel">
-  <h3>
-    Admin Panel
-    <span class="close-admin" onclick="toggleAdmin()"><i class="fas fa-times"></i></span>
-  </h3>
-  <input type="text" id="videoTitle" placeholder="Video Title" value="Sample Title">
-  <input type="text" id="videoThumbnail" placeholder="Thumbnail URL (leave empty for default)">
-  <input type="text" id="videoSrc" placeholder="Video URL (e.g., .mp4 file)" value="https://www.w3schools.com/html/mov_bbb.mp4">
-  <select id="videoType">
-    <option value="free">Free</option>
-    <option value="vip">VIP</option>
-  </select>
-  <button onclick="addVideo()"><i class="fas fa-plus-circle"></i> Add Video</button>
-  <p style="color:#888; font-size:12px; margin-top:10px;">Delete videos by clicking the <i class="fas fa-trash"></i> icon (visible when panel is open).</p>
-</div>
+/* admin panel */
 
-<div class="container">
-  <div class="row">
-    <h2>🎬 Free Videos</h2>
-    <div class="videos" id="freeVideos"></div>
-  </div>
-  <div class="row">
-    <h2>👑 VIP Videos</h2>
-    <div class="videos" id="vipVideos"></div>
-  </div>
-</div>
+#adminPanel{
+display:none;
+position:fixed;
+top:80px;
+right:30px;
+width:320px;
+background:#1f1f1f;
+padding:25px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.7);
+z-index:200;
+border:1px solid #333;
+}
 
-<div id="videoModal" onclick="closeModal(event)">
-  <span class="close" onclick="closeModal(event)">&times;</span>
-  <video controls id="modalVideo"></video>
-</div>
+#adminPanel input,#adminPanel select{
+margin-bottom:15px;
+padding:12px;
+width:100%;
+border-radius:6px;
+border:none;
+background:#2c2c2c;
+color:#fff;
+}
 
-<footer>
-  <p>📞 Contact us on WhatsApp: <a href="https://wa.me/2347061348267" target="_blank">+234 706 134 8267</a></p>
-  <p style="color:#777; font-size:14px;">©️ 2025 ChrisFlix. All rights reserved.</p>
-</footer>
+#adminPanel button{
+padding:12px;
+background:#e50914;
+color:#fff;
+border:none;
+cursor:pointer;
+border-radius:6px;
+font-weight:600;
+font-size:16px;
+width:100%;
+}
 
-<!-- Tawk.to Live Chat Widget (replace with your own property ID) -->
-<script type="text/javascript">
-  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-  (function() {
-    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/YOUR_TAWKTO_PROPERTY_ID/default';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1, s0);
-  })();
-</script>
+/* main container */
 
-<script>
-  (function() {
-    // --- data & references ---
-    const freeVideos = [];
-    const vipVideos = [];
-    const freeVideosContainer = document.getElementById('freeVideos');
-    const vipVideosContainer = document.getElementById('vipVideos');
-    const videoModal = document.getElementById('videoModal');
-    const modalVideo = document.getElementById('modalVideo');
-    const adminPanel = document.getElementById('adminPanel');
-    const purchaseBanner = document.getElementById('purchaseBanner');
+.container{
+padding:20px 30px;
+}
 
-    const ADMIN_PASSWORD = "1234";          // change as needed
-    const PACKAGE_PRICE = 100;              // $100
-    const STORAGE_KEY = 'chrisflix_videos';
-    const PAID_KEY = 'chrisflix_paid';
+/* video rows */
 
-    // --- check if user already paid ---
-    let paid = localStorage.getItem(PAID_KEY) === 'true';
+.row{
+margin-bottom:50px;
+}
 
-    // update purchase banner visibility
-    function updatePurchaseBanner() {
-      if (paid) {
-        purchaseBanner.style.display = 'none';
-      } else {
-        purchaseBanner.style.display = 'flex';
-      }
-    }
-    updatePurchaseBanner();
+.row h2{
+margin-bottom:15px;
+font-size:22px;
+border-left:5px solid #e50914;
+padding-left:15px;
+}
 
-    // --- purchase function (global) ---
-    window.purchasePackage = function() {
-      if (confirm(`Confirm purchase of full access for $${PACKAGE_PRICE}? (This is a simulation.)`)) {
-        paid = true;
-        localStorage.setItem(PAID_KEY, 'true');
-        updatePurchaseBanner();
-        alert('Thank you! All VIP videos are now unlocked.');
-      }
-    };
+.videos{
+display:flex;
+overflow-x:auto;
+gap:15px;
+padding-bottom:15px;
+}
 
-    // --- helper functions ---
-    function generateId() {
-      return Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-    }
+/* video card */
 
-    // load from localStorage
-    function loadFromStorage() {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        try {
-          const data = JSON.parse(stored);
-          freeVideos.length = 0;
-          vipVideos.length = 0;
-          data.free.forEach(v => freeVideos.push({ ...v, id: v.id || generateId() }));
-          data.vip.forEach(v => vipVideos.push({ ...v, id: v.id || generateId() }));
-        } catch (e) { console.error('Failed to load from storage', e); }
-      }
-      // if empty, add sample videos
-      if (freeVideos.length === 0 && vipVideos.length === 0) {
-        freeVideos.push(
-          { id: generateId(), title: 'Sample Free 1', thumbnail: 'https://via.placeholder.com/300x170?text=Free+1', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-          { id: generateId(), title: 'Sample Free 2', thumbnail: 'https://via.placeholder.com/300x170?text=Free+2', src: 'https://www.w3schools.com/html/mov_bbb.mp4' }
-        );
-        vipVideos.push(
-          { id: generateId(), title: 'Sample VIP 1', thumbnail: 'https://via.placeholder.com/300x170?text=VIP+1', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-          { id: generateId(), title: 'Sample VIP 2', thumbnail: 'https://via.placeholder.com/300x170?text=VIP+2', src: 'https://www.w3schools.com/html/mov_bbb.mp4' }
-        );
-      }
-      saveToStorage();
-    }
+.video-card{
+min-width:220px;
+position:relative;
+cursor:pointer;
+border-radius:8px;
+overflow:hidden;
+transition:transform 0.3s;
+}
 
-    function saveToStorage() {
-      const data = {
-        free: freeVideos.map(({ id, title, thumbnail, src }) => ({ id, title, thumbnail, src })),
-        vip: vipVideos.map(({ id, title, thumbnail, src }) => ({ id, title, thumbnail, src }))
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    }
+.video-card:hover{
+transform:scale(1.05);
+}
 
-    // render both sections
-    function renderAllVideos() {
-      const adminVisible = adminPanel.style.display === 'block';
-      renderVideos('free', adminVisible);
-      renderVideos('vip', adminVisible);
-    }
+.video-card img{
+width:100%;
+height:130px;
+object-fit:cover;
+}
 
-    function renderVideos(type, showDelete) {
-      const container = type === 'free' ? freeVideosContainer : vipVideosContainer;
-      const videos = type === 'free' ? freeVideos : vipVideos;
-      container.innerHTML = '';
+/* vip badge */
 
-      videos.forEach(video => {
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.setAttribute('data-id', video.id);
-        card.setAttribute('data-type', type);
+.vip-badge{
+position:absolute;
+top:10px;
+left:10px;
+background:gold;
+color:#111;
+padding:4px 8px;
+font-weight:bold;
+border-radius:4px;
+font-size:12px;
+}
 
-        const img = document.createElement('img');
-        img.src = video.thumbnail || 'https://via.placeholder.com/300x170?text=No+Thumbnail';
-        img.alt = video.title;
-        img.onerror = function() { this.src = 'https://via.placeholder.com/300x170?text=Error'; };
-        card.appendChild(img);
+/* delete button */
 
-        if (type === 'vip') {
-          const badge = document.createElement('div');
-          badge.className = 'vip-badge';
-          badge.textContent = 'VIP';
-          card.appendChild(badge);
-        }
+.delete-btn{
+position:absolute;
+top:10px;
+right:10px;
+background:rgba(0,0,0,0.7);
+color:#fff;
+width:30px;
+height:30px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+border:1px solid #e50914;
+}
 
-        if (showDelete) {
-          const delBtn = document.createElement('div');
-          delBtn.className = 'delete-btn';
-          delBtn.innerHTML = '<i class="fas fa-trash"></i>';
-          delBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            deleteVideo(video.id, type);
-          });
-          card.appendChild(delBtn);
-        }
+/* modal */
 
-        card.addEventListener('click', () => {
-          playVideo(video.src, type);
-        });
+#videoModal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.95);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
 
-        container.appendChild(card);
-      });
-    }
+#videoModal video{
+max-width:90%;
+max-height:85%;
+border-radius:12px;
+}
 
-    function deleteVideo(id, type) {
-      const arr = type === 'free' ? freeVideos : vipVideos;
-      const index = arr.findIndex(v => v.id === id);
-      if (index !== -1) {
-        arr.splice(index, 1);
-        saveToStorage();
-        renderAllVideos();
-      }
-    }
+#videoModal .close{
+position:absolute;
+top:25px;
+right:35px;
+font-size:40px;
+cursor:pointer;
+color:#aaa;
+}
 
-    // play video with payment check for VIP
-    function playVideo(src, type) {
-      if (type === 'vip' && !paid) {
-        // Show a custom payment prompt (using confirm for simplicity)
-        const wantsToBuy = confirm("🔒 This is VIP content. You need to purchase the $100 package to watch. Click OK to buy now.");
-        if (wantsToBuy) {
-          purchasePackage();
-          // if they paid, then play
-          if (paid) {
-            modalVideo.src = src;
-            videoModal.style.display = 'flex';
-            modalVideo.play().catch(e => console.log('Autoplay prevented:', e));
-          }
-        }
-        return;
-      }
-      // free or paid VIP
-      modalVideo.src = src;
-      videoModal.style.display = 'flex';
-      modalVideo.play().catch(e => console.log('Autoplay prevented:', e));
-    }
+/* footer */
 
-    function closeModal(event) {
-      if (event.target === videoModal || event.target.classList.contains('close')) {
-        videoModal.style.display = 'none';
-        modalVideo.pause();
-        modalVideo.src = '';
-      }
-    }
+footer{
+text-align:center;
+padding:25px;
+background:#0f0f0f;
+border-top:1px solid #222;
+margin-top:40px;
+}
 
-    // admin toggle with password
-    window.toggleAdmin = function() {
-      const password = prompt("Enter Admin Password:");
-      if (password === ADMIN_PASSWORD) {
-        if (adminPanel.style.display === 'block') {
-          adminPanel.style.display = 'none';
-        } else {
-          adminPanel.style.display = 'block';
-        }
-        renderAllVideos(); // refresh to show/hide delete buttons
-      } else if (password !== null) {
-        alert("❌ Incorrect password!");
-      }
-    };
-
-    window.addVideo = function() {
-      const title = document.getElementById('videoTitle').value.trim();
-      let thumbnail = document.getElementById('videoThumbnail').value.trim();
-      const src = document.getElementById('videoSrc').value.trim();
-      const type = document.getElementById('videoType').value;
-
-      if (!title || !src) {
-        alert('Please fill at least Title and Video URL');
-        return;
-      }
-
-      if (!thumbnail) {
-        thumbnail = 'https://via.placeholder.com/300x170?text=No+Thumbnail';
-      }
-
-      const video = { id: generateId(), title, thumbnail, src };
-
-      if (type === 'free') {
-        freeVideos.push(video);
-      } else {
-        vipVideos.push(video);
-      }
-
-      saveToStorage();
-      renderAllVideos();
-
-      document.getElementById('videoTitle').value = '';
-      document.getElementById('videoThumbnail').value = '';
-      document.getElementById('videoSrc').value = '';
-    };
-
-    window.closeModal = closeModal;
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && videoModal.style.display === 'flex') {
-        videoModal.style.display = 'none';
-        modalVideo.pause();
-        modalVideo.src = '';
-      }
-    });
-
-    // initial load
-    loadFromStorage();
-    renderAllVideos();
-  })();
-</script>
-
-<!-- Replace the chat widget with your own Tawk.to property ID -->
-<!-- Go to https://www.tawk.to/ , create a free account, and get your property ID -->
-<!-- Then replace "YOUR_TAWKTO_PROPERTY_ID" in the script above -->
-</body>
-</html>
+footer a
