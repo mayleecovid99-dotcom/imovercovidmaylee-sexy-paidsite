@@ -236,4 +236,222 @@ border-top:1px solid #222;
 margin-top:40px;
 }
 
-footer a
+footer a{
+color:#e50914;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>imovercovidmaylee</h1>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">VIP</a>
+<a href="#">Login</a>
+</nav>
+
+<div id="adminDots" onclick="toggleAdmin()">⋮</div>
+</header>
+
+<div id="purchaseBanner">
+<p>🌟 Get unlimited access to all VIP videos for a one-time fee of <strong>$100</strong></p>
+<button onclick="purchasePackage()">Buy Full Access</button>
+</div>
+
+<div id="adminPanel">
+
+<h3>Admin Panel</h3>
+
+<input type="text" id="videoTitle" placeholder="Video Title">
+
+<input type="text" id="videoThumbnail" placeholder="Thumbnail URL">
+
+<input type="text" id="videoSrc" placeholder="Video URL (.mp4)">
+
+<select id="videoType">
+<option value="free">Free</option>
+<option value="vip">VIP</option>
+</select>
+
+<button onclick="addVideo()">Add Video</button>
+
+</div>
+
+<div class="container">
+
+<div class="row">
+<h2>🎬 Free Videos</h2>
+<div class="videos" id="freeVideos"></div>
+</div>
+
+<div class="row">
+<h2>👑 VIP Videos</h2>
+<div class="videos" id="vipVideos"></div>
+</div>
+
+</div>
+
+<div id="videoModal" onclick="closeModal(event)">
+<span class="close" onclick="closeModal(event)">&times;</span>
+<video controls id="modalVideo"></video>
+</div>
+
+<footer>
+<p>📩 Contact us on Telegram:
+<a href="https://t.me/maylee-covid0001" target="_blank">@maylee-covid0001</a>
+</p>
+
+<p style="color:#777;font-size:14px;">
+©️ 2025 imovercovidmaylee. All rights reserved.
+</p>
+</footer>
+
+<script>
+
+const freeVideos=[];
+const vipVideos=[];
+
+const freeVideosContainer=document.getElementById('freeVideos');
+const vipVideosContainer=document.getElementById('vipVideos');
+
+const videoModal=document.getElementById('videoModal');
+const modalVideo=document.getElementById('modalVideo');
+
+const adminPanel=document.getElementById('adminPanel');
+
+const ADMIN_PASSWORD="1234";
+const PAID_KEY="paid_access";
+
+let paid=localStorage.getItem(PAID_KEY)==="true";
+
+function purchasePackage(){
+
+if(confirm("Confirm purchase for $100?")){
+paid=true;
+localStorage.setItem(PAID_KEY,"true");
+alert("VIP videos unlocked");
+}
+
+}
+
+function generateId(){
+return Date.now();
+}
+
+function renderVideos(type){
+
+let container=type==="free"?freeVideosContainer:vipVideosContainer;
+
+let videos=type==="free"?freeVideos:vipVideos;
+
+container.innerHTML="";
+
+videos.forEach(video=>{
+
+const card=document.createElement("div");
+card.className="video-card";
+
+const img=document.createElement("img");
+img.src=video.thumbnail;
+
+card.appendChild(img);
+
+if(type==="vip"){
+
+const badge=document.createElement("div");
+badge.className="vip-badge";
+badge.textContent="VIP";
+
+card.appendChild(badge);
+
+}
+
+card.onclick=()=>playVideo(video.src,type);
+
+container.appendChild(card);
+
+});
+
+}
+
+function playVideo(src,type){
+
+if(type==="vip"&&!paid){
+
+if(confirm("This is VIP content. Buy access?")){
+purchasePackage();
+}
+
+return;
+
+}
+
+modalVideo.src=src;
+videoModal.style.display="flex";
+
+}
+
+function closeModal(event){
+
+if(event.target===videoModal||event.target.classList.contains("close")){
+videoModal.style.display="none";
+modalVideo.pause();
+modalVideo.src="";
+}
+
+}
+
+function toggleAdmin(){
+
+let password=prompt("Enter admin password");
+
+if(password===ADMIN_PASSWORD){
+
+adminPanel.style.display=
+adminPanel.style.display==="block"?"none":"block";
+
+}
+
+}
+
+function addVideo(){
+
+const title=document.getElementById("videoTitle").value;
+const thumbnail=document.getElementById("videoThumbnail").value;
+const src=document.getElementById("videoSrc").value;
+const type=document.getElementById("videoType").value;
+
+if(!title||!src){
+alert("Enter title and video url");
+return;
+}
+
+const video={
+id:generateId(),
+title,
+thumbnail,
+src
+};
+
+if(type==="free"){
+freeVideos.push(video);
+}else{
+vipVideos.push(video);
+}
+
+renderVideos("free");
+renderVideos("vip");
+
+}
+
+renderVideos("free");
+renderVideos("vip");
+
+</script>
+
+</body>
+</html>
