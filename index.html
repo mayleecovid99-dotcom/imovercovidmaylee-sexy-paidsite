@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>imovercovidmaylee · video hub</title>
+  <title>imovercovidmaylee · admin control</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
       line-height: 1.5;
     }
 
-    /* header – glass with underline */
+    /* header */
     header {
       background: rgba(10, 10, 12, 0.95);
       backdrop-filter: blur(8px);
@@ -72,7 +72,120 @@
       color: #e50914;
     }
 
-    /* main container – no hero, no banner */
+    /* HERO – now dynamic */
+    .hero {
+      position: relative;
+      height: 70vh;
+      min-height: 500px;
+      width: 100%;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.45) saturate(1.2);
+      transition: transform 0.3s ease;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #0a0a0c 0%, transparent 50%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 4rem;
+      left: 4rem;
+      max-width: 600px;
+      z-index: 2;
+    }
+    .hero-content h2 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #ddd;
+      margin-bottom: 1.8rem;
+      max-width: 450px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+    .hero-content button {
+      background: #e50914;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(229, 9, 20, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: background 0.2s, scale 0.2s;
+    }
+    .hero-content button i {
+      font-size: 1.3rem;
+    }
+    .hero-content button:hover {
+      background: #ff0f1f;
+      scale: 1.05;
+    }
+
+    /* purchase banner */
+    #purchaseBanner {
+      background: linear-gradient(135deg, #1e1e24, #141417);
+      padding: 0.9rem 2.5rem;
+      border-bottom: 2px solid #e50914;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+    #purchaseBanner p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #purchaseBanner p i {
+      color: #ffd966;
+      font-size: 1.4rem;
+    }
+    #purchaseBanner strong {
+      color: #e50914;
+      font-weight: 700;
+      background: rgba(229,9,20,0.15);
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      margin-left: 0.4rem;
+    }
+    #purchaseBanner button {
+      background: transparent;
+      border: 2px solid #e50914;
+      padding: 0.5rem 1.8rem;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    #purchaseBanner button:hover {
+      background: #e50914;
+      border-color: #e50914;
+      box-shadow: 0 0 15px #e5091433;
+    }
+
+    /* main container */
     .container {
       padding: 2.5rem 2rem;
       max-width: 1600px;
@@ -93,7 +206,7 @@
       padding-left: 1rem;
     }
 
-    /* video scroller – sleek */
+    /* video scroller */
     .videos {
       display: flex;
       gap: 1.2rem;
@@ -114,7 +227,7 @@
       border-radius: 12px;
     }
 
-    /* video card – clean overlay, hover effect */
+    /* video card */
     .video-card {
       min-width: 200px;
       width: 200px;
@@ -140,7 +253,6 @@
       filter: brightness(1.1);
     }
 
-    /* title overlay (shows on hover) */
     .video-card .card-title {
       position: absolute;
       bottom: 0;
@@ -181,7 +293,7 @@
       font-size: 0.7rem;
     }
 
-    /* MODAL – refined */
+    /* MODAL */
     #videoModal {
       display: none;
       position: fixed;
@@ -213,12 +325,12 @@
       color: #e50914;
     }
 
-    /* ADMIN PANEL – glass, now with working X */
+    /* ADMIN PANEL – now with banner upload */
     #adminPanel {
       display: none;
       position: fixed;
       top: 90px; right: 30px;
-      width: 360px;
+      width: 380px;
       background: rgba(20, 20, 26, 0.95);
       backdrop-filter: blur(16px);
       padding: 2rem 1.8rem;
@@ -226,15 +338,30 @@
       box-shadow: 0 30px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(229,9,20,0.3);
       z-index: 200;
       border: 1px solid rgba(255,255,255,0.06);
+      max-height: 90vh;
+      overflow-y: auto;
     }
     #adminPanel h3 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       margin-bottom: 1.5rem;
       font-weight: 600;
       color: #e50914;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.8rem;
+    }
+    .admin-section {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed #2a2a2a;
+    }
+    .admin-section h4 {
+      color: #ddd;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      font-size: 1.1rem;
     }
     #adminPanel input,
     #adminPanel select {
@@ -260,7 +387,7 @@
       border: none;
       border-radius: 40px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -273,7 +400,6 @@
     #adminPanel button:hover {
       background: #ff1f2b;
     }
-    /* panel close button: now closes without password */
     .panel-close {
       position: absolute;
       top: 18px; right: 22px;
@@ -286,11 +412,24 @@
       color: #e50914;
     }
 
-    /* empty state */
     .placeholder-text {
       color: #555;
       font-style: italic;
       padding: 1rem 0;
+    }
+
+    /* banner preview (small) */
+    .banner-preview {
+      margin: 10px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 100%;
+      max-height: 100px;
+      border: 2px solid #333;
+    }
+    .banner-preview img {
+      width: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -298,27 +437,57 @@
   <header>
     <h1>imovercovidmaylee</h1>
     <nav>
-      <a href="#"><i class="fa-solid fa-house" style="margin-right: 6px;"></i>Home</a>
-      <a href="#"><i class="fa-solid fa-crown" style="margin-right: 6px; color: gold;"></i>VIP</a>
+      <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="#"><i class="fa-solid fa-crown" style="color: gold;"></i> VIP</a>
       <a href="#"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
     </nav>
     <div id="adminDots" onclick="toggleAdmin()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
   </header>
 
-  <!-- HERO AND PURCHASE BANNER REMOVED as requested – now only video rows -->
+  <!-- HERO section (dynamic image) -->
+  <div class="hero">
+    <img id="heroImage" src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" alt="banner">
+    <div class="hero-content">
+      <h2>Featured: <span style="color:#e50914;">Your stage</span></h2>
+      <p>Upload your own banner and videos – everything is yours.</p>
+      <button onclick="alert('▶ Play featured (demo)')"><i class="fa-solid fa-play"></i> Watch now</button>
+    </div>
+  </div>
 
-  <!-- ADMIN PANEL (X closes without password) -->
+  <!-- PURCHASE BANNER (optional, kept for VIP logic) -->
+  <div id="purchaseBanner">
+    <p><i class="fa-solid fa-gem"></i> Get unlimited access to all VIP videos for a one-time fee of <strong>$100</strong></p>
+    <button onclick="purchasePackage()"><i class="fa-solid fa-bolt"></i> Buy full access</button>
+  </div>
+
+  <!-- ADMIN PANEL with two sections: banner + video upload -->
   <div id="adminPanel">
     <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
     <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
-    <input type="text" id="videoTitle" placeholder="Video title">
-    <input type="file" id="videoThumbnail" accept="image/*">
-    <input type="text" id="videoSrc" placeholder="Video URL (.mp4)">
-    <select id="videoType">
-      <option value="free">Free</option>
-      <option value="vip">VIP</option>
-    </select>
-    <button onclick="addVideo()"><i class="fa-solid fa-plus"></i> Add video</button>
+    
+    <!-- Banner upload section -->
+    <div class="admin-section">
+      <h4><i class="fa-regular fa-image"></i> Homepage banner</h4>
+      <input type="file" id="bannerUpload" accept="image/*">
+      <div class="banner-preview" id="bannerPreview">
+        <img id="previewImg" src="#" alt="" style="display: none;">
+      </div>
+      <button onclick="uploadBanner()"><i class="fa-solid fa-upload"></i> Set banner image</button>
+    </div>
+
+    <!-- Video upload section -->
+    <div class="admin-section">
+      <h4><i class="fa-solid fa-video"></i> Add new video</h4>
+      <input type="text" id="videoTitle" placeholder="Video title">
+      <input type="file" id="videoThumbnail" accept="image/*">
+      <input type="text" id="videoSrc" placeholder="Video URL (.mp4)">
+      <select id="videoType">
+        <option value="free">Free</option>
+        <option value="vip">VIP</option>
+      </select>
+      <button onclick="addVideo()"><i class="fa-solid fa-plus"></i> Add video</button>
+    </div>
+    <p style="font-size:0.8rem; color:#666; text-align:center;">Changes are saved in your browser.</p>
   </div>
 
   <div class="container">
@@ -341,19 +510,61 @@
   <script>
     (function() {
       // ---------- data ----------
-      const freeVideos = [];
-      const vipVideos = [];
+      let freeVideos = [];
+      let vipVideos = [];
       const freeContainer = document.getElementById('freeVideos');
       const vipContainer = document.getElementById('vipVideos');
       const videoModal = document.getElementById('videoModal');
       const modalVideo = document.getElementById('player');
       const adminPanel = document.getElementById('adminPanel');
+      const heroImage = document.getElementById('heroImage');
+      const bannerPreviewImg = document.getElementById('previewImg');
+      const bannerPreview = document.getElementById('bannerPreview');
 
       const ADMIN_PASSWORD = "1234";
       const PAID_KEY = "paid_access";
+      const BANNER_KEY = "home_banner";
+      const VIDEOS_KEY = "user_videos";
+
       let paid = localStorage.getItem(PAID_KEY) === "true";
 
-      // helper to render both sections
+      // Load saved banner
+      const savedBanner = localStorage.getItem(BANNER_KEY);
+      if (savedBanner) {
+        heroImage.src = savedBanner;
+        bannerPreviewImg.src = savedBanner;
+        bannerPreviewImg.style.display = 'block';
+      } else {
+        // default unsplash kept
+      }
+
+      // Load saved videos from localStorage
+      function loadVideos() {
+        const saved = localStorage.getItem(VIDEOS_KEY);
+        if (saved) {
+          try {
+            const data = JSON.parse(saved);
+            freeVideos = data.free || [];
+            vipVideos = data.vip || [];
+          } catch (e) {}
+        } else {
+          // start empty – no dummy videos
+          freeVideos = [];
+          vipVideos = [];
+        }
+        renderVideos('free');
+        renderVideos('vip');
+      }
+
+      // Save videos to localStorage
+      function saveVideos() {
+        localStorage.setItem(VIDEOS_KEY, JSON.stringify({
+          free: freeVideos,
+          vip: vipVideos
+        }));
+      }
+
+      // helper to render sections
       function renderVideos(type) {
         const container = type === 'free' ? freeContainer : vipContainer;
         const videos = type === 'free' ? freeVideos : vipVideos;
@@ -374,7 +585,6 @@
           img.alt = video.title;
           card.appendChild(img);
 
-          // title overlay
           const titleSpan = document.createElement('span');
           titleSpan.className = 'card-title';
           titleSpan.textContent = video.title;
@@ -410,7 +620,7 @@
         modalVideo.src = '';
       };
 
-      // purchase (simple demo)
+      // purchase
       window.purchasePackage = function() {
         if (confirm('💰 Confirm purchase for $100? (demo)')) {
           paid = true;
@@ -423,7 +633,6 @@
       // ADMIN: dots toggle with password only when opening
       window.toggleAdmin = function() {
         if (adminPanel.style.display === 'block') {
-          // if already open, just close without password
           adminPanel.style.display = 'none';
         } else {
           let pwd = prompt('Enter admin password');
@@ -435,12 +644,32 @@
         }
       };
 
-      // separate close function for the X (no password)
       window.closeAdminPanel = function() {
         adminPanel.style.display = 'none';
       };
 
-      // add video with thumbnail dataURL
+      // BANNER UPLOAD
+      window.uploadBanner = function() {
+        const input = document.getElementById('bannerUpload');
+        if (input.files.length === 0) {
+          alert('Please select an image for the banner.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const dataURL = e.target.result;
+          heroImage.src = dataURL;
+          // store in localStorage
+          localStorage.setItem(BANNER_KEY, dataURL);
+          // update preview
+          bannerPreviewImg.src = dataURL;
+          bannerPreviewImg.style.display = 'block';
+          alert('Banner updated!');
+        };
+        reader.readAsDataURL(input.files[0]);
+      };
+
+      // ADD VIDEO (with thumbnail upload)
       window.addVideo = function() {
         const title = document.getElementById('videoTitle').value.trim();
         const thumbInput = document.getElementById('videoThumbnail');
@@ -465,6 +694,7 @@
           } else {
             vipVideos.push(video);
           }
+          saveVideos(); // save to localStorage
           renderVideos('free');
           renderVideos('vip');
 
@@ -476,31 +706,26 @@
         reader.readAsDataURL(thumbInput.files[0]);
       };
 
-      // dummy videos to keep layout alive
-      function addDummyVideos() {
-        if (freeVideos.length === 0 && vipVideos.length === 0) {
-          freeVideos.push(
-            { id: 1, title: 'Sunset Horizons', thumbnail: 'https://picsum.photos/id/1015/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
-            { id: 2, title: 'City Lights', thumbnail: 'https://picsum.photos/id/1043/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
-            { id: 3, title: 'Quiet Dunes', thumbnail: 'https://picsum.photos/id/133/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' }
-          );
-          vipVideos.push(
-            { id: 4, title: 'Midnight Editor (VIP)', thumbnail: 'https://picsum.photos/id/107/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
-            { id: 5, title: 'Neon Dreams (VIP)', thumbnail: 'https://picsum.photos/id/20/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
-            { id: 6, title: 'Exclusive Interview', thumbnail: 'https://picsum.photos/id/15/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' }
-          );
-        }
-      }
-
-      addDummyVideos();
-      renderVideos('free');
-      renderVideos('vip');
+      // initial load
+      loadVideos();
 
       // close modal on background click
       videoModal.addEventListener('click', function(e) {
         if (e.target === videoModal) closeVideo();
       });
+
+      // banner preview on file select (optional)
+      document.getElementById('bannerUpload').addEventListener('change', function(e) {
+        if (this.files.length) {
+          const reader = new FileReader();
+          reader.onload = function(ev) {
+            bannerPreviewImg.src = ev.target.result;
+            bannerPreviewImg.style.display = 'block';
+          };
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
     })();
   </script>
 </body>
-</html>
+        </html>
