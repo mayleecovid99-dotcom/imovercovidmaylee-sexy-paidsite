@@ -1,190 +1,650 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>imovercovidmaylee</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>imovercovidmaylee · premium video</title>
+  <!-- Font Awesome 6 (professional icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Google Font: Inter (clean, modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;background:#0b0b0b;color:white;}
-header{background:#111;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
-header h1{color:#e50914;font-size:26px;}
-nav a{color:#ddd;margin-left:20px;text-decoration:none;}
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0c;
+      color: #ffffff;
+      line-height: 1.5;
+    }
 
-/* HERO */
-.hero{position:relative;height:65vh;width:100%;overflow:hidden;}
-.hero img{width:100%;height:100%;object-fit:cover;filter:brightness(60%);}
-.hero-content{position:absolute;bottom:50px;left:40px;}
-.hero-content h2{font-size:45px;margin-bottom:10px;}
-.hero-content p{max-width:400px;margin-bottom:15px;color:#ddd;}
-.hero-content button{background:#e50914;border:none;padding:12px 25px;color:white;font-size:18px;cursor:pointer;border-radius:4px;}
+    /* modern gradient accents & smooth transitions */
+    .container, header, .hero, .video-card, button {
+      transition: all 0.2s ease;
+    }
 
-/* CONTAINER */
-.container{padding:30px;}
-.row{margin-bottom:40px;}
-.row h2{margin-bottom:15px;}
-.videos{display:flex;gap:15px;overflow-x:auto;}
-.video-card{min-width:200px;cursor:pointer;position:relative;}
-.video-card img{width:100%;border-radius:6px;}
-.vip{position:absolute;top:10px;left:10px;background:gold;color:black;padding:3px 8px;font-size:12px;font-weight:bold;border-radius:4px;}
+    /* header – glassmorphism touch */
+    header {
+      background: rgba(10, 10, 12, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(229, 9, 20, 0.25);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
 
-/* MODAL */
-#videoModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:999;}
-#videoModal video{max-width:90%;max-height:85%;}
-.close{position:absolute;top:20px;right:35px;font-size:40px;cursor:pointer;}
+    header h1 {
+      color: #e50914;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(145deg, #e50914, #ff4d4d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-/* ADMIN PANEL */
-#adminPanel{display:none;position:fixed;top:80px;right:30px;width:320px;background:#1f1f1f;padding:25px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.7);z-index:200;}
-#adminPanel input,#adminPanel select{margin-bottom:15px;padding:12px;width:100%;border-radius:6px;border:none;background:#2c2c2c;color:#fff;}
-#adminPanel button{padding:12px;background:#e50914;color:#fff;border:none;cursor:pointer;border-radius:6px;font-size:16px;width:100%;}
-#adminDots{font-size:28px;cursor:pointer;color:#fff;}
-</style>
+    nav a {
+      color: #eee;
+      margin-left: 2rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #e50914;
+    }
+
+    #adminDots {
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #aaa;
+      margin-left: 1.5rem;
+      transition: color 0.2s;
+    }
+    #adminDots:hover {
+      color: #e50914;
+    }
+
+    /* HERO – cinematic */
+    .hero {
+      position: relative;
+      height: 70vh;
+      min-height: 500px;
+      width: 100%;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.45) saturate(1.2);
+      transition: transform 0.3s ease;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #0a0a0c 0%, transparent 50%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 4rem;
+      left: 4rem;
+      max-width: 600px;
+      z-index: 2;
+    }
+    .hero-content h2 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #ddd;
+      margin-bottom: 1.8rem;
+      max-width: 450px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+    .hero-content button {
+      background: #e50914;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(229, 9, 20, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: background 0.2s, scale 0.2s;
+    }
+    .hero-content button i {
+      font-size: 1.3rem;
+    }
+    .hero-content button:hover {
+      background: #ff0f1f;
+      scale: 1.05;
+    }
+
+    /* purchase banner – elegant callout */
+    #purchaseBanner {
+      background: linear-gradient(135deg, #1e1e24, #141417);
+      padding: 0.9rem 2.5rem;
+      border-bottom: 2px solid #e50914;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+    #purchaseBanner p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #purchaseBanner p i {
+      color: #ffd966;
+      font-size: 1.4rem;
+    }
+    #purchaseBanner strong {
+      color: #e50914;
+      font-weight: 700;
+      background: rgba(229,9,20,0.15);
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      margin-left: 0.4rem;
+    }
+    #purchaseBanner button {
+      background: transparent;
+      border: 2px solid #e50914;
+      padding: 0.5rem 1.8rem;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    #purchaseBanner button:hover {
+      background: #e50914;
+      border-color: #e50914;
+      box-shadow: 0 0 15px #e5091433;
+    }
+
+    /* main container */
+    .container {
+      padding: 2.5rem 2rem;
+    }
+
+    .row {
+      margin-bottom: 3.5rem;
+    }
+    .row h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-left: 6px solid #e50914;
+      padding-left: 1rem;
+    }
+
+    /* video scroller – sleek */
+    .videos {
+      display: flex;
+      gap: 1.2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: #e50914 #1f1f1f;
+    }
+    .videos::-webkit-scrollbar {
+      height: 6px;
+    }
+    .videos::-webkit-scrollbar-track {
+      background: #1f1f1f;
+      border-radius: 12px;
+    }
+    .videos::-webkit-scrollbar-thumb {
+      background: #e50914;
+      border-radius: 12px;
+    }
+
+    /* video card – modern, hover scale + title overlay */
+    .video-card {
+      min-width: 200px;
+      width: 200px;
+      cursor: pointer;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.2,0,0,1), box-shadow 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 18px 30px rgba(229, 9, 20, 0.25);
+    }
+    .video-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.3s;
+    }
+    .video-card:hover img {
+      filter: brightness(1.1);
+    }
+
+    /* title overlay (shows on hover) */
+    .video-card .card-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+      color: white;
+      padding: 1.2rem 0.8rem 0.8rem 0.8rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transform: translateY(100%);
+      transition: transform 0.25s ease;
+      text-shadow: 0 1px 4px black;
+      pointer-events: none;
+    }
+    .video-card:hover .card-title {
+      transform: translateY(0);
+    }
+
+    .vip {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: linear-gradient(145deg, #fbbf24, #f59e0b);
+      color: #0a0a0c;
+      font-weight: 800;
+      font-size: 0.7rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 40px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .vip i {
+      font-size: 0.7rem;
+    }
+
+    /* lock overlay for unpaid VIP (visual hint) – optional but nice */
+    .video-card.vip-locked::after {
+      content: '\f023';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.5);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    /* MODAL – refined */
+    #videoModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+    #videoModal video {
+      max-width: 90%;
+      max-height: 85%;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -8px black;
+    }
+    .close {
+      position: absolute;
+      top: 25px; right: 35px;
+      font-size: 3.5rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s;
+      line-height: 1;
+      z-index: 1001;
+    }
+    .close:hover {
+      color: #e50914;
+    }
+
+    /* ADMIN PANEL – glassy, premium */
+    #adminPanel {
+      display: none;
+      position: fixed;
+      top: 90px; right: 30px;
+      width: 360px;
+      background: rgba(20, 20, 26, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 2rem 1.8rem;
+      border-radius: 28px;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(229,9,20,0.3);
+      z-index: 200;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    #adminPanel h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      color: #e50914;
+    }
+    #adminPanel input,
+    #adminPanel select {
+      margin-bottom: 1.2rem;
+      padding: 0.9rem 1rem;
+      width: 100%;
+      border-radius: 40px;
+      border: none;
+      background: #2b2b31;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: 1px solid transparent;
+      transition: outline 0.2s;
+    }
+    #adminPanel input:focus,
+    #adminPanel select:focus {
+      outline: 1px solid #e50914;
+    }
+    #adminPanel button {
+      padding: 0.9rem 1rem;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: background 0.2s;
+      box-shadow: 0 6px 14px rgba(229,9,20,0.4);
+      width: 100%;
+    }
+    #adminPanel button:hover {
+      background: #ff1f2b;
+    }
+    /* small close inside panel */
+    .panel-close {
+      position: absolute;
+      top: 18px; right: 22px;
+      font-size: 1.8rem;
+      color: #aaa;
+      cursor: pointer;
+    }
+    .panel-close:hover {
+      color: #e50914;
+    }
+
+    /* empty state */
+    .placeholder-text {
+      color: #555;
+      font-style: italic;
+      padding: 1rem 0;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>imovercovidmaylee</h1>
+    <nav>
+      <a href="#"><i class="fa-solid fa-house" style="margin-right: 6px;"></i>Home</a>
+      <a href="#"><i class="fa-solid fa-crown" style="margin-right: 6px; color: gold;"></i>VIP</a>
+      <a href="#"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+    </nav>
+    <div id="adminDots" onclick="toggleAdmin()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+  </header>
 
-<header>
-<h1>imovercovidmaylee</h1>
-<nav>
-<a href="#">Home</a>
-<a href="#">VIP</a>
-<a href="#">Login</a>
-</nav>
-<div id="adminDots" onclick="toggleAdmin()">⋮</div>
-</header>
+  <!-- HERO (improved gradient + button icon) -->
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" alt="cinematic banner">
+    <div class="hero-content">
+      <h2>Featured: <span style="color:#e50914;">Limitless</span></h2>
+      <p>Exclusive releases, VIP access, and the best curated videos.</p>
+      <button onclick="alert('▶ Playing featured (demo)')"><i class="fa-solid fa-play"></i> Watch now</button>
+    </div>
+  </div>
 
-<!-- HERO -->
-<div class="hero">
-<img src="banner.jpg">
-<div class="hero-content">
-<h2>Featured Video</h2>
-<p>Watch the latest exclusive videos on our platform.</p>
-<button onclick="alert('Play featured video')">▶ Play</button>
-</div>
-</div>
+  <!-- PURCHASE BANNER (polished) -->
+  <div id="purchaseBanner">
+    <p><i class="fa-solid fa-gem"></i> Get unlimited access to all VIP videos for a one-time fee of <strong>$100</strong></p>
+    <button onclick="purchasePackage()"><i class="fa-solid fa-bolt"></i> Buy full access</button>
+  </div>
 
-<!-- PURCHASE BANNER -->
-<div id="purchaseBanner" style="background:#1a1a1a;padding:12px 30px;border-bottom:2px solid #e50914;display:flex;justify-content:space-between;">
-<p>🌟 Get unlimited access to all VIP videos for a one-time fee of <strong>$100</strong></p>
-<button onclick="purchasePackage()">Buy Full Access</button>
-</div>
+  <!-- ADMIN PANEL (with close icon) -->
+  <div id="adminPanel">
+    <div class="panel-close" onclick="toggleAdmin()"><i class="fa-solid fa-xmark"></i></div>
+    <h3><i class="fa-solid fa-lock" style="margin-right: 8px;"></i>Admin panel</h3>
+    <input type="text" id="videoTitle" placeholder="Video title">
+    <input type="file" id="videoThumbnail" accept="image/*">
+    <input type="text" id="videoSrc" placeholder="Video URL (.mp4)">
+    <select id="videoType">
+      <option value="free">Free</option>
+      <option value="vip">VIP</option>
+    </select>
+    <button onclick="addVideo()"><i class="fa-solid fa-plus"></i> Add video</button>
+  </div>
 
-<!-- ADMIN PANEL -->
-<div id="adminPanel">
-<h3>Admin Panel</h3>
-<input type="text" id="videoTitle" placeholder="Video Title">
-<input type="file" id="videoThumbnail" accept="image/*">
-<input type="text" id="videoSrc" placeholder="Video URL (.mp4)">
-<select id="videoType">
-<option value="free">Free</option>
-<option value="vip">VIP</option>
-</select>
-<button onclick="addVideo()">Add Video</button>
-</div>
+  <div class="container">
+    <div class="row">
+      <h2><i class="fa-regular fa-eye" style="color:#e50914;"></i> Free videos</h2>
+      <div class="videos" id="freeVideos"></div>
+    </div>
+    <div class="row">
+      <h2><i class="fa-solid fa-crown" style="color:gold;"></i> VIP videos</h2>
+      <div class="videos" id="vipVideos"></div>
+    </div>
+  </div>
 
-<div class="container">
-<div class="row">
-<h2>Free Videos</h2>
-<div class="videos" id="freeVideos"></div>
-</div>
-<div class="row">
-<h2>VIP Videos</h2>
-<div class="videos" id="vipVideos"></div>
-</div>
-</div>
+  <!-- MODAL -->
+  <div id="videoModal">
+    <span class="close" onclick="closeVideo()"><i class="fa-regular fa-circle-xmark"></i></span>
+    <video controls id="player"></video>
+  </div>
 
-<!-- VIDEO MODAL -->
-<div id="videoModal">
-<span class="close" onclick="closeVideo()">&times;</span>
-<video controls id="player"></video>
-</div>
+  <script>
+    (function() {
+      // ---------- data ----------
+      const freeVideos = [];
+      const vipVideos = [];
+      const freeContainer = document.getElementById('freeVideos');
+      const vipContainer = document.getElementById('vipVideos');
+      const videoModal = document.getElementById('videoModal');
+      const modalVideo = document.getElementById('player');
+      const adminPanel = document.getElementById('adminPanel');
 
-<script>
-// Admin + videos
-const freeVideos=[];
-const vipVideos=[];
-const freeVideosContainer=document.getElementById('freeVideos');
-const vipVideosContainer=document.getElementById('vipVideos');
-const videoModal=document.getElementById('videoModal');
-const modalVideo=document.getElementById('player');
-const adminPanel=document.getElementById('adminPanel');
+      const ADMIN_PASSWORD = "1234";
+      const PAID_KEY = "paid_access";
+      let paid = localStorage.getItem(PAID_KEY) === "true";
 
-const ADMIN_PASSWORD="1234";
-const PAID_KEY="paid_access";
-let paid=localStorage.getItem(PAID_KEY)==="true";
+      // helper to render both sections
+      function renderVideos(type) {
+        const container = type === 'free' ? freeContainer : vipContainer;
+        const videos = type === 'free' ? freeVideos : vipVideos;
+        container.innerHTML = '';
+        if (videos.length === 0) {
+          const msg = document.createElement('div');
+          msg.className = 'placeholder-text';
+          msg.innerHTML = type === 'free' ? '✨ No free videos yet. Add via admin.' : '👑 No VIP videos yet. Add via admin.';
+          container.appendChild(msg);
+          return;
+        }
+        videos.forEach(video => {
+          const card = document.createElement('div');
+          card.className = 'video-card';
+          if (type === 'vip' && !paid) card.classList.add('vip-locked'); // visual lock hint (optional)
 
-// PURCHASE
-function purchasePackage(){
-if(confirm("Confirm purchase for $100?")){
-paid=true;
-localStorage.setItem(PAID_KEY,"true");
-alert("VIP videos unlocked");
-}
-}
+          const img = document.createElement('img');
+          img.src = video.thumbnail;
+          img.alt = video.title;
+          card.appendChild(img);
 
-// ADMIN PANEL
-function toggleAdmin(){
-let password=prompt("Enter admin password");
-if(password===ADMIN_PASSWORD){
-adminPanel.style.display = adminPanel.style.display==="block"?"none":"block";
-}
-}
+          // title overlay
+          const titleSpan = document.createElement('span');
+          titleSpan.className = 'card-title';
+          titleSpan.textContent = video.title;
+          card.appendChild(titleSpan);
 
-// ADD VIDEO (with gallery upload)
-function addVideo(){
-const title=document.getElementById("videoTitle").value;
-const thumbnailInput=document.getElementById("videoThumbnail");
-const src=document.getElementById("videoSrc").value;
-const type=document.getElementById("videoType").value;
+          if (type === 'vip') {
+            const badge = document.createElement('div');
+            badge.className = 'vip';
+            badge.innerHTML = '<i class="fa-solid fa-crown"></i> VIP';
+            card.appendChild(badge);
+          }
 
-if(!title||!src||thumbnailInput.files.length===0){
-alert("Enter title, video and thumbnail");
-return;
-}
+          card.onclick = () => playVideo(video.src, type);
+          container.appendChild(card);
+        });
+      }
 
-const reader=new FileReader();
-reader.onload=function(e){
-const video={id:Date.now(),title:title,thumbnail:e.target.result,src:src};
-if(type==="free"){freeVideos.push(video);}else{vipVideos.push(video);}
-renderVideos("free");
-renderVideos("vip");
-};
-reader.readAsDataURL(thumbnailInput.files[0]);
-}
+      // play modal
+      window.playVideo = function(src, type) {
+        if (type === 'vip' && !paid) {
+          if (confirm('🔒 This is VIP content. Buy unlimited access for $100?')) {
+            purchasePackage();
+          }
+          return;
+        }
+        modalVideo.src = src;
+        videoModal.style.display = 'flex';
+      };
 
-// RENDER VIDEOS
-function renderVideos(type){
-let container=type==="free"?freeVideosContainer:vipVideosContainer;
-let videos=type==="free"?freeVideos:vipVideos;
-container.innerHTML="";
-videos.forEach(video=>{
-const card=document.createElement("div");
-card.className="video-card";
-const img=document.createElement("img");
-img.src=video.thumbnail;
-card.appendChild(img);
-if(type==="vip"){
-const badge=document.createElement("div");
-badge.className="vip";
-badge.textContent="VIP";
-card.appendChild(badge);
-}
-card.onclick=()=>playVideo(video.src,type);
-container.appendChild(card);
-});
-}
+      window.closeVideo = function() {
+        videoModal.style.display = 'none';
+        modalVideo.pause();
+        modalVideo.src = '';
+      };
 
-// PLAY & CLOSE MODAL
-function playVideo(src,type){
-if(type==="vip"&&!paid){if(confirm("This is VIP content. Buy access?")){purchasePackage();} return;}
-modalVideo.src=src;
-videoModal.style.display="flex";
-}
-function closeVideo(){videoModal.style.display="none";modalVideo.pause();modalVideo.src="";}
-renderVideos("free");
-renderVideos("vip");
-</script>
+      // purchase
+      window.purchasePackage = function() {
+        if (confirm('💰 Confirm purchase for $100? (demo)')) {
+          paid = true;
+          localStorage.setItem(PAID_KEY, 'true');
+          alert('✅ VIP videos unlocked!');
+          renderVideos('vip'); // re-render to remove lock overlay
+        }
+      };
 
+      // admin toggle
+      window.toggleAdmin = function() {
+        let pwd = prompt('Enter admin password');
+        if (pwd === ADMIN_PASSWORD) {
+          adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
+        } else if (pwd !== null) {
+          alert('Wrong password');
+        }
+      };
+
+      // add video (with thumbnail as dataURL)
+      window.addVideo = function() {
+        const title = document.getElementById('videoTitle').value.trim();
+        const thumbInput = document.getElementById('videoThumbnail');
+        const src = document.getElementById('videoSrc').value.trim();
+        const type = document.getElementById('videoType').value;
+
+        if (!title || !src || thumbInput.files.length === 0) {
+          alert('Please fill title, video URL and select a thumbnail image.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const video = {
+            id: Date.now(),
+            title: title,
+            thumbnail: e.target.result,
+            src: src
+          };
+          if (type === 'free') {
+            freeVideos.push(video);
+          } else {
+            vipVideos.push(video);
+          }
+          renderVideos('free');
+          renderVideos('vip');
+
+          // clear inputs
+          document.getElementById('videoTitle').value = '';
+          document.getElementById('videoThumbnail').value = '';
+          document.getElementById('videoSrc').value = '';
+        };
+        reader.readAsDataURL(thumbInput.files[0]);
+      };
+
+      // dummy videos to make page look alive (professional placeholder)
+      function addDummyVideos() {
+        if (freeVideos.length === 0 && vipVideos.length === 0) {
+          freeVideos.push(
+            { id: 1, title: 'Sunset Horizons', thumbnail: 'https://picsum.photos/id/1015/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+            { id: 2, title: 'City Lights', thumbnail: 'https://picsum.photos/id/1043/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
+            { id: 3, title: 'Quiet Dunes', thumbnail: 'https://picsum.photos/id/133/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' }
+          );
+          vipVideos.push(
+            { id: 4, title: 'Midnight Editor (VIP)', thumbnail: 'https://picsum.photos/id/107/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
+            { id: 5, title: 'Neon Dreams (VIP)', thumbnail: 'https://picsum.photos/id/20/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+            { id: 6, title: 'Exclusive Interview', thumbnail: 'https://picsum.photos/id/15/300/200', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4' }
+          );
+        }
+      }
+
+      addDummyVideos();
+      renderVideos('free');
+      renderVideos('vip');
+
+      // close modal if click outside video (optional)
+      videoModal.addEventListener('click', function(e) {
+        if (e.target === videoModal) closeVideo();
+      });
+    })();
+  </script>
 </body>
 </html>
