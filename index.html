@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>imovercovidmaylee · premium video</title>
-  <!-- Font Awesome 6 (professional icons) -->
+  <title>imovercovidmaylee · video hub</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Google Font: Inter (clean, modern) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -18,22 +16,16 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       background: #0a0a0c;
       color: #ffffff;
       line-height: 1.5;
     }
 
-    /* modern gradient accents & smooth transitions */
-    .container, header, .hero, .video-card, button {
-      transition: all 0.2s ease;
-    }
-
-    /* header – glassmorphism touch */
+    /* header – glass with underline */
     header {
       background: rgba(10, 10, 12, 0.95);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       padding: 0.75rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -80,122 +72,11 @@
       color: #e50914;
     }
 
-    /* HERO – cinematic */
-    .hero {
-      position: relative;
-      height: 70vh;
-      min-height: 500px;
-      width: 100%;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.45) saturate(1.2);
-      transition: transform 0.3s ease;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, #0a0a0c 0%, transparent 50%, transparent 100%);
-      pointer-events: none;
-    }
-    .hero-content {
-      position: absolute;
-      bottom: 4rem;
-      left: 4rem;
-      max-width: 600px;
-      z-index: 2;
-    }
-    .hero-content h2 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-    .hero-content p {
-      font-size: 1.2rem;
-      color: #ddd;
-      margin-bottom: 1.8rem;
-      max-width: 450px;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    }
-    .hero-content button {
-      background: #e50914;
-      border: none;
-      padding: 0.9rem 2.2rem;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
-      border-radius: 40px;
-      cursor: pointer;
-      box-shadow: 0 8px 22px rgba(229, 9, 20, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      transition: background 0.2s, scale 0.2s;
-    }
-    .hero-content button i {
-      font-size: 1.3rem;
-    }
-    .hero-content button:hover {
-      background: #ff0f1f;
-      scale: 1.05;
-    }
-
-    /* purchase banner – elegant callout */
-    #purchaseBanner {
-      background: linear-gradient(135deg, #1e1e24, #141417);
-      padding: 0.9rem 2.5rem;
-      border-bottom: 2px solid #e50914;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      font-size: 1.1rem;
-    }
-    #purchaseBanner p {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    #purchaseBanner p i {
-      color: #ffd966;
-      font-size: 1.4rem;
-    }
-    #purchaseBanner strong {
-      color: #e50914;
-      font-weight: 700;
-      background: rgba(229,9,20,0.15);
-      padding: 0.2rem 1rem;
-      border-radius: 40px;
-      margin-left: 0.4rem;
-    }
-    #purchaseBanner button {
-      background: transparent;
-      border: 2px solid #e50914;
-      padding: 0.5rem 1.8rem;
-      border-radius: 40px;
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    #purchaseBanner button:hover {
-      background: #e50914;
-      border-color: #e50914;
-      box-shadow: 0 0 15px #e5091433;
-    }
-
-    /* main container */
+    /* main container – no hero, no banner */
     .container {
       padding: 2.5rem 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
     }
 
     .row {
@@ -233,7 +114,7 @@
       border-radius: 12px;
     }
 
-    /* video card – modern, hover scale + title overlay */
+    /* video card – clean overlay, hover effect */
     .video-card {
       min-width: 200px;
       width: 200px;
@@ -300,29 +181,6 @@
       font-size: 0.7rem;
     }
 
-    /* lock overlay for unpaid VIP (visual hint) – optional but nice */
-    .video-card.vip-locked::after {
-      content: '\f023';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      color: rgba(255,255,255,0.7);
-      background: rgba(0,0,0,0.5);
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(2px);
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
     /* MODAL – refined */
     #videoModal {
       display: none;
@@ -355,7 +213,7 @@
       color: #e50914;
     }
 
-    /* ADMIN PANEL – glassy, premium */
+    /* ADMIN PANEL – glass, now with working X */
     #adminPanel {
       display: none;
       position: fixed;
@@ -363,7 +221,6 @@
       width: 360px;
       background: rgba(20, 20, 26, 0.95);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       padding: 2rem 1.8rem;
       border-radius: 28px;
       box-shadow: 0 30px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(229,9,20,0.3);
@@ -375,6 +232,9 @@
       margin-bottom: 1.5rem;
       font-weight: 600;
       color: #e50914;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
     #adminPanel input,
     #adminPanel select {
@@ -413,13 +273,14 @@
     #adminPanel button:hover {
       background: #ff1f2b;
     }
-    /* small close inside panel */
+    /* panel close button: now closes without password */
     .panel-close {
       position: absolute;
       top: 18px; right: 22px;
       font-size: 1.8rem;
       color: #aaa;
       cursor: pointer;
+      transition: color 0.2s;
     }
     .panel-close:hover {
       color: #e50914;
@@ -444,26 +305,12 @@
     <div id="adminDots" onclick="toggleAdmin()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
   </header>
 
-  <!-- HERO (improved gradient + button icon) -->
-  <div class="hero">
-    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" alt="cinematic banner">
-    <div class="hero-content">
-      <h2>Featured: <span style="color:#e50914;">Limitless</span></h2>
-      <p>Exclusive releases, VIP access, and the best curated videos.</p>
-      <button onclick="alert('▶ Playing featured (demo)')"><i class="fa-solid fa-play"></i> Watch now</button>
-    </div>
-  </div>
+  <!-- HERO AND PURCHASE BANNER REMOVED as requested – now only video rows -->
 
-  <!-- PURCHASE BANNER (polished) -->
-  <div id="purchaseBanner">
-    <p><i class="fa-solid fa-gem"></i> Get unlimited access to all VIP videos for a one-time fee of <strong>$100</strong></p>
-    <button onclick="purchasePackage()"><i class="fa-solid fa-bolt"></i> Buy full access</button>
-  </div>
-
-  <!-- ADMIN PANEL (with close icon) -->
+  <!-- ADMIN PANEL (X closes without password) -->
   <div id="adminPanel">
-    <div class="panel-close" onclick="toggleAdmin()"><i class="fa-solid fa-xmark"></i></div>
-    <h3><i class="fa-solid fa-lock" style="margin-right: 8px;"></i>Admin panel</h3>
+    <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
+    <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
     <input type="text" id="videoTitle" placeholder="Video title">
     <input type="file" id="videoThumbnail" accept="image/*">
     <input type="text" id="videoSrc" placeholder="Video URL (.mp4)">
@@ -521,7 +368,6 @@
         videos.forEach(video => {
           const card = document.createElement('div');
           card.className = 'video-card';
-          if (type === 'vip' && !paid) card.classList.add('vip-locked'); // visual lock hint (optional)
 
           const img = document.createElement('img');
           img.src = video.thumbnail;
@@ -549,7 +395,7 @@
       // play modal
       window.playVideo = function(src, type) {
         if (type === 'vip' && !paid) {
-          if (confirm('🔒 This is VIP content. Buy unlimited access for $100?')) {
+          if (confirm('🔒 This is VIP content. Purchase full access for $100?')) {
             purchasePackage();
           }
           return;
@@ -564,27 +410,37 @@
         modalVideo.src = '';
       };
 
-      // purchase
+      // purchase (simple demo)
       window.purchasePackage = function() {
         if (confirm('💰 Confirm purchase for $100? (demo)')) {
           paid = true;
           localStorage.setItem(PAID_KEY, 'true');
-          alert('✅ VIP videos unlocked!');
-          renderVideos('vip'); // re-render to remove lock overlay
+          alert('✅ VIP unlocked!');
+          renderVideos('vip');
         }
       };
 
-      // admin toggle
+      // ADMIN: dots toggle with password only when opening
       window.toggleAdmin = function() {
-        let pwd = prompt('Enter admin password');
-        if (pwd === ADMIN_PASSWORD) {
-          adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
-        } else if (pwd !== null) {
-          alert('Wrong password');
+        if (adminPanel.style.display === 'block') {
+          // if already open, just close without password
+          adminPanel.style.display = 'none';
+        } else {
+          let pwd = prompt('Enter admin password');
+          if (pwd === ADMIN_PASSWORD) {
+            adminPanel.style.display = 'block';
+          } else if (pwd !== null) {
+            alert('Wrong password');
+          }
         }
       };
 
-      // add video (with thumbnail as dataURL)
+      // separate close function for the X (no password)
+      window.closeAdminPanel = function() {
+        adminPanel.style.display = 'none';
+      };
+
+      // add video with thumbnail dataURL
       window.addVideo = function() {
         const title = document.getElementById('videoTitle').value.trim();
         const thumbInput = document.getElementById('videoThumbnail');
@@ -620,7 +476,7 @@
         reader.readAsDataURL(thumbInput.files[0]);
       };
 
-      // dummy videos to make page look alive (professional placeholder)
+      // dummy videos to keep layout alive
       function addDummyVideos() {
         if (freeVideos.length === 0 && vipVideos.length === 0) {
           freeVideos.push(
@@ -640,7 +496,7 @@
       renderVideos('free');
       renderVideos('vip');
 
-      // close modal if click outside video (optional)
+      // close modal on background click
       videoModal.addEventListener('click', function(e) {
         if (e.target === videoModal) closeVideo();
       });
