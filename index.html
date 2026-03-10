@@ -4,453 +4,186 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>imovercovidmaylee</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#0b0b0b;color:white;}
+header{background:#111;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+header h1{color:#e50914;font-size:26px;}
+nav a{color:#ddd;margin-left:20px;text-decoration:none;}
 
-body{
-font-family:'Segoe UI',Arial,sans-serif;
-background:#0b0b0b;
-color:#fff;
-line-height:1.5;
-}
+/* HERO */
+.hero{position:relative;height:65vh;width:100%;overflow:hidden;}
+.hero img{width:100%;height:100%;object-fit:cover;filter:brightness(60%);}
+.hero-content{position:absolute;bottom:50px;left:40px;}
+.hero-content h2{font-size:45px;margin-bottom:10px;}
+.hero-content p{max-width:400px;margin-bottom:15px;color:#ddd;}
+.hero-content button{background:#e50914;border:none;padding:12px 25px;color:white;font-size:18px;cursor:pointer;border-radius:4px;}
 
-/* header */
+/* CONTAINER */
+.container{padding:30px;}
+.row{margin-bottom:40px;}
+.row h2{margin-bottom:15px;}
+.videos{display:flex;gap:15px;overflow-x:auto;}
+.video-card{min-width:200px;cursor:pointer;position:relative;}
+.video-card img{width:100%;border-radius:6px;}
+.vip{position:absolute;top:10px;left:10px;background:gold;color:black;padding:3px 8px;font-size:12px;font-weight:bold;border-radius:4px;}
 
-header{
-background:linear-gradient(180deg,#141414 0%,#0f0f0f 100%);
-padding:15px 30px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:100;
-box-shadow:0 4px 10px rgba(0,0,0,0.6);
-}
+/* MODAL */
+#videoModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:999;}
+#videoModal video{max-width:90%;max-height:85%;}
+.close{position:absolute;top:20px;right:35px;font-size:40px;cursor:pointer;}
 
-header h1{
-color:#e50914;
-font-size:28px;
-letter-spacing:-0.5px;
-font-weight:700;
-}
-
-header nav a{
-color:#e5e5e5;
-margin-left:25px;
-text-decoration:none;
-font-size:16px;
-transition:color 0.2s;
-}
-
-header nav a:hover{
-color:#fff;
-}
-
-#adminDots{
-font-size:28px;
-cursor:pointer;
-user-select:none;
-color:#fff;
-}
-
-/* purchase banner */
-
-#purchaseBanner{
-background:#1a1a1a;
-padding:12px 30px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:2px solid #e50914;
-}
-
-#purchaseBanner button{
-background:#e50914;
-color:#fff;
-border:none;
-padding:10px 25px;
-border-radius:5px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* admin panel */
-
-#adminPanel{
-display:none;
-position:fixed;
-top:80px;
-right:30px;
-width:320px;
-background:#1f1f1f;
-padding:25px;
-border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,0.7);
-z-index:200;
-border:1px solid #333;
-}
-
-#adminPanel input,#adminPanel select{
-margin-bottom:15px;
-padding:12px;
-width:100%;
-border-radius:6px;
-border:none;
-background:#2c2c2c;
-color:#fff;
-}
-
-#adminPanel button{
-padding:12px;
-background:#e50914;
-color:#fff;
-border:none;
-cursor:pointer;
-border-radius:6px;
-font-weight:600;
-font-size:16px;
-width:100%;
-}
-
-/* main container */
-
-.container{
-padding:20px 30px;
-}
-
-/* video rows */
-
-.row{
-margin-bottom:50px;
-}
-
-.row h2{
-margin-bottom:15px;
-font-size:22px;
-border-left:5px solid #e50914;
-padding-left:15px;
-}
-
-.videos{
-display:flex;
-overflow-x:auto;
-gap:15px;
-padding-bottom:15px;
-}
-
-/* video card */
-
-.video-card{
-min-width:220px;
-position:relative;
-cursor:pointer;
-border-radius:8px;
-overflow:hidden;
-transition:transform 0.3s;
-}
-
-.video-card:hover{
-transform:scale(1.05);
-}
-
-.video-card img{
-width:100%;
-height:130px;
-object-fit:cover;
-}
-
-/* vip badge */
-
-.vip-badge{
-position:absolute;
-top:10px;
-left:10px;
-background:gold;
-color:#111;
-padding:4px 8px;
-font-weight:bold;
-border-radius:4px;
-font-size:12px;
-}
-
-/* delete button */
-
-.delete-btn{
-position:absolute;
-top:10px;
-right:10px;
-background:rgba(0,0,0,0.7);
-color:#fff;
-width:30px;
-height:30px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-border:1px solid #e50914;
-}
-
-/* modal */
-
-#videoModal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.95);
-justify-content:center;
-align-items:center;
-z-index:1000;
-}
-
-#videoModal video{
-max-width:90%;
-max-height:85%;
-border-radius:12px;
-}
-
-#videoModal .close{
-position:absolute;
-top:25px;
-right:35px;
-font-size:40px;
-cursor:pointer;
-color:#aaa;
-}
-
-/* footer */
-
-footer{
-text-align:center;
-padding:25px;
-background:#0f0f0f;
-border-top:1px solid #222;
-margin-top:40px;
-}
-
-footer a{
-color:#e50914;
-text-decoration:none;
-}
+/* ADMIN PANEL */
+#adminPanel{display:none;position:fixed;top:80px;right:30px;width:320px;background:#1f1f1f;padding:25px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.7);z-index:200;}
+#adminPanel input,#adminPanel select{margin-bottom:15px;padding:12px;width:100%;border-radius:6px;border:none;background:#2c2c2c;color:#fff;}
+#adminPanel button{padding:12px;background:#e50914;color:#fff;border:none;cursor:pointer;border-radius:6px;font-size:16px;width:100%;}
+#adminDots{font-size:28px;cursor:pointer;color:#fff;}
 </style>
 </head>
-
 <body>
 
 <header>
 <h1>imovercovidmaylee</h1>
-
 <nav>
 <a href="#">Home</a>
 <a href="#">VIP</a>
 <a href="#">Login</a>
 </nav>
-
 <div id="adminDots" onclick="toggleAdmin()">⋮</div>
 </header>
 
-<div id="purchaseBanner">
+<!-- HERO -->
+<div class="hero">
+<img src="banner.jpg">
+<div class="hero-content">
+<h2>Featured Video</h2>
+<p>Watch the latest exclusive videos on our platform.</p>
+<button onclick="alert('Play featured video')">▶ Play</button>
+</div>
+</div>
+
+<!-- PURCHASE BANNER -->
+<div id="purchaseBanner" style="background:#1a1a1a;padding:12px 30px;border-bottom:2px solid #e50914;display:flex;justify-content:space-between;">
 <p>🌟 Get unlimited access to all VIP videos for a one-time fee of <strong>$100</strong></p>
 <button onclick="purchasePackage()">Buy Full Access</button>
 </div>
 
+<!-- ADMIN PANEL -->
 <div id="adminPanel">
-
 <h3>Admin Panel</h3>
-
 <input type="text" id="videoTitle" placeholder="Video Title">
-
-<input type="text" id="videoThumbnail" placeholder="Thumbnail URL">
-
+<input type="file" id="videoThumbnail" accept="image/*">
 <input type="text" id="videoSrc" placeholder="Video URL (.mp4)">
-
 <select id="videoType">
 <option value="free">Free</option>
 <option value="vip">VIP</option>
 </select>
-
 <button onclick="addVideo()">Add Video</button>
-
 </div>
 
 <div class="container">
-
 <div class="row">
-<h2>🎬 Free Videos</h2>
+<h2>Free Videos</h2>
 <div class="videos" id="freeVideos"></div>
 </div>
-
 <div class="row">
-<h2>👑 VIP Videos</h2>
+<h2>VIP Videos</h2>
 <div class="videos" id="vipVideos"></div>
 </div>
-
 </div>
 
-<div id="videoModal" onclick="closeModal(event)">
-<span class="close" onclick="closeModal(event)">&times;</span>
-<video controls id="modalVideo"></video>
+<!-- VIDEO MODAL -->
+<div id="videoModal">
+<span class="close" onclick="closeVideo()">&times;</span>
+<video controls id="player"></video>
 </div>
-
-<footer>
-<p>📩 Contact us on Telegram:
-<a href="https://t.me/maylee-covid0001" target="_blank">@maylee-covid0001</a>
-</p>
-
-<p style="color:#777;font-size:14px;">
-©️ 2025 imovercovidmaylee. All rights reserved.
-</p>
-</footer>
 
 <script>
-
+// Admin + videos
 const freeVideos=[];
 const vipVideos=[];
-
 const freeVideosContainer=document.getElementById('freeVideos');
 const vipVideosContainer=document.getElementById('vipVideos');
-
 const videoModal=document.getElementById('videoModal');
-const modalVideo=document.getElementById('modalVideo');
-
+const modalVideo=document.getElementById('player');
 const adminPanel=document.getElementById('adminPanel');
 
 const ADMIN_PASSWORD="1234";
 const PAID_KEY="paid_access";
-
 let paid=localStorage.getItem(PAID_KEY)==="true";
 
+// PURCHASE
 function purchasePackage(){
-
 if(confirm("Confirm purchase for $100?")){
 paid=true;
 localStorage.setItem(PAID_KEY,"true");
 alert("VIP videos unlocked");
 }
-
 }
 
-function generateId(){
-return Date.now();
-}
-
-function renderVideos(type){
-
-let container=type==="free"?freeVideosContainer:vipVideosContainer;
-
-let videos=type==="free"?freeVideos:vipVideos;
-
-container.innerHTML="";
-
-videos.forEach(video=>{
-
-const card=document.createElement("div");
-card.className="video-card";
-
-const img=document.createElement("img");
-img.src=video.thumbnail;
-
-card.appendChild(img);
-
-if(type==="vip"){
-
-const badge=document.createElement("div");
-badge.className="vip-badge";
-badge.textContent="VIP";
-
-card.appendChild(badge);
-
-}
-
-card.onclick=()=>playVideo(video.src,type);
-
-container.appendChild(card);
-
-});
-
-}
-
-function playVideo(src,type){
-
-if(type==="vip"&&!paid){
-
-if(confirm("This is VIP content. Buy access?")){
-purchasePackage();
-}
-
-return;
-
-}
-
-modalVideo.src=src;
-videoModal.style.display="flex";
-
-}
-
-function closeModal(event){
-
-if(event.target===videoModal||event.target.classList.contains("close")){
-videoModal.style.display="none";
-modalVideo.pause();
-modalVideo.src="";
-}
-
-}
-
+// ADMIN PANEL
 function toggleAdmin(){
-
 let password=prompt("Enter admin password");
-
 if(password===ADMIN_PASSWORD){
-
-adminPanel.style.display=
-adminPanel.style.display==="block"?"none":"block";
-
+adminPanel.style.display = adminPanel.style.display==="block"?"none":"block";
+}
 }
 
-}
-
+// ADD VIDEO (with gallery upload)
 function addVideo(){
-
 const title=document.getElementById("videoTitle").value;
-const thumbnail=document.getElementById("videoThumbnail").value;
+const thumbnailInput=document.getElementById("videoThumbnail");
 const src=document.getElementById("videoSrc").value;
 const type=document.getElementById("videoType").value;
 
-if(!title||!src){
-alert("Enter title and video url");
+if(!title||!src||thumbnailInput.files.length===0){
+alert("Enter title, video and thumbnail");
 return;
 }
 
-const video={
-id:generateId(),
-title,
-thumbnail,
-src
+const reader=new FileReader();
+reader.onload=function(e){
+const video={id:Date.now(),title:title,thumbnail:e.target.result,src:src};
+if(type==="free"){freeVideos.push(video);}else{vipVideos.push(video);}
+renderVideos("free");
+renderVideos("vip");
 };
-
-if(type==="free"){
-freeVideos.push(video);
-}else{
-vipVideos.push(video);
+reader.readAsDataURL(thumbnailInput.files[0]);
 }
 
-renderVideos("free");
-renderVideos("vip");
-
+// RENDER VIDEOS
+function renderVideos(type){
+let container=type==="free"?freeVideosContainer:vipVideosContainer;
+let videos=type==="free"?freeVideos:vipVideos;
+container.innerHTML="";
+videos.forEach(video=>{
+const card=document.createElement("div");
+card.className="video-card";
+const img=document.createElement("img");
+img.src=video.thumbnail;
+card.appendChild(img);
+if(type==="vip"){
+const badge=document.createElement("div");
+badge.className="vip";
+badge.textContent="VIP";
+card.appendChild(badge);
+}
+card.onclick=()=>playVideo(video.src,type);
+container.appendChild(card);
+});
 }
 
+// PLAY & CLOSE MODAL
+function playVideo(src,type){
+if(type==="vip"&&!paid){if(confirm("This is VIP content. Buy access?")){purchasePackage();} return;}
+modalVideo.src=src;
+videoModal.style.display="flex";
+}
+function closeVideo(){videoModal.style.display="none";modalVideo.pause();modalVideo.src="";}
 renderVideos("free");
 renderVideos("vip");
-
 </script>
 
 </body>
