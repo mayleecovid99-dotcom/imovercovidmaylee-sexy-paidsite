@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>imovercovidmaylee · reliable video URLs</title>
+  <title>imovercovidmaylee · smart URL tester</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
-    /* (styles unchanged from previous version – only minor additions) */
     * {
       margin: 0;
       padding: 0;
@@ -17,7 +16,7 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       background: #0a0a0c;
       color: #ffffff;
       line-height: 1.5;
@@ -284,7 +283,7 @@
       color: #e50914;
     }
 
-    /* admin panel – with extra guidance */
+    /* admin panel – with URL tester */
     #adminPanel {
       display: none;
       position: fixed;
@@ -393,19 +392,70 @@
       align-items: center;
       gap: 0.3rem;
     }
-    /* new: helpful note for URLs */
-    .url-hint {
-      background: #1e1e2a;
-      border-radius: 30px;
-      padding: 0.5rem 1rem;
+
+    /* URL tester styles */
+    .url-tester {
+      background: #1a1a22;
+      border-radius: 28px;
+      padding: 1rem 1rem 1.2rem 1rem;
       margin: 0.5rem 0 1rem 0;
-      font-size: 0.8rem;
-      color: #b0b0b0;
-      border-left: 3px solid #e50914;
     }
-    .url-hint i {
+    .url-tester p {
+      font-size: 0.85rem;
+      color: #bbb;
+      margin-bottom: 0.8rem;
+    }
+    .test-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .test-row input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    .test-row button {
+      width: auto;
+      padding: 0.8rem 1.2rem;
+      background: #2b2b35;
+      box-shadow: none;
+      margin-top: 0;
+    }
+    .test-result {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      border-radius: 30px;
+      background: #0f0f14;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .test-result.success {
+      color: #4caf50;
+    }
+    .test-result.fail {
       color: #e50914;
-      margin-right: 6px;
+    }
+    .test-result i {
+      font-size: 1rem;
+    }
+
+    .example-urls {
+      background: #1a1a22;
+      border-radius: 20px;
+      padding: 0.8rem 1rem;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin: 1rem 0;
+    }
+    .example-urls span {
+      display: inline-block;
+      background: #2b2b33;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin: 0.3rem 0.3rem 0 0;
+      color: #ddd;
     }
 
     #adminPanel button {
@@ -493,7 +543,7 @@
     <button onclick="purchasePackage()">Buy</button>
   </div>
 
-  <!-- ADMIN PANEL – with URL help text -->
+  <!-- ADMIN PANEL – with built-in URL tester and examples -->
   <div id="adminPanel">
     <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
     <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
@@ -508,7 +558,7 @@
       <button onclick="uploadBanner()"><i class="fa-solid fa-upload"></i> Set banner</button>
     </div>
 
-    <!-- Video upload (now with direct file picker + URL with guidance) -->
+    <!-- Video upload section with URL tester -->
     <div class="admin-section">
       <h4><i class="fa-solid fa-video"></i> Add new video</h4>
       <input type="text" id="videoTitle" placeholder="Video title">
@@ -516,21 +566,32 @@
       <!-- Thumbnail image -->
       <input type="file" id="videoThumbnail" accept="image/*">
       
-      <!-- Two ways to provide video: direct file upload OR URL -->
-      <p style="color:#aaa; margin:0 0 0.3rem 0; font-size:0.85rem;"><i class="fa-solid fa-mobile-screen"></i> Upload video file (from phone):</p>
+      <!-- Option 1: Upload file -->
+      <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;"><i class="fa-solid fa-mobile-screen"></i> Upload video file (from phone):</p>
       <input type="file" id="videoFileUpload" accept="video/mp4, video/quicktime, video/x-matroska, video/*">
       <div class="video-file-note">
-        <i class="fa-solid fa-circle-info"></i> <span>Video will be stored as data (small clips only)</span>
+        <i class="fa-solid fa-circle-info"></i> <span>Video stored in browser (small clips only)</span>
       </div>
       
-      <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;">— OR video URL —</p>
-      <input type="text" id="videoSrc" placeholder="e.g. https://example.com/video.mp4">
+      <!-- Option 2: Video URL with tester -->
+      <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;">— OR use a direct video URL —</p>
       
-      <!-- helpful hint for URLs -->
-      <div class="url-hint">
-        <i class="fa-solid fa-link"></i> Use a direct link to a video file (.mp4, .webm). 
-        YouTube or Vimeo page links won't work.
+      <!-- URL tester component -->
+      <div class="url-tester">
+        <p><i class="fa-regular fa-lightbulb"></i> Test your URL before adding</p>
+        <div class="test-row">
+          <input type="text" id="testUrlInput" placeholder="https://example.com/video.mp4">
+          <button onclick="testVideoUrl()"><i class="fa-solid fa-flask"></i> Test</button>
+        </div>
+        <div id="testResult" class="test-result"><i class="fa-regular fa-circle-check"></i> Enter a URL and click Test</div>
+        <div class="example-urls">
+          <span>✅ works: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4</span>
+          <span>✅ works: https://media.w3.org/2010/05/sintel/trailer.mp4</span>
+        </div>
       </div>
+      
+      <!-- Actual URL input (linked to tester) -->
+      <input type="text" id="videoSrc" placeholder="Paste tested URL here" value="">
       
       <select id="videoType">
         <option value="free">Free</option>
@@ -538,7 +599,7 @@
       </select>
       
       <button onclick="addVideo()"><i class="fa-solid fa-plus"></i> Add video</button>
-      <div class="storage-warning"><i class="fa-regular fa-hard-drive"></i> Videos are stored in your browser. Large files may fail.</div>
+      <div class="storage-warning"><i class="fa-regular fa-hard-drive"></i> Videos stored in browser. Large files may fail.</div>
     </div>
   </div>
 
@@ -642,7 +703,7 @@
         });
       }
 
-      // ----- IMPROVED play function with error handling -----
+      // ----- play with error handling -----
       window.playVideo = function(src, type) {
         if (type === 'vip' && !paid) {
           if (confirm('🔒 VIP content. Buy access for $100?')) {
@@ -651,32 +712,25 @@
           return;
         }
 
-        // Clear previous error handlers
         modalVideo.onerror = null;
         modalVideo.onloadeddata = null;
 
-        // Set source and show modal
         modalVideo.src = src;
         videoModal.style.display = 'flex';
 
-        // Attempt to play (autoplay may be blocked, but user will click play)
         const playPromise = modalVideo.play();
         if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Autoplay prevented – fine, user can press play button.
-          });
+          playPromise.catch(() => {});
         }
 
-        // If video fails to load, show alert and close modal
         modalVideo.onerror = function() {
-          // Get more details if possible
           let errorMsg = 'Video cannot be played. ';
           if (modalVideo.error) {
             switch (modalVideo.error.code) {
               case MediaError.MEDIA_ERR_ABORTED: errorMsg += 'Loading aborted.'; break;
               case MediaError.MEDIA_ERR_NETWORK: errorMsg += 'Network error.'; break;
               case MediaError.MEDIA_ERR_DECODE: errorMsg += 'Format not supported.'; break;
-              case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorMsg += 'Video format or URL is not supported.'; break;
+              case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorMsg += 'Video format or URL is not supported. Use direct .mp4 links.'; break;
               default: errorMsg += 'Unknown error.';
             }
           } else {
@@ -691,7 +745,7 @@
         videoModal.style.display = 'none';
         modalVideo.pause();
         modalVideo.src = '';
-        modalVideo.onerror = null; // Clean up
+        modalVideo.onerror = null;
       };
 
       window.purchasePackage = function() {
@@ -731,7 +785,53 @@
         reader.readAsDataURL(input.files[0]);
       };
 
-      // ADD VIDEO – handles both video file upload OR video URL
+      // ----- URL TESTER function -----
+      window.testVideoUrl = function() {
+        const url = document.getElementById('testUrlInput').value.trim();
+        if (!url) { alert('Enter a URL to test'); return; }
+        const resultDiv = document.getElementById('testResult');
+        resultDiv.innerHTML = '<i class="fa-solid fa-spinner fa-pulse"></i> Testing...';
+        resultDiv.className = 'test-result';
+
+        // Create hidden video element to test
+        const testVideo = document.createElement('video');
+        testVideo.preload = 'metadata';
+        testVideo.src = url;
+
+        let timeout = setTimeout(() => {
+          cleanup();
+          resultDiv.innerHTML = '<i class="fa-regular fa-circle-xmark"></i> Timeout – URL may be slow or invalid.';
+          resultDiv.className = 'test-result fail';
+        }, 10000); // 10 sec timeout
+
+        const success = () => {
+          cleanup();
+          resultDiv.innerHTML = '<i class="fa-regular fa-circle-check"></i> URL seems valid (metadata loaded)';
+          resultDiv.className = 'test-result success';
+          // Optionally fill the videoSrc field
+          document.getElementById('videoSrc').value = url;
+        };
+
+        const fail = () => {
+          cleanup();
+          resultDiv.innerHTML = '<i class="fa-regular fa-circle-xmark"></i> Failed – not a playable video URL. Use direct .mp4 links.';
+          resultDiv.className = 'test-result fail';
+        };
+
+        const cleanup = () => {
+          clearTimeout(timeout);
+          testVideo.removeEventListener('loadedmetadata', success);
+          testVideo.removeEventListener('error', fail);
+          testVideo.src = '';
+          testVideo.load();
+        };
+
+        testVideo.addEventListener('loadedmetadata', success);
+        testVideo.addEventListener('error', fail);
+        testVideo.load(); // start loading
+      };
+
+      // ADD VIDEO – now with optional URL tester integration
       window.addVideo = function() {
         const title = document.getElementById('videoTitle').value.trim();
         const thumbInput = document.getElementById('videoThumbnail');
@@ -743,13 +843,11 @@
         if (thumbInput.files.length === 0) { alert('Select a thumbnail image'); return; }
         if (!videoFile && !videoUrl) { alert('Provide either a video file or a video URL'); return; }
 
-        // Read thumbnail first
         const thumbReader = new FileReader();
         thumbReader.onload = function(thumbEvent) {
           const thumbnailData = thumbEvent.target.result;
 
           if (videoFile) {
-            // User selected a video file – read as data URL
             if (videoFile.size > 30 * 1024 * 1024) {
               if (!confirm('Video file is larger than 30MB. It may fail to store. Continue?')) return;
             }
@@ -777,7 +875,6 @@
           saveVideos();
         } catch (e) {
           alert('Storage limit exceeded. Try using video URLs or smaller files.');
-          // rollback
           if (type === 'free') freeVideos.pop();
           else vipVideos.pop();
           return;
@@ -791,6 +888,9 @@
         document.getElementById('videoThumbnail').value = '';
         document.getElementById('videoFileUpload').value = '';
         document.getElementById('videoSrc').value = '';
+        document.getElementById('testUrlInput').value = ''; // optional clear
+        document.getElementById('testResult').innerHTML = '<i class="fa-regular fa-circle-check"></i> Enter a URL and click Test';
+        document.getElementById('testResult').className = 'test-result';
       }
 
       // Load on start
@@ -813,4 +913,4 @@
     })();
   </script>
 </body>
-  </html>
+          </html>
