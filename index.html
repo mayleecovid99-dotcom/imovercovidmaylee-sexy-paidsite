@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>imovercovidmaylee · subscribe for access</title>
+  <title>imovercovidmaylee · video banner + gallery</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,6 +74,7 @@
       color: #e50914;
     }
 
+    /* HERO with video background */
     .hero {
       position: relative;
       height: 60vh;
@@ -81,10 +82,17 @@
       width: 100%;
       overflow: hidden;
       isolation: isolate;
+      background: #111; /* fallback */
     }
-    .hero img {
-      width: 100%;
-      height: 100%;
+    .hero video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
       object-fit: cover;
       filter: brightness(0.45) saturate(1.2);
     }
@@ -94,6 +102,7 @@
       inset: 0;
       background: linear-gradient(0deg, #0a0a0c 0%, transparent 60%);
       pointer-events: none;
+      z-index: 2;
     }
     .hero-content {
       position: absolute;
@@ -101,7 +110,7 @@
       left: 1.5rem;
       right: 1.5rem;
       max-width: 500px;
-      z-index: 2;
+      z-index: 3;
     }
     .hero-content h2 {
       font-size: 2.5rem;
@@ -129,6 +138,10 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      transition: background 0.2s;
+    }
+    .hero-content button:hover {
+      background: #ff1f2b;
     }
 
     /* subscribe banner */
@@ -266,14 +279,14 @@
       z-index: 2;
     }
 
-    /* admin panel */
+    /* admin panel – with video banner upload */
     #adminPanel {
       display: none;
       position: fixed;
       top: 70px;
       right: 10px;
       width: 94%;
-      max-width: 400px;
+      max-width: 440px;
       max-height: 80vh;
       background: rgba(18, 18, 22, 0.98);
       backdrop-filter: blur(24px);
@@ -300,7 +313,7 @@
 
     #adminPanel h3 {
       font-size: 1.6rem;
-      margin: 0 0 1.5rem 0;
+      margin: 0 0 1.2rem 0;
       color: #e50914;
       display: flex;
       align-items: center;
@@ -326,7 +339,7 @@
 
     .admin-section h4 {
       color: #ddd;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       font-weight: 500;
       font-size: 1.1rem;
       display: flex;
@@ -403,19 +416,20 @@
     }
 
     .banner-preview {
-      margin: 0.5rem 0 1.2rem 0;
+      margin: 0.8rem 0 1.2rem 0;
       border-radius: 16px;
       overflow: hidden;
       max-width: 100%;
       border: 2px solid #333;
       background: #111;
     }
+    .banner-preview video,
     .banner-preview img {
       width: 100%;
-      max-height: 100px;
+      max-height: 120px;
       object-fit: cover;
+      display: block;
     }
-
     .placeholder-text {
       color: #555;
       font-style: italic;
@@ -519,9 +533,9 @@
     <div id="adminDots" onclick="toggleAdmin()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
   </header>
 
-  <!-- HERO (dynamic banner) -->
+  <!-- HERO with video background (fallback image if no video) -->
   <div class="hero">
-    <img id="heroImage" src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" alt="banner">
+    <video id="heroVideo" autoplay muted loop playsinline></video>
     <div class="hero-content">
       <h2>Your <span style="color:#e50914;">gallery</span></h2>
       <p>Browse exclusive images. Subscribe to unlock everything.</p>
@@ -529,7 +543,7 @@
     </div>
   </div>
 
-  <!-- SUBSCRIBE BANNER with correct Telegram handle -->
+  <!-- SUBSCRIBE BANNER -->
   <div id="subscribeBanner">
     <p><i class="fa-solid fa-gem"></i> Get unlimited access to all content – <strong>Subscribe now</strong></p>
     <button onclick="window.open('https://t.me/maylee_covid0001', '_blank'); markSubscribed();">
@@ -537,19 +551,21 @@
     </button>
   </div>
 
-  <!-- ADMIN PANEL – image upload only -->
+  <!-- ADMIN PANEL – with banner video upload and image gallery upload -->
   <div id="adminPanel">
     <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
     <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
     
-    <!-- Banner upload -->
+    <!-- Banner video upload (muted autoplay) -->
     <div class="admin-section">
-      <h4><i class="fa-regular fa-image"></i> Homepage banner</h4>
-      <input type="file" id="bannerUpload" accept="image/*">
+      <h4><i class="fa-solid fa-video"></i> Banner video (muted)</h4>
+      <input type="file" id="bannerVideoUpload" accept="video/mp4, video/webm, video/quicktime">
       <div class="banner-preview">
-        <img id="previewImg" src="#" alt="" style="display: none;">
+        <video id="bannerPreviewVideo" muted loop playsinline style="display: none;"></video>
+        <img id="bannerPreviewFallback" src="#" alt="" style="display: none;">
       </div>
-      <button onclick="uploadBanner()"><i class="fa-solid fa-upload"></i> Set banner</button>
+      <button onclick="uploadBannerVideo()"><i class="fa-solid fa-upload"></i> Set banner video</button>
+      <p style="font-size:0.75rem; color:#aaa; margin-top:0.3rem;">Video will autoplay muted. Keep it short.</p>
     </div>
 
     <!-- Image upload section -->
@@ -562,7 +578,7 @@
         <option value="vip">VIP</option>
       </select>
       <button onclick="addImage()"><i class="fa-solid fa-plus"></i> Add image</button>
-      <p style="font-size:0.75rem; color:#666; margin-top:0.8rem;">Images are stored in your browser.</p>
+      <p style="font-size:0.75rem; color:#666; margin-top:0.8rem;">Images stored in browser.</p>
     </div>
   </div>
 
@@ -588,11 +604,12 @@
       const freeContainer = document.getElementById('freeImages');
       const vipContainer = document.getElementById('vipImages');
       const adminPanel = document.getElementById('adminPanel');
-      const heroImage = document.getElementById('heroImage');
-      const bannerPreviewImg = document.getElementById('previewImg');
+      const heroVideo = document.getElementById('heroVideo');
+      const bannerPreviewVideo = document.getElementById('bannerPreviewVideo');
+      const bannerPreviewFallback = document.getElementById('bannerPreviewFallback');
 
       const ADMIN_PASSWORD = "1234";
-      const BANNER_KEY = "home_banner";
+      const BANNER_VIDEO_KEY = "banner_video";
       const IMAGES_KEY = "user_images";
       const SUBSCRIBED_KEY = "has_subscribed";
 
@@ -628,12 +645,21 @@
         markSubscribed();
       });
 
-      // ----- load banner -----
-      const savedBanner = localStorage.getItem(BANNER_KEY);
-      if (savedBanner) {
-        heroImage.src = savedBanner;
-        bannerPreviewImg.src = savedBanner;
-        bannerPreviewImg.style.display = 'block';
+      // ----- load banner video from localStorage -----
+      function loadBannerVideo() {
+        const savedVideo = localStorage.getItem(BANNER_VIDEO_KEY);
+        if (savedVideo) {
+          heroVideo.src = savedVideo;
+          heroVideo.load();
+          heroVideo.play().catch(() => {}); // autoplay may be prevented, but muted helps
+          bannerPreviewVideo.src = savedVideo;
+          bannerPreviewVideo.style.display = 'block';
+          bannerPreviewFallback.style.display = 'none';
+        } else {
+          // fallback image (optional)
+          heroVideo.poster = 'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop';
+          // we can keep video empty, or use a default image via background? we have video element only, but poster shows.
+        }
       }
 
       // ----- load images from localStorage -----
@@ -720,19 +746,28 @@
         adminPanel.style.display = 'none';
       };
 
-      // Banner upload
-      window.uploadBanner = function() {
-        const input = document.getElementById('bannerUpload');
-        if (!input.files.length) { alert('Select an image'); return; }
+      // Banner video upload
+      window.uploadBannerVideo = function() {
+        const input = document.getElementById('bannerVideoUpload');
+        if (!input.files.length) { alert('Select a video file'); return; }
+        const file = input.files[0];
+        if (file.size > 50 * 1024 * 1024) {
+          alert('Video is larger than 50MB. It may not store well. Try a smaller file.');
+          return;
+        }
         const reader = new FileReader();
         reader.onload = (e) => {
-          heroImage.src = e.target.result;
-          localStorage.setItem(BANNER_KEY, e.target.result);
-          bannerPreviewImg.src = e.target.result;
-          bannerPreviewImg.style.display = 'block';
-          alert('Banner updated');
+          const videoData = e.target.result;
+          localStorage.setItem(BANNER_VIDEO_KEY, videoData);
+          heroVideo.src = videoData;
+          heroVideo.load();
+          heroVideo.play().catch(() => {});
+          bannerPreviewVideo.src = videoData;
+          bannerPreviewVideo.style.display = 'block';
+          bannerPreviewFallback.style.display = 'none';
+          alert('Banner video updated');
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(file);
       };
 
       // Add image
@@ -780,15 +815,17 @@
       };
 
       // initial load
+      loadBannerVideo();
       loadImages();
 
-      // live preview for banner
-      document.getElementById('bannerUpload').addEventListener('change', function(e) {
+      // live preview for banner video (optional)
+      document.getElementById('bannerVideoUpload').addEventListener('change', function(e) {
         if (this.files.length) {
           const reader = new FileReader();
           reader.onload = (ev) => {
-            bannerPreviewImg.src = ev.target.result;
-            bannerPreviewImg.style.display = 'block';
+            bannerPreviewVideo.src = ev.target.result;
+            bannerPreviewVideo.style.display = 'block';
+            bannerPreviewFallback.style.display = 'none';
           };
           reader.readAsDataURL(this.files[0]);
         }
@@ -796,4 +833,4 @@
     })();
   </script>
 </body>
-</html>
+  </html>
