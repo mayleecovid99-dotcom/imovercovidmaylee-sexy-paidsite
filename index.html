@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>imovercovidmaylee · subscribe for unlimited</title>
+  <title>imovercovidmaylee · subscribe for access</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,7 +131,7 @@
       gap: 0.5rem;
     }
 
-    /* new subscription banner (replaces purchase) */
+    /* subscribe banner */
     #subscribeBanner {
       background: linear-gradient(135deg, #1e1e24, #141417);
       padding: 0.8rem 1.5rem;
@@ -192,115 +192,92 @@
       padding-left: 1rem;
     }
 
-    .videos {
+    /* image grid */
+    .image-grid {
       display: flex;
-      gap: 1rem;
+      gap: 1.2rem;
       overflow-x: auto;
       padding-bottom: 1rem;
       scrollbar-width: thin;
       scrollbar-color: #e50914 #1f1f1f;
     }
-    .videos::-webkit-scrollbar {
+    .image-grid::-webkit-scrollbar {
       height: 5px;
     }
-    .videos::-webkit-scrollbar-track {
+    .image-grid::-webkit-scrollbar-track {
       background: #1f1f1f;
       border-radius: 12px;
     }
-    .videos::-webkit-scrollbar-thumb {
+    .image-grid::-webkit-scrollbar-thumb {
       background: #e50914;
       border-radius: 12px;
     }
 
-    .video-card {
-      min-width: 160px;
-      width: 160px;
+    .image-card {
+      min-width: 180px;
+      width: 180px;
       cursor: pointer;
       position: relative;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 8px 20px rgba(0,0,0,0.6);
     }
-    .video-card:hover {
+    .image-card:hover {
       transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 30px rgba(229, 9, 20, 0.25);
     }
-    .video-card img {
+    .image-card img {
       width: 100%;
-      height: 220px;
+      height: 240px;
       object-fit: cover;
+      display: block;
     }
-    .video-card .card-title {
+    .image-card .card-title {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent);
       color: white;
-      padding: 1rem 0.5rem 0.5rem 0.5rem;
-      font-size: 0.85rem;
+      padding: 1.2rem 0.8rem 0.8rem 0.8rem;
+      font-size: 1rem;
+      font-weight: 500;
       transform: translateY(100%);
-      transition: transform 0.2s;
+      transition: transform 0.25s ease;
       pointer-events: none;
     }
-    .video-card:hover .card-title {
+    .image-card:hover .card-title {
       transform: translateY(0);
     }
-    .vip {
+    .vip-badge {
       position: absolute;
-      top: 8px;
-      left: 8px;
+      top: 10px;
+      left: 10px;
       background: linear-gradient(145deg, #fbbf24, #f59e0b);
       color: #0a0a0c;
       font-weight: 800;
-      font-size: 0.65rem;
-      padding: 0.2rem 0.6rem;
+      font-size: 0.7rem;
+      padding: 0.3rem 0.7rem;
       border-radius: 40px;
       display: flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       z-index: 2;
     }
 
-    #videoModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.98);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(12px);
-    }
-    #videoModal video {
-      max-width: 95%;
-      max-height: 80%;
-      border-radius: 16px;
-    }
-    .close {
-      position: absolute;
-      top: 20px; right: 25px;
-      font-size: 3rem;
-      color: #ccc;
-      cursor: pointer;
-    }
-    .close:hover {
-      color: #e50914;
-    }
-
-    /* admin panel (unchanged) */
+    /* admin panel */
     #adminPanel {
       display: none;
       position: fixed;
       top: 70px;
       right: 10px;
       width: 94%;
-      max-width: 440px;
+      max-width: 400px;
       max-height: 80vh;
       background: rgba(18, 18, 22, 0.98);
       backdrop-filter: blur(24px);
-      padding: 1.5rem 1.5rem 2rem 1.5rem;
+      padding: 1.8rem 1.8rem 2rem 1.8rem;
       border-radius: 32px;
       box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(229,9,20,0.3);
       z-index: 200;
@@ -320,9 +297,10 @@
       background: #e50914;
       border-radius: 12px;
     }
+
     #adminPanel h3 {
-      font-size: 1.5rem;
-      margin: 0 0 1.2rem 0;
+      font-size: 1.6rem;
+      margin: 0 0 1.5rem 0;
       color: #e50914;
       display: flex;
       align-items: center;
@@ -334,6 +312,7 @@
       background: rgba(18,18,22,0.98);
       z-index: 3;
     }
+
     .admin-section {
       margin-bottom: 2rem;
       padding-bottom: 1.5rem;
@@ -344,19 +323,21 @@
       margin-bottom: 0;
       padding-bottom: 0;
     }
+
     .admin-section h4 {
       color: #ddd;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       font-weight: 500;
       font-size: 1.1rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+
     #adminPanel input,
     #adminPanel select {
-      margin-bottom: 1rem;
-      padding: 0.8rem 1rem;
+      margin-bottom: 1.2rem;
+      padding: 0.9rem 1.2rem;
       width: 100%;
       border-radius: 40px;
       border: none;
@@ -369,8 +350,9 @@
     #adminPanel select:focus {
       outline: 1px solid #e50914;
     }
+
     #adminPanel input[type="file"] {
-      padding: 0.5rem 0.8rem;
+      padding: 0.6rem 1rem;
       color: #aaa;
       background: #1f1f25;
     }
@@ -378,81 +360,15 @@
       background: #e50914;
       border: none;
       color: white;
-      padding: 0.4rem 0.8rem;
+      padding: 0.4rem 1rem;
       border-radius: 40px;
       font-weight: 600;
       margin-right: 0.8rem;
       cursor: pointer;
     }
-    .video-file-note {
-      font-size: 0.8rem;
-      color: #aaa;
-      margin: -0.5rem 0 1rem 0;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .url-tester {
-      background: #1a1a22;
-      border-radius: 28px;
-      padding: 1rem 1rem 1.2rem 1rem;
-      margin: 0.5rem 0 1rem 0;
-    }
-    .url-tester p {
-      font-size: 0.85rem;
-      color: #bbb;
-      margin-bottom: 0.8rem;
-    }
-    .test-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-    .test-row input {
-      flex: 1;
-      margin-bottom: 0;
-    }
-    .test-row button {
-      width: auto;
-      padding: 0.8rem 1.2rem;
-      background: #2b2b35;
-      box-shadow: none;
-      margin-top: 0;
-    }
-    .test-result {
-      font-size: 0.8rem;
-      padding: 0.5rem;
-      border-radius: 30px;
-      background: #0f0f14;
-      color: #aaa;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .test-result.success {
-      color: #4caf50;
-    }
-    .test-result.fail {
-      color: #e50914;
-    }
-    .example-urls {
-      background: #1a1a22;
-      border-radius: 20px;
-      padding: 0.8rem 1rem;
-      font-size: 0.8rem;
-      color: #aaa;
-      margin: 1rem 0;
-    }
-    .example-urls span {
-      display: inline-block;
-      background: #2b2b33;
-      padding: 0.2rem 1rem;
-      border-radius: 30px;
-      margin: 0.3rem 0.3rem 0 0;
-      color: #ddd;
-    }
+
     #adminPanel button {
-      padding: 0.8rem 1rem;
+      padding: 0.9rem 1.2rem;
       background: #e50914;
       color: #fff;
       border: none;
@@ -469,6 +385,10 @@
       width: 100%;
       margin-top: 0.5rem;
     }
+    #adminPanel button:hover {
+      background: #ff1f2b;
+    }
+
     .panel-close {
       position: absolute;
       top: 18px;
@@ -481,8 +401,9 @@
     .panel-close:hover {
       color: #e50914;
     }
+
     .banner-preview {
-      margin: 0.5rem 0 1rem 0;
+      margin: 0.5rem 0 1.2rem 0;
       border-radius: 16px;
       overflow: hidden;
       max-width: 100%;
@@ -494,18 +415,14 @@
       max-height: 100px;
       object-fit: cover;
     }
+
     .placeholder-text {
       color: #555;
       font-style: italic;
       padding: 1rem 0;
     }
-    .storage-warning {
-      color: #f59e0b;
-      font-size: 0.7rem;
-      margin-top: 0.5rem;
-    }
 
-    /* ---------- SUBSCRIPTION MODAL ---------- */
+    /* subscription modal */
     #subscribeModal {
       display: none;
       position: fixed;
@@ -579,12 +496,12 @@
   </style>
 </head>
 <body>
-  <!-- SUBSCRIPTION MODAL (appears on first visit) -->
+  <!-- SUBSCRIPTION MODAL (first visit) -->
   <div id="subscribeModal">
     <div class="modal-content">
       <i class="fa-solid fa-crown"></i>
-      <h2>Unlimited access</h2>
-      <p>Subscribe to get full unlimited videos and support the channel.</p>
+      <h2>Unlock everything</h2>
+      <p>Subscribe to get unlimited access to all images and content.</p>
       <button class="modal-btn" id="subscribeNowBtn">
         <i class="fa-brands fa-telegram"></i> Subscribe via Telegram
       </button>
@@ -606,21 +523,21 @@
   <div class="hero">
     <img id="heroImage" src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" alt="banner">
     <div class="hero-content">
-      <h2>Your <span style="color:#e50914;">library</span></h2>
-      <p>Upload videos directly from your phone or use a direct video URL.</p>
+      <h2>Your <span style="color:#e50914;">gallery</span></h2>
+      <p>Browse exclusive images. Subscribe to unlock everything.</p>
       <button onclick="alert('▶ Play featured (demo)')"><i class="fa-solid fa-play"></i> Watch</button>
     </div>
   </div>
 
-  <!-- SUBSCRIBE BANNER (replaces purchase banner) -->
+  <!-- SUBSCRIBE BANNER with correct Telegram handle -->
   <div id="subscribeBanner">
-    <p><i class="fa-solid fa-gem"></i> Get unlimited access to all videos – <strong>Subscribe now</strong></p>
-    <button onclick="window.open('https://t.me/maylee-covid0001', '_blank'); markSubscribed();">
+    <p><i class="fa-solid fa-gem"></i> Get unlimited access to all content – <strong>Subscribe now</strong></p>
+    <button onclick="window.open('https://t.me/maylee_covid0001', '_blank'); markSubscribed();">
       <i class="fa-brands fa-telegram"></i> Join Telegram
     </button>
   </div>
 
-  <!-- ADMIN PANEL (unchanged) -->
+  <!-- ADMIN PANEL – image upload only -->
   <div id="adminPanel">
     <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
     <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
@@ -635,127 +552,83 @@
       <button onclick="uploadBanner()"><i class="fa-solid fa-upload"></i> Set banner</button>
     </div>
 
-    <!-- Video upload section with URL tester -->
+    <!-- Image upload section -->
     <div class="admin-section">
-      <h4><i class="fa-solid fa-video"></i> Add new video</h4>
-      <input type="text" id="videoTitle" placeholder="Video title">
-      
-      <!-- Thumbnail image -->
-      <input type="file" id="videoThumbnail" accept="image/*">
-      
-      <!-- Option 1: Upload file -->
-      <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;"><i class="fa-solid fa-mobile-screen"></i> Upload video file (from phone):</p>
-      <input type="file" id="videoFileUpload" accept="video/mp4, video/quicktime, video/x-matroska, video/*">
-      <div class="video-file-note">
-        <i class="fa-solid fa-circle-info"></i> <span>Video stored in browser (small clips only)</span>
-      </div>
-      
-      <!-- Option 2: Video URL with tester -->
-      <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;">— OR use a direct video URL —</p>
-      
-      <!-- URL tester component -->
-      <div class="url-tester">
-        <p><i class="fa-regular fa-lightbulb"></i> Test your URL before adding</p>
-        <div class="test-row">
-          <input type="text" id="testUrlInput" placeholder="https://example.com/video.mp4">
-          <button onclick="testVideoUrl()"><i class="fa-solid fa-flask"></i> Test</button>
-        </div>
-        <div id="testResult" class="test-result"><i class="fa-regular fa-circle-check"></i> Enter a URL and click Test</div>
-        <div class="example-urls">
-          <span>✅ works: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4</span>
-          <span>✅ works: https://media.w3.org/2010/05/sintel/trailer.mp4</span>
-        </div>
-      </div>
-      
-      <!-- Actual URL input (linked to tester) -->
-      <input type="text" id="videoSrc" placeholder="Paste tested URL here" value="">
-      
-      <select id="videoType">
+      <h4><i class="fa-regular fa-images"></i> Add new image</h4>
+      <input type="text" id="imageTitle" placeholder="Image title / caption">
+      <input type="file" id="imageUpload" accept="image/*">
+      <select id="imageType">
         <option value="free">Free</option>
         <option value="vip">VIP</option>
       </select>
-      
-      <button onclick="addVideo()"><i class="fa-solid fa-plus"></i> Add video</button>
-      <div class="storage-warning"><i class="fa-regular fa-hard-drive"></i> Videos stored in browser. Large files may fail.</div>
+      <button onclick="addImage()"><i class="fa-solid fa-plus"></i> Add image</button>
+      <p style="font-size:0.75rem; color:#666; margin-top:0.8rem;">Images are stored in your browser.</p>
     </div>
   </div>
 
   <div class="container">
+    <!-- Free images row -->
     <div class="row">
-      <h2><i class="fa-regular fa-eye" style="color:#e50914;"></i> Free videos</h2>
-      <div class="videos" id="freeVideos"></div>
+      <h2><i class="fa-regular fa-eye" style="color:#e50914;"></i> Free preview</h2>
+      <div class="image-grid" id="freeImages"></div>
     </div>
+    <!-- VIP images row -->
     <div class="row">
-      <h2><i class="fa-solid fa-crown" style="color:gold;"></i> VIP videos</h2>
-      <div class="videos" id="vipVideos"></div>
+      <h2><i class="fa-solid fa-crown" style="color:gold;"></i> VIP preview</h2>
+      <div class="image-grid" id="vipImages"></div>
     </div>
-  </div>
-
-  <!-- MODAL -->
-  <div id="videoModal">
-    <span class="close" onclick="closeVideo()"><i class="fa-regular fa-circle-xmark"></i></span>
-    <video controls id="player"></video>
   </div>
 
   <script>
     (function() {
-      let freeVideos = [];
-      let vipVideos = [];
-      const freeContainer = document.getElementById('freeVideos');
-      const vipContainer = document.getElementById('vipVideos');
-      const videoModal = document.getElementById('videoModal');
-      const modalVideo = document.getElementById('player');
+      // ---------- data ----------
+      let freeImages = [];
+      let vipImages = [];
+
+      const freeContainer = document.getElementById('freeImages');
+      const vipContainer = document.getElementById('vipImages');
       const adminPanel = document.getElementById('adminPanel');
       const heroImage = document.getElementById('heroImage');
       const bannerPreviewImg = document.getElementById('previewImg');
 
       const ADMIN_PASSWORD = "1234";
-      const PAID_KEY = "paid_access";  // keep for VIP unlock, but now subscription is separate
       const BANNER_KEY = "home_banner";
-      const VIDEOS_KEY = "user_videos";
-      const SUBSCRIBED_KEY = "has_subscribed"; // flag to hide modal
+      const IMAGES_KEY = "user_images";
+      const SUBSCRIBED_KEY = "has_subscribed";
 
-      let paid = localStorage.getItem(PAID_KEY) === "true";
-
-      // ----- SUBSCRIPTION MODAL LOGIC -----
+      // ----- subscription modal logic -----
       const modal = document.getElementById('subscribeModal');
       const subscribeBtn = document.getElementById('subscribeNowBtn');
       const closeModalBtn = document.getElementById('closeModalBtn');
       const bannerBtn = document.querySelector('#subscribeBanner button');
 
-      // Function to mark as subscribed (hide modal forever)
       window.markSubscribed = function() {
         localStorage.setItem(SUBSCRIBED_KEY, 'true');
         modal.style.display = 'none';
       };
 
-      // Show modal only if not subscribed before
       if (!localStorage.getItem(SUBSCRIBED_KEY)) {
-        // small delay to not block rendering
         setTimeout(() => {
           modal.style.display = 'flex';
         }, 500);
       }
 
-      // Subscribe button – open Telegram and mark subscribed
       subscribeBtn.addEventListener('click', function() {
-        window.open('https://t.me/maylee-covid0001', '_blank');
+        window.open('https://t.me/maylee_covid0001', '_blank');
         markSubscribed();
       });
 
-      // Close modal without subscribing – but we don't mark as subscribed, so it will appear next visit.
       closeModalBtn.addEventListener('click', function() {
         modal.style.display = 'none';
       });
 
-      // Also handle the banner button (same action)
       bannerBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        window.open('https://t.me/maylee-covid0001', '_blank');
-        markSubscribed(); // optional: if they click banner, we can also hide modal permanently
+        window.open('https://t.me/maylee_covid0001', '_blank');
+        markSubscribed();
       });
 
-      // Load banner
+      // ----- load banner -----
       const savedBanner = localStorage.getItem(BANNER_KEY);
       if (savedBanner) {
         heroImage.src = savedBanner;
@@ -763,114 +636,75 @@
         bannerPreviewImg.style.display = 'block';
       }
 
-      // Load videos
-      function loadVideos() {
-        const saved = localStorage.getItem(VIDEOS_KEY);
+      // ----- load images from localStorage -----
+      function loadImages() {
+        const saved = localStorage.getItem(IMAGES_KEY);
         if (saved) {
           try {
             const data = JSON.parse(saved);
-            freeVideos = data.free || [];
-            vipVideos = data.vip || [];
+            freeImages = data.free || [];
+            vipImages = data.vip || [];
           } catch (e) {}
         } else {
-          freeVideos = [];
-          vipVideos = [];
+          freeImages = [];
+          vipImages = [];
         }
-        renderVideos('free');
-        renderVideos('vip');
+        renderImages('free');
+        renderImages('vip');
       }
 
-      function saveVideos() {
-        localStorage.setItem(VIDEOS_KEY, JSON.stringify({
-          free: freeVideos,
-          vip: vipVideos
+      function saveImages() {
+        localStorage.setItem(IMAGES_KEY, JSON.stringify({
+          free: freeImages,
+          vip: vipImages
         }));
       }
 
-      function renderVideos(type) {
+      function renderImages(type) {
         const container = type === 'free' ? freeContainer : vipContainer;
-        const videos = type === 'free' ? freeVideos : vipVideos;
+        const images = type === 'free' ? freeImages : vipImages;
         container.innerHTML = '';
-        if (videos.length === 0) {
+        if (images.length === 0) {
           const msg = document.createElement('div');
           msg.className = 'placeholder-text';
-          msg.innerHTML = type === 'free' ? '✨ No free videos. Add via admin.' : '👑 No VIP videos. Add via admin.';
+          msg.innerHTML = type === 'free' ? '✨ No free images yet. Add via admin.' : '👑 No VIP images yet. Add via admin.';
           container.appendChild(msg);
           return;
         }
-        videos.forEach(video => {
+        images.forEach(imgItem => {
           const card = document.createElement('div');
-          card.className = 'video-card';
+          card.className = 'image-card';
+
           const img = document.createElement('img');
-          img.src = video.thumbnail;
+          img.src = imgItem.src;
+          img.alt = imgItem.title;
           card.appendChild(img);
+
           const titleSpan = document.createElement('span');
           titleSpan.className = 'card-title';
-          titleSpan.textContent = video.title;
+          titleSpan.textContent = imgItem.title;
           card.appendChild(titleSpan);
+
           if (type === 'vip') {
             const badge = document.createElement('div');
-            badge.className = 'vip';
+            badge.className = 'vip-badge';
             badge.innerHTML = '<i class="fa-solid fa-crown"></i> VIP';
             card.appendChild(badge);
           }
-          card.onclick = () => playVideo(video.src, type);
+
+          // On click, always show subscription prompt (both free and VIP)
+          card.onclick = function() {
+            if (confirm('🔒 This content requires subscription. Open Telegram to subscribe?')) {
+              window.open('https://t.me/maylee_covid0001', '_blank');
+              markSubscribed();
+            }
+          };
+
           container.appendChild(card);
         });
       }
 
-      window.playVideo = function(src, type) {
-        if (type === 'vip' && !paid) {
-          if (confirm('🔒 This is VIP content. Subscribe via Telegram for unlimited access?')) {
-            window.open('https://t.me/maylee-covid0001', '_blank');
-            markSubscribed();
-          }
-          return;
-        }
-        modalVideo.onerror = null;
-        modalVideo.onloadeddata = null;
-        modalVideo.src = src;
-        videoModal.style.display = 'flex';
-        const playPromise = modalVideo.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {});
-        }
-        modalVideo.onerror = function() {
-          let errorMsg = 'Video cannot be played. ';
-          if (modalVideo.error) {
-            switch (modalVideo.error.code) {
-              case MediaError.MEDIA_ERR_ABORTED: errorMsg += 'Loading aborted.'; break;
-              case MediaError.MEDIA_ERR_NETWORK: errorMsg += 'Network error.'; break;
-              case MediaError.MEDIA_ERR_DECODE: errorMsg += 'Format not supported.'; break;
-              case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorMsg += 'Video format or URL is not supported. Use direct .mp4 links.'; break;
-              default: errorMsg += 'Unknown error.';
-            }
-          } else {
-            errorMsg += 'Check the URL or file format. For URLs, use direct .mp4 links.';
-          }
-          alert(errorMsg);
-          closeVideo();
-        };
-      };
-
-      window.closeVideo = function() {
-        videoModal.style.display = 'none';
-        modalVideo.pause();
-        modalVideo.src = '';
-        modalVideo.onerror = null;
-      };
-
-      // We keep purchasePackage for VIP unlock (but now subscription is separate)
-      window.purchasePackage = function() {
-        if (confirm('💰 Confirm purchase for $100? (demo)')) {
-          paid = true;
-          localStorage.setItem(PAID_KEY, 'true');
-          alert('✅ VIP unlocked!');
-          renderVideos('vip');
-        }
-      };
-
-      // Admin toggle
+      // ----- admin functions -----
       window.toggleAdmin = function() {
         if (adminPanel.style.display === 'block') {
           adminPanel.style.display = 'none';
@@ -881,7 +715,10 @@
           } else if (pwd !== null) alert('Wrong password');
         }
       };
-      window.closeAdminPanel = function() { adminPanel.style.display = 'none'; };
+
+      window.closeAdminPanel = function() {
+        adminPanel.style.display = 'none';
+      };
 
       // Banner upload
       window.uploadBanner = function() {
@@ -898,114 +735,54 @@
         reader.readAsDataURL(input.files[0]);
       };
 
-      // URL tester
-      window.testVideoUrl = function() {
-        const url = document.getElementById('testUrlInput').value.trim();
-        if (!url) { alert('Enter a URL to test'); return; }
-        const resultDiv = document.getElementById('testResult');
-        resultDiv.innerHTML = '<i class="fa-solid fa-spinner fa-pulse"></i> Testing...';
-        resultDiv.className = 'test-result';
-
-        const testVideo = document.createElement('video');
-        testVideo.preload = 'metadata';
-        testVideo.src = url;
-
-        let timeout = setTimeout(() => {
-          cleanup();
-          resultDiv.innerHTML = '<i class="fa-regular fa-circle-xmark"></i> Timeout – URL may be slow or invalid.';
-          resultDiv.className = 'test-result fail';
-        }, 10000);
-
-        const success = () => {
-          cleanup();
-          resultDiv.innerHTML = '<i class="fa-regular fa-circle-check"></i> URL seems valid (metadata loaded)';
-          resultDiv.className = 'test-result success';
-          document.getElementById('videoSrc').value = url;
-        };
-
-        const fail = () => {
-          cleanup();
-          resultDiv.innerHTML = '<i class="fa-regular fa-circle-xmark"></i> Failed – not a playable video URL. Use direct .mp4 links.';
-          resultDiv.className = 'test-result fail';
-        };
-
-        const cleanup = () => {
-          clearTimeout(timeout);
-          testVideo.removeEventListener('loadedmetadata', success);
-          testVideo.removeEventListener('error', fail);
-          testVideo.src = '';
-          testVideo.load();
-        };
-
-        testVideo.addEventListener('loadedmetadata', success);
-        testVideo.addEventListener('error', fail);
-        testVideo.load();
-      };
-
-      // Add video
-      window.addVideo = function() {
-        const title = document.getElementById('videoTitle').value.trim();
-        const thumbInput = document.getElementById('videoThumbnail');
-        const videoFile = document.getElementById('videoFileUpload').files[0];
-        const videoUrl = document.getElementById('videoSrc').value.trim();
-        const type = document.getElementById('videoType').value;
+      // Add image
+      window.addImage = function() {
+        const title = document.getElementById('imageTitle').value.trim();
+        const fileInput = document.getElementById('imageUpload');
+        const type = document.getElementById('imageType').value;
 
         if (!title) { alert('Enter a title'); return; }
-        if (thumbInput.files.length === 0) { alert('Select a thumbnail image'); return; }
-        if (!videoFile && !videoUrl) { alert('Provide either a video file or a video URL'); return; }
+        if (fileInput.files.length === 0) { alert('Select an image file'); return; }
 
-        const thumbReader = new FileReader();
-        thumbReader.onload = function(thumbEvent) {
-          const thumbnailData = thumbEvent.target.result;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imageData = e.target.result;
+          const newImage = {
+            id: Date.now(),
+            title: title,
+            src: imageData
+          };
 
-          if (videoFile) {
-            if (videoFile.size > 30 * 1024 * 1024) {
-              if (!confirm('Video file is larger than 30MB. It may fail to store. Continue?')) return;
-            }
-            const videoReader = new FileReader();
-            videoReader.onload = function(videoEvent) {
-              const videoData = videoEvent.target.result;
-              addVideoToArray(title, thumbnailData, videoData, type);
-            };
-            videoReader.onerror = function() { alert('Error reading video file.'); };
-            videoReader.readAsDataURL(videoFile);
+          if (type === 'free') {
+            freeImages.push(newImage);
           } else {
-            addVideoToArray(title, thumbnailData, videoUrl, type);
+            vipImages.push(newImage);
           }
+
+          try {
+            saveImages();
+          } catch (e) {
+            alert('Storage limit exceeded. Try smaller images.');
+            // rollback
+            if (type === 'free') freeImages.pop();
+            else vipImages.pop();
+            return;
+          }
+
+          renderImages('free');
+          renderImages('vip');
+
+          // Clear inputs
+          document.getElementById('imageTitle').value = '';
+          document.getElementById('imageUpload').value = '';
         };
-        thumbReader.readAsDataURL(thumbInput.files[0]);
+        reader.readAsDataURL(fileInput.files[0]);
       };
 
-      function addVideoToArray(title, thumbnail, src, type) {
-        const video = { id: Date.now(), title, thumbnail, src };
-        if (type === 'free') freeVideos.push(video);
-        else vipVideos.push(video);
+      // initial load
+      loadImages();
 
-        try {
-          saveVideos();
-        } catch (e) {
-          alert('Storage limit exceeded. Try using video URLs or smaller files.');
-          if (type === 'free') freeVideos.pop();
-          else vipVideos.pop();
-          return;
-        }
-
-        renderVideos('free');
-        renderVideos('vip');
-
-        document.getElementById('videoTitle').value = '';
-        document.getElementById('videoThumbnail').value = '';
-        document.getElementById('videoFileUpload').value = '';
-        document.getElementById('videoSrc').value = '';
-        document.getElementById('testUrlInput').value = '';
-        document.getElementById('testResult').innerHTML = '<i class="fa-regular fa-circle-check"></i> Enter a URL and click Test';
-        document.getElementById('testResult').className = 'test-result';
-      }
-
-      loadVideos();
-
-      videoModal.addEventListener('click', (e) => { if (e.target === videoModal) closeVideo(); });
-
+      // live preview for banner
       document.getElementById('bannerUpload').addEventListener('change', function(e) {
         if (this.files.length) {
           const reader = new FileReader();
@@ -1019,4 +796,4 @@
     })();
   </script>
 </body>
-                                                                                      </html>
+</html>
