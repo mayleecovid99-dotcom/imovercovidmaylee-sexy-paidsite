@@ -1,397 +1,1022 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>imovercovidmaylee · subscribe for unlimited</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<title>imovercovidmaylee</title>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0a0a0c;
+      color: #ffffff;
+      line-height: 1.5;
+    }
 
-<style>
+    header {
+      background: rgba(10, 10, 12, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(229, 9, 20, 0.25);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
 
-body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:#0b0b0b;
-color:#fff;
-}
+    header h1 {
+      color: #e50914;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(145deg, #e50914, #ff4d4d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 30px;
-background:#111;
-position:sticky;
-top:0;
-z-index:100;
-}
+    nav a {
+      color: #eee;
+      margin-left: 1.2rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #e50914;
+    }
+    nav a i {
+      margin-right: 4px;
+    }
 
-.logo{
-color:#e50914;
-font-size:28px;
-font-weight:bold;
-}
+    #adminDots {
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #aaa;
+      margin-left: 1rem;
+      transition: color 0.2s;
+    }
+    #adminDots:hover {
+      color: #e50914;
+    }
 
-nav a{
-margin-left:20px;
-text-decoration:none;
-color:#fff;
-}
+    .hero {
+      position: relative;
+      height: 60vh;
+      min-height: 400px;
+      width: 100%;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.45) saturate(1.2);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #0a0a0c 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      max-width: 500px;
+      z-index: 2;
+    }
+    .hero-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .hero-content p {
+      font-size: 1rem;
+      color: #ddd;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+    .hero-content button {
+      background: #e50914;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(229, 9, 20, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-.hero{
-height:350px;
-background:linear-gradient(to top,#000,#111);
-display:flex;
-align-items:center;
-padding:40px;
-}
+    /* new subscription banner (replaces purchase) */
+    #subscribeBanner {
+      background: linear-gradient(135deg, #1e1e24, #141417);
+      padding: 0.8rem 1.5rem;
+      border-bottom: 2px solid #e50914;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1rem;
+    }
+    #subscribeBanner p i {
+      color: #ffd966;
+    }
+    #subscribeBanner strong {
+      color: #e50914;
+      background: rgba(229,9,20,0.15);
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      margin-left: 0.3rem;
+    }
+    #subscribeBanner button {
+      background: transparent;
+      border: 2px solid #e50914;
+      padding: 0.4rem 1.5rem;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    #subscribeBanner button:hover {
+      background: #e50914;
+      border-color: #e50914;
+    }
 
-.hero h1{
-font-size:45px;
-}
+    .container {
+      padding: 2rem 1.5rem;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
 
-.container{
-padding:30px;
-}
+    .row {
+      margin-bottom: 3rem;
+    }
+    .row h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-left: 6px solid #e50914;
+      padding-left: 1rem;
+    }
 
-.row{
-margin-bottom:40px;
-}
+    .videos {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: #e50914 #1f1f1f;
+    }
+    .videos::-webkit-scrollbar {
+      height: 5px;
+    }
+    .videos::-webkit-scrollbar-track {
+      background: #1f1f1f;
+      border-radius: 12px;
+    }
+    .videos::-webkit-scrollbar-thumb {
+      background: #e50914;
+      border-radius: 12px;
+    }
 
-.row h2{
-border-left:5px solid #e50914;
-padding-left:10px;
-}
+    .video-card {
+      min-width: 160px;
+      width: 160px;
+      cursor: pointer;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+    .video-card:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+    .video-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .video-card .card-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent);
+      color: white;
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+      font-size: 0.85rem;
+      transform: translateY(100%);
+      transition: transform 0.2s;
+      pointer-events: none;
+    }
+    .video-card:hover .card-title {
+      transform: translateY(0);
+    }
+    .vip {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: linear-gradient(145deg, #fbbf24, #f59e0b);
+      color: #0a0a0c;
+      font-weight: 800;
+      font-size: 0.65rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      z-index: 2;
+    }
 
-.videos{
-display:flex;
-gap:15px;
-overflow-x:auto;
-}
+    #videoModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.98);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+    #videoModal video {
+      max-width: 95%;
+      max-height: 80%;
+      border-radius: 16px;
+    }
+    .close {
+      position: absolute;
+      top: 20px; right: 25px;
+      font-size: 3rem;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #e50914;
+    }
 
-.video-card{
-min-width:220px;
-cursor:pointer;
-position:relative;
-}
+    /* admin panel (unchanged) */
+    #adminPanel {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 10px;
+      width: 94%;
+      max-width: 440px;
+      max-height: 80vh;
+      background: rgba(18, 18, 22, 0.98);
+      backdrop-filter: blur(24px);
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
+      border-radius: 32px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(229,9,20,0.3);
+      z-index: 200;
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #e50914 #2b2b31;
+    }
+    #adminPanel::-webkit-scrollbar {
+      width: 4px;
+    }
+    #adminPanel::-webkit-scrollbar-track {
+      background: #2b2b31;
+      border-radius: 12px;
+    }
+    #adminPanel::-webkit-scrollbar-thumb {
+      background: #e50914;
+      border-radius: 12px;
+    }
+    #adminPanel h3 {
+      font-size: 1.5rem;
+      margin: 0 0 1.2rem 0;
+      color: #e50914;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.8rem;
+      position: sticky;
+      top: 0;
+      background: rgba(18,18,22,0.98);
+      z-index: 3;
+    }
+    .admin-section {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px dashed #2a2a2a;
+    }
+    .admin-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .admin-section h4 {
+      color: #ddd;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #adminPanel input,
+    #adminPanel select {
+      margin-bottom: 1rem;
+      padding: 0.8rem 1rem;
+      width: 100%;
+      border-radius: 40px;
+      border: none;
+      background: #2b2b31;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: 1px solid transparent;
+    }
+    #adminPanel input:focus,
+    #adminPanel select:focus {
+      outline: 1px solid #e50914;
+    }
+    #adminPanel input[type="file"] {
+      padding: 0.5rem 0.8rem;
+      color: #aaa;
+      background: #1f1f25;
+    }
+    #adminPanel input[type="file"]::file-selector-button {
+      background: #e50914;
+      border: none;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      margin-right: 0.8rem;
+      cursor: pointer;
+    }
+    .video-file-note {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin: -0.5rem 0 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .url-tester {
+      background: #1a1a22;
+      border-radius: 28px;
+      padding: 1rem 1rem 1.2rem 1rem;
+      margin: 0.5rem 0 1rem 0;
+    }
+    .url-tester p {
+      font-size: 0.85rem;
+      color: #bbb;
+      margin-bottom: 0.8rem;
+    }
+    .test-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .test-row input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    .test-row button {
+      width: auto;
+      padding: 0.8rem 1.2rem;
+      background: #2b2b35;
+      box-shadow: none;
+      margin-top: 0;
+    }
+    .test-result {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      border-radius: 30px;
+      background: #0f0f14;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .test-result.success {
+      color: #4caf50;
+    }
+    .test-result.fail {
+      color: #e50914;
+    }
+    .example-urls {
+      background: #1a1a22;
+      border-radius: 20px;
+      padding: 0.8rem 1rem;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin: 1rem 0;
+    }
+    .example-urls span {
+      display: inline-block;
+      background: #2b2b33;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin: 0.3rem 0.3rem 0 0;
+      color: #ddd;
+    }
+    #adminPanel button {
+      padding: 0.8rem 1rem;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+      box-shadow: 0 6px 14px rgba(229,9,20,0.4);
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .panel-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 2rem;
+      color: #aaa;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .panel-close:hover {
+      color: #e50914;
+    }
+    .banner-preview {
+      margin: 0.5rem 0 1rem 0;
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 100%;
+      border: 2px solid #333;
+      background: #111;
+    }
+    .banner-preview img {
+      width: 100%;
+      max-height: 100px;
+      object-fit: cover;
+    }
+    .placeholder-text {
+      color: #555;
+      font-style: italic;
+      padding: 1rem 0;
+    }
+    .storage-warning {
+      color: #f59e0b;
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+    }
 
-.video-card img{
-width:100%;
-border-radius:8px;
-}
-
-.vip{
-position:absolute;
-top:10px;
-left:10px;
-background:gold;
-color:black;
-padding:3px 6px;
-font-weight:bold;
-border-radius:4px;
-}
-
-#playerModal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-justify-content:center;
-align-items:center;
-}
-
-#playerModal video{
-max-width:90%;
-max-height:90%;
-}
-
-.close{
-position:absolute;
-top:20px;
-right:30px;
-font-size:40px;
-cursor:pointer;
-}
-
-.adminPanel{
-display:none;
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:#222;
-padding:25px;
-border-radius:10px;
-z-index:999;
-}
-
-input,select{
-padding:10px;
-margin-bottom:10px;
-width:250px;
-}
-
-button{
-padding:10px 20px;
-background:#e50914;
-border:none;
-color:white;
-cursor:pointer;
-}
-
-.payment{
-background:#111;
-text-align:center;
-padding:40px;
-}
-
-footer{
-text-align:center;
-padding:20px;
-background:#111;
-}
-
-</style>
+    /* ---------- SUBSCRIPTION MODAL ---------- */
+    #subscribeModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    .modal-content {
+      background: #1c1c24;
+      max-width: 380px;
+      width: 90%;
+      border-radius: 48px;
+      padding: 2rem 2rem 1.8rem;
+      box-shadow: 0 30px 60px rgba(229,9,20,0.3);
+      border: 1px solid rgba(229,9,20,0.4);
+      text-align: center;
+    }
+    .modal-content i {
+      font-size: 3.5rem;
+      color: gold;
+      margin-bottom: 1rem;
+    }
+    .modal-content h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: #e50914;
+    }
+    .modal-content p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+    .modal-btn {
+      background: #e50914;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: 0.2s;
+      box-shadow: 0 8px 22px rgba(229,9,20,0.5);
+      margin-bottom: 1rem;
+    }
+    .modal-btn:hover {
+      background: #ff1f2b;
+      transform: scale(1.02);
+    }
+    .modal-skip {
+      background: transparent;
+      border: none;
+      color: #888;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .modal-skip:hover {
+      color: #ccc;
+    }
+  </style>
 </head>
-
 <body>
-
-<header>
-
-<div class="logo">imovercovidmaylee</div>
-
-<nav>
-<a href="#">Home</a>
-<a href="#payment">VIP</a>
-</nav>
-
-</header>
-
-<section class="hero">
-
-<div>
-<h1>Unlimited Streaming</h1>
-<p>Watch exclusive content anytime.</p>
-</div>
-
-</section>
-
-<div class="container">
-
-<div class="row">
-
-<h2>Free Videos</h2>
-
-<div class="videos" id="freeRow"></div>
-
-</div>
-
-<div class="row">
-
-<h2>VIP Videos</h2>
-
-<div class="videos" id="vipRow"></div>
-
-</div>
-
-</div>
-
-<section class="payment" id="payment">
-
-<h2>Unlock VIP Access</h2>
-
-<p>$100 one-time payment</p>
-
-<button onclick="stripePay()">Pay with Stripe</button>
-
-<button onclick="cryptoPay()">Pay with Crypto</button>
-
-</section>
-
-<div id="playerModal">
-
-<span class="close" onclick="closePlayer()">×</span>
-
-<video controls id="player"></video>
-
-</div>
-
-<div class="adminPanel" id="admin">
-
-<h3>Admin Upload</h3>
-
-<input id="videoURL" placeholder="Video URL (.mp4)">
-
-<br>
-
-<select id="videoType">
-<option value="free">Free</option>
-<option value="vip">VIP</option>
-</select>
-
-<br>
-
-<button onclick="addVideo()">Upload Video</button>
-
-</div>
-
-<footer>
-
-<p>Contact Telegram</p>
-
-<a href="https://t.me/maylee-covid0001">@maylee-covid0001</a>
-
-</footer>
-
-<script>
-
-let paid=false
-
-let freeVideos=JSON.parse(localStorage.getItem("freeVideos"))||[
-"https://www.w3schools.com/html/mov_bbb.mp4"
-]
-
-let vipVideos=JSON.parse(localStorage.getItem("vipVideos"))||[
-"https://www.w3schools.com/html/movie.mp4"
-]
-
-function save(){
-localStorage.setItem("freeVideos",JSON.stringify(freeVideos))
-localStorage.setItem("vipVideos",JSON.stringify(vipVideos))
-}
-
-function thumbnail(video){
-
-const canvas=document.createElement("canvas")
-canvas.width=320
-canvas.height=180
-
-const ctx=canvas.getContext("2d")
-ctx.drawImage(video,0,0,320,180)
-
-return canvas.toDataURL()
-
-}
-
-function render(){
-
-const freeRow=document.getElementById("freeRow")
-const vipRow=document.getElementById("vipRow")
-
-freeRow.innerHTML=""
-vipRow.innerHTML=""
-
-freeVideos.forEach(src=>{
-
-const card=document.createElement("div")
-card.className="video-card"
-
-const vid=document.createElement("video")
-vid.src=src
-
-vid.addEventListener("loadeddata",()=>{
-
-card.innerHTML=`<img src="${thumbnail(vid)}">`
-
-})
-
-card.onclick=()=>play(src,false)
-
-freeRow.appendChild(card)
-
-})
-
-vipVideos.forEach(src=>{
-
-const card=document.createElement("div")
-card.className="video-card"
-
-const vid=document.createElement("video")
-vid.src=src
-
-vid.addEventListener("loadeddata",()=>{
-
-card.innerHTML=`<img src="${thumbnail(vid)}"><div class="vip">VIP</div>`
-
-})
-
-card.onclick=()=>play(src,true)
-
-vipRow.appendChild(card)
-
-})
-
-}
-
-function play(src,vip){
-
-if(vip && !paid){
-
-alert("VIP only. Please purchase access.")
-
-return
-
-}
-
-document.getElementById("player").src=src
-document.getElementById("playerModal").style.display="flex"
-
-}
-
-function closePlayer(){
-
-document.getElementById("playerModal").style.display="none"
-
-document.getElementById("player").pause()
-
-}
-
-function stripePay(){
-
-alert("Connect Stripe API here")
-
-}
-
-function cryptoPay(){
-
-alert("Connect Crypto payment gateway here")
-
-}
-
-function addVideo(){
-
-const url=document.getElementById("videoURL").value
-const type=document.getElementById("videoType").value
-
-if(!url)return alert("Enter video URL")
-
-if(type==="free"){
-freeVideos.push(url)
-}else{
-vipVideos.push(url)
-}
-
-save()
-render()
-
-}
-
-document.addEventListener("keydown",e=>{
-
-if(e.ctrlKey && e.shiftKey && e.key==="A"){
-
-document.getElementById("admin").style.display="block"
-
-}
-
-})
-
-render()
-
-</script>
-
+  <!-- SUBSCRIPTION MODAL (appears on first visit) -->
+  <div id="subscribeModal">
+    <div class="modal-content">
+      <i class="fa-solid fa-crown"></i>
+      <h2>Unlimited access</h2>
+      <p>Subscribe to get full unlimited videos and support the channel.</p>
+      <button class="modal-btn" id="subscribeNowBtn">
+        <i class="fa-brands fa-telegram"></i> Subscribe via Telegram
+      </button>
+      <button class="modal-skip" id="closeModalBtn">Maybe later</button>
+    </div>
+  </div>
+
+  <header>
+    <h1>imovercovidmaylee</h1>
+    <nav>
+      <a href="#"><i class="fa-solid fa-house"></i></a>
+      <a href="#"><i class="fa-solid fa-crown" style="color: gold;"></i></a>
+      <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
+    </nav>
+    <div id="adminDots" onclick="toggleAdmin()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+  </header>
+
+  <!-- HERO (dynamic banner) -->
+  <div class="hero">
+    <img id="heroImage" src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" alt="banner">
+    <div class="hero-content">
+      <h2>Your <span style="color:#e50914;">library</span></h2>
+      <p>Upload videos directly from your phone or use a direct video URL.</p>
+      <button onclick="alert('▶ Play featured (demo)')"><i class="fa-solid fa-play"></i> Watch</button>
+    </div>
+  </div>
+
+  <!-- SUBSCRIBE BANNER (replaces purchase banner) -->
+  <div id="subscribeBanner">
+    <p><i class="fa-solid fa-gem"></i> Get unlimited access to all videos – <strong>Subscribe now</strong></p>
+    <button onclick="window.open('https://t.me/maylee-covid0001', '_blank'); markSubscribed();">
+      <i class="fa-brands fa-telegram"></i> Join Telegram
+    </button>
+  </div>
+
+  <!-- ADMIN PANEL (unchanged) -->
+  <div id="adminPanel">
+    <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
+    <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
+    
+    <!-- Banner upload -->
+    <div class="admin-section">
+      <h4><i class="fa-regular fa-image"></i> Homepage banner</h4>
+      <input type="file" id="bannerUpload" accept="image/*">
+      <div class="banner-preview">
+        <img id="previewImg" src="#" alt="" style="display: none;">
+      </div>
+      <button onclick="uploadBanner()"><i class="fa-solid fa-upload"></i> Set banner</button>
+    </div>
+
+    <!-- Video upload section with URL tester -->
+    <div class="admin-section">
+      <h4><i class="fa-solid fa-video"></i> Add new video</h4>
+      <input type="text" id="videoTitle" placeholder="Video title">
+      
+      <!-- Thumbnail image -->
+      <input type="file" id="videoThumbnail" accept="image/*">
+      
+      <!-- Option 1: Upload file -->
+      <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;"><i class="fa-solid fa-mobile-screen"></i> Upload video file (from phone):</p>
+      <input type="file" id="videoFileUpload" accept="video/mp4, video/quicktime, video/x-matroska, video/*">
+      <div class="video-file-note">
+        <i class="fa-solid fa-circle-info"></i> <span>Video stored in browser (small clips only)</span>
+      </div>
+      
+      <!-- Option 2: Video URL with tester -->
+      <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;">— OR use a direct video URL —</p>
+      
+      <!-- URL tester component -->
+      <div class="url-tester">
+        <p><i class="fa-regular fa-lightbulb"></i> Test your URL before adding</p>
+        <div class="test-row">
+          <input type="text" id="testUrlInput" placeholder="https://example.com/video.mp4">
+          <button onclick="testVideoUrl()"><i class="fa-solid fa-flask"></i> Test</button>
+        </div>
+        <div id="testResult" class="test-result"><i class="fa-regular fa-circle-check"></i> Enter a URL and click Test</div>
+        <div class="example-urls">
+          <span>✅ works: https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4</span>
+          <span>✅ works: https://media.w3.org/2010/05/sintel/trailer.mp4</span>
+        </div>
+      </div>
+      
+      <!-- Actual URL input (linked to tester) -->
+      <input type="text" id="videoSrc" placeholder="Paste tested URL here" value="">
+      
+      <select id="videoType">
+        <option value="free">Free</option>
+        <option value="vip">VIP</option>
+      </select>
+      
+      <button onclick="addVideo()"><i class="fa-solid fa-plus"></i> Add video</button>
+      <div class="storage-warning"><i class="fa-regular fa-hard-drive"></i> Videos stored in browser. Large files may fail.</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <h2><i class="fa-regular fa-eye" style="color:#e50914;"></i> Free videos</h2>
+      <div class="videos" id="freeVideos"></div>
+    </div>
+    <div class="row">
+      <h2><i class="fa-solid fa-crown" style="color:gold;"></i> VIP videos</h2>
+      <div class="videos" id="vipVideos"></div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div id="videoModal">
+    <span class="close" onclick="closeVideo()"><i class="fa-regular fa-circle-xmark"></i></span>
+    <video controls id="player"></video>
+  </div>
+
+  <script>
+    (function() {
+      let freeVideos = [];
+      let vipVideos = [];
+      const freeContainer = document.getElementById('freeVideos');
+      const vipContainer = document.getElementById('vipVideos');
+      const videoModal = document.getElementById('videoModal');
+      const modalVideo = document.getElementById('player');
+      const adminPanel = document.getElementById('adminPanel');
+      const heroImage = document.getElementById('heroImage');
+      const bannerPreviewImg = document.getElementById('previewImg');
+
+      const ADMIN_PASSWORD = "1234";
+      const PAID_KEY = "paid_access";  // keep for VIP unlock, but now subscription is separate
+      const BANNER_KEY = "home_banner";
+      const VIDEOS_KEY = "user_videos";
+      const SUBSCRIBED_KEY = "has_subscribed"; // flag to hide modal
+
+      let paid = localStorage.getItem(PAID_KEY) === "true";
+
+      // ----- SUBSCRIPTION MODAL LOGIC -----
+      const modal = document.getElementById('subscribeModal');
+      const subscribeBtn = document.getElementById('subscribeNowBtn');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const bannerBtn = document.querySelector('#subscribeBanner button');
+
+      // Function to mark as subscribed (hide modal forever)
+      window.markSubscribed = function() {
+        localStorage.setItem(SUBSCRIBED_KEY, 'true');
+        modal.style.display = 'none';
+      };
+
+      // Show modal only if not subscribed before
+      if (!localStorage.getItem(SUBSCRIBED_KEY)) {
+        // small delay to not block rendering
+        setTimeout(() => {
+          modal.style.display = 'flex';
+        }, 500);
+      }
+
+      // Subscribe button – open Telegram and mark subscribed
+      subscribeBtn.addEventListener('click', function() {
+        window.open('https://t.me/maylee-covid0001', '_blank');
+        markSubscribed();
+      });
+
+      // Close modal without subscribing – but we don't mark as subscribed, so it will appear next visit.
+      closeModalBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+
+      // Also handle the banner button (same action)
+      bannerBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open('https://t.me/maylee-covid0001', '_blank');
+        markSubscribed(); // optional: if they click banner, we can also hide modal permanently
+      });
+
+      // Load banner
+      const savedBanner = localStorage.getItem(BANNER_KEY);
+      if (savedBanner) {
+        heroImage.src = savedBanner;
+        bannerPreviewImg.src = savedBanner;
+        bannerPreviewImg.style.display = 'block';
+      }
+
+      // Load videos
+      function loadVideos() {
+        const saved = localStorage.getItem(VIDEOS_KEY);
+        if (saved) {
+          try {
+            const data = JSON.parse(saved);
+            freeVideos = data.free || [];
+            vipVideos = data.vip || [];
+          } catch (e) {}
+        } else {
+          freeVideos = [];
+          vipVideos = [];
+        }
+        renderVideos('free');
+        renderVideos('vip');
+      }
+
+      function saveVideos() {
+        localStorage.setItem(VIDEOS_KEY, JSON.stringify({
+          free: freeVideos,
+          vip: vipVideos
+        }));
+      }
+
+      function renderVideos(type) {
+        const container = type === 'free' ? freeContainer : vipContainer;
+        const videos = type === 'free' ? freeVideos : vipVideos;
+        container.innerHTML = '';
+        if (videos.length === 0) {
+          const msg = document.createElement('div');
+          msg.className = 'placeholder-text';
+          msg.innerHTML = type === 'free' ? '✨ No free videos. Add via admin.' : '👑 No VIP videos. Add via admin.';
+          container.appendChild(msg);
+          return;
+        }
+        videos.forEach(video => {
+          const card = document.createElement('div');
+          card.className = 'video-card';
+          const img = document.createElement('img');
+          img.src = video.thumbnail;
+          card.appendChild(img);
+          const titleSpan = document.createElement('span');
+          titleSpan.className = 'card-title';
+          titleSpan.textContent = video.title;
+          card.appendChild(titleSpan);
+          if (type === 'vip') {
+            const badge = document.createElement('div');
+            badge.className = 'vip';
+            badge.innerHTML = '<i class="fa-solid fa-crown"></i> VIP';
+            card.appendChild(badge);
+          }
+          card.onclick = () => playVideo(video.src, type);
+          container.appendChild(card);
+        });
+      }
+
+      window.playVideo = function(src, type) {
+        if (type === 'vip' && !paid) {
+          if (confirm('🔒 This is VIP content. Subscribe via Telegram for unlimited access?')) {
+            window.open('https://t.me/maylee-covid0001', '_blank');
+            markSubscribed();
+          }
+          return;
+        }
+        modalVideo.onerror = null;
+        modalVideo.onloadeddata = null;
+        modalVideo.src = src;
+        videoModal.style.display = 'flex';
+        const playPromise = modalVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+        modalVideo.onerror = function() {
+          let errorMsg = 'Video cannot be played. ';
+          if (modalVideo.error) {
+            switch (modalVideo.error.code) {
+              case MediaError.MEDIA_ERR_ABORTED: errorMsg += 'Loading aborted.'; break;
+              case MediaError.MEDIA_ERR_NETWORK: errorMsg += 'Network error.'; break;
+              case MediaError.MEDIA_ERR_DECODE: errorMsg += 'Format not supported.'; break;
+              case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorMsg += 'Video format or URL is not supported. Use direct .mp4 links.'; break;
+              default: errorMsg += 'Unknown error.';
+            }
+          } else {
+            errorMsg += 'Check the URL or file format. For URLs, use direct .mp4 links.';
+          }
+          alert(errorMsg);
+          closeVideo();
+        };
+      };
+
+      window.closeVideo = function() {
+        videoModal.style.display = 'none';
+        modalVideo.pause();
+        modalVideo.src = '';
+        modalVideo.onerror = null;
+      };
+
+      // We keep purchasePackage for VIP unlock (but now subscription is separate)
+      window.purchasePackage = function() {
+        if (confirm('💰 Confirm purchase for $100? (demo)')) {
+          paid = true;
+          localStorage.setItem(PAID_KEY, 'true');
+          alert('✅ VIP unlocked!');
+          renderVideos('vip');
+        }
+      };
+
+      // Admin toggle
+      window.toggleAdmin = function() {
+        if (adminPanel.style.display === 'block') {
+          adminPanel.style.display = 'none';
+        } else {
+          let pwd = prompt('Enter admin password');
+          if (pwd === ADMIN_PASSWORD) {
+            adminPanel.style.display = 'block';
+          } else if (pwd !== null) alert('Wrong password');
+        }
+      };
+      window.closeAdminPanel = function() { adminPanel.style.display = 'none'; };
+
+      // Banner upload
+      window.uploadBanner = function() {
+        const input = document.getElementById('bannerUpload');
+        if (!input.files.length) { alert('Select an image'); return; }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          heroImage.src = e.target.result;
+          localStorage.setItem(BANNER_KEY, e.target.result);
+          bannerPreviewImg.src = e.target.result;
+          bannerPreviewImg.style.display = 'block';
+          alert('Banner updated');
+        };
+        reader.readAsDataURL(input.files[0]);
+      };
+
+      // URL tester
+      window.testVideoUrl = function() {
+        const url = document.getElementById('testUrlInput').value.trim();
+        if (!url) { alert('Enter a URL to test'); return; }
+        const resultDiv = document.getElementById('testResult');
+        resultDiv.innerHTML = '<i class="fa-solid fa-spinner fa-pulse"></i> Testing...';
+        resultDiv.className = 'test-result';
+
+        const testVideo = document.createElement('video');
+        testVideo.preload = 'metadata';
+        testVideo.src = url;
+
+        let timeout = setTimeout(() => {
+          cleanup();
+          resultDiv.innerHTML = '<i class="fa-regular fa-circle-xmark"></i> Timeout – URL may be slow or invalid.';
+          resultDiv.className = 'test-result fail';
+        }, 10000);
+
+        const success = () => {
+          cleanup();
+          resultDiv.innerHTML = '<i class="fa-regular fa-circle-check"></i> URL seems valid (metadata loaded)';
+          resultDiv.className = 'test-result success';
+          document.getElementById('videoSrc').value = url;
+        };
+
+        const fail = () => {
+          cleanup();
+          resultDiv.innerHTML = '<i class="fa-regular fa-circle-xmark"></i> Failed – not a playable video URL. Use direct .mp4 links.';
+          resultDiv.className = 'test-result fail';
+        };
+
+        const cleanup = () => {
+          clearTimeout(timeout);
+          testVideo.removeEventListener('loadedmetadata', success);
+          testVideo.removeEventListener('error', fail);
+          testVideo.src = '';
+          testVideo.load();
+        };
+
+        testVideo.addEventListener('loadedmetadata', success);
+        testVideo.addEventListener('error', fail);
+        testVideo.load();
+      };
+
+      // Add video
+      window.addVideo = function() {
+        const title = document.getElementById('videoTitle').value.trim();
+        const thumbInput = document.getElementById('videoThumbnail');
+        const videoFile = document.getElementById('videoFileUpload').files[0];
+        const videoUrl = document.getElementById('videoSrc').value.trim();
+        const type = document.getElementById('videoType').value;
+
+        if (!title) { alert('Enter a title'); return; }
+        if (thumbInput.files.length === 0) { alert('Select a thumbnail image'); return; }
+        if (!videoFile && !videoUrl) { alert('Provide either a video file or a video URL'); return; }
+
+        const thumbReader = new FileReader();
+        thumbReader.onload = function(thumbEvent) {
+          const thumbnailData = thumbEvent.target.result;
+
+          if (videoFile) {
+            if (videoFile.size > 30 * 1024 * 1024) {
+              if (!confirm('Video file is larger than 30MB. It may fail to store. Continue?')) return;
+            }
+            const videoReader = new FileReader();
+            videoReader.onload = function(videoEvent) {
+              const videoData = videoEvent.target.result;
+              addVideoToArray(title, thumbnailData, videoData, type);
+            };
+            videoReader.onerror = function() { alert('Error reading video file.'); };
+            videoReader.readAsDataURL(videoFile);
+          } else {
+            addVideoToArray(title, thumbnailData, videoUrl, type);
+          }
+        };
+        thumbReader.readAsDataURL(thumbInput.files[0]);
+      };
+
+      function addVideoToArray(title, thumbnail, src, type) {
+        const video = { id: Date.now(), title, thumbnail, src };
+        if (type === 'free') freeVideos.push(video);
+        else vipVideos.push(video);
+
+        try {
+          saveVideos();
+        } catch (e) {
+          alert('Storage limit exceeded. Try using video URLs or smaller files.');
+          if (type === 'free') freeVideos.pop();
+          else vipVideos.pop();
+          return;
+        }
+
+        renderVideos('free');
+        renderVideos('vip');
+
+        document.getElementById('videoTitle').value = '';
+        document.getElementById('videoThumbnail').value = '';
+        document.getElementById('videoFileUpload').value = '';
+        document.getElementById('videoSrc').value = '';
+        document.getElementById('testUrlInput').value = '';
+        document.getElementById('testResult').innerHTML = '<i class="fa-regular fa-circle-check"></i> Enter a URL and click Test';
+        document.getElementById('testResult').className = 'test-result';
+      }
+
+      loadVideos();
+
+      videoModal.addEventListener('click', (e) => { if (e.target === videoModal) closeVideo(); });
+
+      document.getElementById('bannerUpload').addEventListener('change', function(e) {
+        if (this.files.length) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            bannerPreviewImg.src = ev.target.result;
+            bannerPreviewImg.style.display = 'block';
+          };
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+    })();
+  </script>
 </body>
-</html>
+                                                                                      </html>
