@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>imovercovidmaylee · mobile upload</title>
+  <title>imovercovidmaylee · reliable video URLs</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
+    /* (styles unchanged from previous version – only minor additions) */
     * {
       margin: 0;
       padding: 0;
@@ -22,7 +23,6 @@
       line-height: 1.5;
     }
 
-    /* header */
     header {
       background: rgba(10, 10, 12, 0.95);
       backdrop-filter: blur(8px);
@@ -75,7 +75,6 @@
       color: #e50914;
     }
 
-    /* HERO */
     .hero {
       position: relative;
       height: 60vh;
@@ -133,7 +132,6 @@
       gap: 0.5rem;
     }
 
-    /* purchase banner */
     #purchaseBanner {
       background: linear-gradient(135deg, #1e1e24, #141417);
       padding: 0.8rem 1.5rem;
@@ -169,7 +167,6 @@
       background: #e50914;
     }
 
-    /* main container */
     .container {
       padding: 2rem 1.5rem;
       max-width: 1600px;
@@ -260,7 +257,6 @@
       z-index: 2;
     }
 
-    /* MODAL */
     #videoModal {
       display: none;
       position: fixed;
@@ -288,7 +284,7 @@
       color: #e50914;
     }
 
-    /* =========  ADMIN PANEL – mobile friendly, scrollable, with video file upload ========= */
+    /* admin panel – with extra guidance */
     #adminPanel {
       display: none;
       position: fixed;
@@ -373,7 +369,6 @@
       outline: 1px solid #e50914;
     }
 
-    /* file inputs */
     #adminPanel input[type="file"] {
       padding: 0.5rem 0.8rem;
       color: #aaa;
@@ -397,6 +392,20 @@
       display: flex;
       align-items: center;
       gap: 0.3rem;
+    }
+    /* new: helpful note for URLs */
+    .url-hint {
+      background: #1e1e2a;
+      border-radius: 30px;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 0 1rem 0;
+      font-size: 0.8rem;
+      color: #b0b0b0;
+      border-left: 3px solid #e50914;
+    }
+    .url-hint i {
+      color: #e50914;
+      margin-right: 6px;
     }
 
     #adminPanel button {
@@ -450,7 +459,6 @@
       font-style: italic;
       padding: 1rem 0;
     }
-    /* small hint */
     .storage-warning {
       color: #f59e0b;
       font-size: 0.7rem;
@@ -474,7 +482,7 @@
     <img id="heroImage" src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop" alt="banner">
     <div class="hero-content">
       <h2>Your <span style="color:#e50914;">library</span></h2>
-      <p>Upload videos directly from your phone.</p>
+      <p>Upload videos directly from your phone or use a direct video URL.</p>
       <button onclick="alert('▶ Play featured (demo)')"><i class="fa-solid fa-play"></i> Watch</button>
     </div>
   </div>
@@ -485,7 +493,7 @@
     <button onclick="purchasePackage()">Buy</button>
   </div>
 
-  <!-- ADMIN PANEL – now with video file upload (mobile friendly) -->
+  <!-- ADMIN PANEL – with URL help text -->
   <div id="adminPanel">
     <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
     <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
@@ -500,7 +508,7 @@
       <button onclick="uploadBanner()"><i class="fa-solid fa-upload"></i> Set banner</button>
     </div>
 
-    <!-- Video upload (now with direct file picker + URL fallback) -->
+    <!-- Video upload (now with direct file picker + URL with guidance) -->
     <div class="admin-section">
       <h4><i class="fa-solid fa-video"></i> Add new video</h4>
       <input type="text" id="videoTitle" placeholder="Video title">
@@ -512,11 +520,17 @@
       <p style="color:#aaa; margin:0 0 0.3rem 0; font-size:0.85rem;"><i class="fa-solid fa-mobile-screen"></i> Upload video file (from phone):</p>
       <input type="file" id="videoFileUpload" accept="video/mp4, video/quicktime, video/x-matroska, video/*">
       <div class="video-file-note">
-        <i class="fa-solid fa-circle-info"></i> <span>Video will be stored as data (works for small clips, max ~20MB)</span>
+        <i class="fa-solid fa-circle-info"></i> <span>Video will be stored as data (small clips only)</span>
       </div>
       
       <p style="color:#aaa; margin:0.5rem 0 0.3rem 0; font-size:0.85rem;">— OR video URL —</p>
-      <input type="text" id="videoSrc" placeholder="Video URL (https://... .mp4)">
+      <input type="text" id="videoSrc" placeholder="e.g. https://example.com/video.mp4">
+      
+      <!-- helpful hint for URLs -->
+      <div class="url-hint">
+        <i class="fa-solid fa-link"></i> Use a direct link to a video file (.mp4, .webm). 
+        YouTube or Vimeo page links won't work.
+      </div>
       
       <select id="videoType">
         <option value="free">Free</option>
@@ -539,7 +553,7 @@
     </div>
   </div>
 
-  <!-- MODAL -->
+  <!-- MODAL with error handling -->
   <div id="videoModal">
     <span class="close" onclick="closeVideo()"><i class="fa-regular fa-circle-xmark"></i></span>
     <video controls id="player"></video>
@@ -628,19 +642,56 @@
         });
       }
 
+      // ----- IMPROVED play function with error handling -----
       window.playVideo = function(src, type) {
         if (type === 'vip' && !paid) {
-          if (confirm('🔒 VIP content. Buy access for $100?')) purchasePackage();
+          if (confirm('🔒 VIP content. Buy access for $100?')) {
+            purchasePackage();
+          }
           return;
         }
+
+        // Clear previous error handlers
+        modalVideo.onerror = null;
+        modalVideo.onloadeddata = null;
+
+        // Set source and show modal
         modalVideo.src = src;
         videoModal.style.display = 'flex';
+
+        // Attempt to play (autoplay may be blocked, but user will click play)
+        const playPromise = modalVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay prevented – fine, user can press play button.
+          });
+        }
+
+        // If video fails to load, show alert and close modal
+        modalVideo.onerror = function() {
+          // Get more details if possible
+          let errorMsg = 'Video cannot be played. ';
+          if (modalVideo.error) {
+            switch (modalVideo.error.code) {
+              case MediaError.MEDIA_ERR_ABORTED: errorMsg += 'Loading aborted.'; break;
+              case MediaError.MEDIA_ERR_NETWORK: errorMsg += 'Network error.'; break;
+              case MediaError.MEDIA_ERR_DECODE: errorMsg += 'Format not supported.'; break;
+              case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorMsg += 'Video format or URL is not supported.'; break;
+              default: errorMsg += 'Unknown error.';
+            }
+          } else {
+            errorMsg += 'Check the URL or file format. For URLs, use direct .mp4 links.';
+          }
+          alert(errorMsg);
+          closeVideo();
+        };
       };
 
       window.closeVideo = function() {
         videoModal.style.display = 'none';
         modalVideo.pause();
         modalVideo.src = '';
+        modalVideo.onerror = null; // Clean up
       };
 
       window.purchasePackage = function() {
@@ -680,7 +731,7 @@
         reader.readAsDataURL(input.files[0]);
       };
 
-      // ADD VIDEO – now handles both video file upload OR video URL
+      // ADD VIDEO – handles both video file upload OR video URL
       window.addVideo = function() {
         const title = document.getElementById('videoTitle').value.trim();
         const thumbInput = document.getElementById('videoThumbnail');
@@ -692,26 +743,25 @@
         if (thumbInput.files.length === 0) { alert('Select a thumbnail image'); return; }
         if (!videoFile && !videoUrl) { alert('Provide either a video file or a video URL'); return; }
 
-        // Read thumbnail first (always needed)
+        // Read thumbnail first
         const thumbReader = new FileReader();
         thumbReader.onload = function(thumbEvent) {
           const thumbnailData = thumbEvent.target.result;
 
-          // Now handle video source
           if (videoFile) {
             // User selected a video file – read as data URL
-            if (videoFile.size > 25 * 1024 * 1024) {
-              alert('Video file is larger than 25MB. It might fail to store. Try a smaller file or use a URL.');
-              // proceed anyway if user wants
+            if (videoFile.size > 30 * 1024 * 1024) {
+              if (!confirm('Video file is larger than 30MB. It may fail to store. Continue?')) return;
             }
             const videoReader = new FileReader();
             videoReader.onload = function(videoEvent) {
-              const videoData = videoEvent.target.result; // base64 data URL
+              const videoData = videoEvent.target.result;
               addVideoToArray(title, thumbnailData, videoData, type);
             };
+            videoReader.onerror = function() { alert('Error reading video file.'); };
             videoReader.readAsDataURL(videoFile);
           } else {
-            // Use video URL
+            // Use video URL – no validation except that it's not empty
             addVideoToArray(title, thumbnailData, videoUrl, type);
           }
         };
@@ -763,4 +813,4 @@
     })();
   </script>
 </body>
-</html>
+  </html>
