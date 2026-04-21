@@ -5,33 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>imovercovidmaylee</title>
 
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
 
 <style>
 body{margin:0;background:#0b0b0b;color:white;font-family:Arial}
-
-/* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-padding:20px;
-background:#111;
-}
-
+header{display:flex;justify-content:space-between;padding:20px;background:#111}
 .logo{color:#e50914;font-size:26px}
 
-/* BANNER */
 #banner{
-height:250px;
-background:#000;
+height:300px;
 background-size:cover;
 display:flex;
 align-items:flex-end;
 padding:20px;
 }
 
-/* GRID */
 .videos{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
@@ -40,12 +32,7 @@ padding:20px;
 }
 
 .card{cursor:pointer;position:relative}
-.card img{
-width:100%;
-height:130px;
-object-fit:cover;
-border-radius:8px;
-}
+.card img{width:100%;height:130px;object-fit:cover;border-radius:8px}
 
 .vip{
 position:absolute;
@@ -56,12 +43,10 @@ color:black;
 padding:3px 6px;
 }
 
-/* MODAL */
 #modal{
 display:none;
 position:fixed;
-top:0;left:0;
-width:100%;height:100%;
+top:0;left:0;width:100%;height:100%;
 background:black;
 justify-content:center;
 align-items:center;
@@ -69,25 +54,13 @@ align-items:center;
 
 #modal video,#modal img{max-width:90%}
 
-/* SECTIONS */
-.payment,.admin{padding:20px;background:#111;margin-top:20px}
+.panel{background:#111;padding:20px;margin:20px}
 
-.wallet{background:#222;padding:10px;margin:10px 0;cursor:pointer}
+button{background:#e50914;border:none;padding:10px;color:white;cursor:pointer}
 
-button{
-padding:10px;
-background:#e50914;
-border:none;
-color:white;
-cursor:pointer;
-margin-top:5px;
-}
+.wallet{background:#222;padding:10px;margin:10px 0}
 
-footer{
-text-align:center;
-padding:20px;
-background:#111;
-}
+footer{text-align:center;padding:20px;background:#111}
 </style>
 </head>
 
@@ -95,65 +68,57 @@ background:#111;
 
 <header>
 <div class="logo">imovercovidmaylee</div>
+<button onclick="logout()">Logout</button>
 </header>
 
-<!-- BANNER -->
-<div id="banner">
-<h2 id="bannerTitle">Featured</h2>
-</div>
-
-<!-- LOGIN -->
-<div style="padding:20px;">
-<input id="username" placeholder="Enter username">
+<!-- AUTH -->
+<div class="panel">
+<h3>Account</h3>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="register()">Register</button>
 <button onclick="login()">Login</button>
 </div>
 
-<h2 style="padding-left:20px;">Free Videos</h2>
+<!-- BANNER -->
+<div id="banner"><h2 id="bannerTitle">Featured</h2></div>
+
+<h2 style="padding-left:20px;">Free</h2>
 <div id="free" class="videos"></div>
 
-<h2 style="padding-left:20px;">VIP Videos</h2>
+<h2 style="padding-left:20px;">VIP</h2>
 <div id="vip" class="videos"></div>
 
 <!-- PAYMENT -->
-<div class="payment">
-<h2>Pay with Bitcoin</h2>
+<div class="panel">
+<h2>Bitcoin Payment</h2>
 
 <div class="wallet" onclick="copyWallet()">
 BTC: 1JxRkqmF31wb8zJWYGanDNBK2aWKxg9pJ8
 </div>
 
-<a href="bitcoin:1JxRkqmF31wb8zJWYGanDNBK2aWKxg9pJ8?amount=0.002">
+<a href="bitcoin:1JxRkqmF31wb8zJWYGanDNBK2aWKxg9pJ8">
 <button>Pay with Bitcoin</button>
 </a>
 
 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:1JxRkqmF31wb8zJWYGanDNBK2aWKxg9pJ8">
 
-<br>
-<button onclick="requestAccess()">I HAVE PAID</button>
+<button onclick="requestVIP()">I HAVE PAID</button>
 </div>
 
 <!-- ADMIN -->
-<div class="admin">
-<h3>Admin Panel</h3>
+<div class="panel">
+<h3>Admin</h3>
 
-<input id="thumb" placeholder="Thumbnail URL">
-<input id="src" placeholder="Video/Image URL">
-<label>VIP</label>
-<input type="checkbox" id="isVip">
+<input type="file" id="file">
+<input id="title" placeholder="Title">
+<label>VIP</label><input type="checkbox" id="vipCheck">
 
-<button onclick="addVideo()">Add Video (Global)</button>
-
-<hr>
-
-<h4>Upload from Phone (Local only)</h4>
-<input type="file" id="videoUpload" accept="video/*">
-<input type="file" id="thumbUpload" accept="image/*">
-<button onclick="uploadLocal()">Upload Local</button>
+<button onclick="upload()">Upload Video/Image</button>
 
 <hr>
 
-<h4>Set Banner</h4>
-<input type="file" id="bannerUpload">
+<input type="file" id="bannerFile">
 <input id="bannerText" placeholder="Banner Title">
 <button onclick="setBanner()">Set Banner</button>
 
@@ -162,50 +127,62 @@ BTC: 1JxRkqmF31wb8zJWYGanDNBK2aWKxg9pJ8
 <!-- MODAL -->
 <div id="modal" onclick="closeModal()"></div>
 
-<!-- FOOTER -->
 <footer>
-<p>Admin Telegram:</p>
-<a href="https://t.me/maylee_covid0001" target="_blank">@maylee_covid0001</a>
+<p>Contact:</p>
+<a href="https://t.me/maylee_covid0001">@maylee_covid0001</a>
 </footer>
 
 <script>
 
-/* FIREBASE */
-const firebaseConfig = {
-  apiKey:"YOUR_KEY",
-  authDomain:"YOUR_PROJECT.firebaseapp.com",
-  projectId:"YOUR_PROJECT"
+/* FIREBASE CONFIG */
+const firebaseConfig={
+apiKey:"YOUR_KEY",
+authDomain:"YOUR_PROJECT.firebaseapp.com",
+projectId:"YOUR_PROJECT",
+storageBucket:"YOUR_PROJECT.appspot.com"
 };
+
 firebase.initializeApp(firebaseConfig);
+
+const auth=firebase.auth();
 const db=firebase.firestore();
+const storage=firebase.storage();
 
-/* USER */
-let currentUser=localStorage.getItem("user");
-let paidUsers=JSON.parse(localStorage.getItem("paidUsers")||"[]");
-
-/* LOGIN */
-function login(){
-currentUser=username.value;
-localStorage.setItem("user",currentUser);
-alert("Logged in");
+/* AUTH */
+function register(){
+auth.createUserWithEmailAndPassword(email.value,password.value);
 }
 
-/* LOAD GLOBAL VIDEOS */
+function login(){
+auth.signInWithEmailAndPassword(email.value,password.value);
+}
+
+function logout(){
+auth.signOut();
+}
+
+/* USER STATE */
+let currentUser=null;
+
+auth.onAuthStateChanged(user=>{
+currentUser=user;
+loadVideos();
+});
+
+/* LOAD VIDEOS */
 function loadVideos(){
-db.collection("videos").onSnapshot(snapshot=>{
+db.collection("videos").onSnapshot(snap=>{
 free.innerHTML="";
 vip.innerHTML="";
 
-snapshot.forEach(doc=>{
+snap.forEach(doc=>{
 let v=doc.data();
 
 let d=document.createElement("div");
 d.className="card";
 
-d.innerHTML=`
-<img src="${v.thumb}">
-${v.vip?'<div class="vip">VIP</div>':''}
-`;
+d.innerHTML=`<img src="${v.thumb}">
+${v.vip?'<div class="vip">VIP</div>':''}`;
 
 d.onclick=()=>play(v);
 
@@ -217,86 +194,76 @@ else free.appendChild(d);
 
 /* PLAY */
 function play(v){
-if(v.vip && !paidUsers.includes(currentUser)){
-alert("VIP locked");
+
+if(v.vip){
+db.collection("users").doc(currentUser.uid).get().then(doc=>{
+if(!doc.data()?.vip){
+alert("VIP required");
 return;
 }
-
-let modal=document.getElementById("modal");
-
-if(v.src.match(/\.(jpg|png|jpeg|gif)$/)){
-modal.innerHTML=`<img src="${v.src}">`;
+open(v);
+});
 }else{
-modal.innerHTML=`<video src="${v.src}" controls autoplay></video>`;
+open(v);
+}
 }
 
+function open(v){
+modal.innerHTML=v.src.match(/\.(jpg|png)/)?
+`<img src="${v.src}">`:
+`<video src="${v.src}" controls autoplay></video>`;
 modal.style.display="flex";
 }
 
-/* CLOSE */
 function closeModal(){
 modal.style.display="none";
 }
 
-/* COPY WALLET */
-function copyWallet(){
-navigator.clipboard.writeText("1JxRkqmF31wb8zJWYGanDNBK2aWKxg9pJ8");
-alert("Copied");
-}
+/* UPLOAD */
+function upload(){
 
-/* PAYMENT */
-function requestAccess(){
-if(!currentUser){alert("Login first");return;}
-paidUsers.push(currentUser);
-localStorage.setItem("paidUsers",JSON.stringify(paidUsers));
-alert("Access granted");
-}
+const file=document.getElementById("file").files[0];
 
-/* ADD VIDEO (GLOBAL) */
-function addVideo(){
+let ref=storage.ref("videos/"+file.name);
+
+ref.put(file).then(()=>{
+ref.getDownloadURL().then(url=>{
+
 db.collection("videos").add({
-thumb:thumb.value,
-src:src.value,
-vip:isVip.checked
+src:url,
+thumb:url,
+vip:vipCheck.checked
 });
-alert("Added globally");
+
+});
+});
 }
 
-/* LOCAL UPLOAD */
-function uploadLocal(){
-const v=document.getElementById("videoUpload").files[0];
-const t=document.getElementById("thumbUpload").files[0];
-
-if(!v){alert("Select video");return;}
-
-let videoURL=URL.createObjectURL(v);
-let thumbURL=t?URL.createObjectURL(t):"https://via.placeholder.com/300x170";
-
-let obj={src:videoURL,thumb:thumbURL,vip:false};
-
-let d=document.createElement("div");
-d.className="card";
-d.innerHTML=`<img src="${obj.thumb}">`;
-d.onclick=()=>play(obj);
-
-free.appendChild(d);
+/* VIP REQUEST */
+function requestVIP(){
+db.collection("users").doc(currentUser.uid).set({vip:true},{merge:true});
+alert("VIP activated (manual)");
 }
 
 /* BANNER */
 function setBanner(){
-const file=document.getElementById("bannerUpload").files[0];
-const text=document.getElementById("bannerText").value;
+const file=bannerFile.files[0];
 
-if(!file){alert("Upload image");return;}
+let ref=storage.ref("banner/"+file.name);
 
-let url=URL.createObjectURL(file);
-
+ref.put(file).then(()=>{
+ref.getDownloadURL().then(url=>{
 banner.style.backgroundImage=`url(${url})`;
-bannerTitle.innerText=text||"Featured";
+bannerTitle.innerText=bannerText.value;
+});
+});
 }
 
-/* INIT */
-loadVideos();
+/* WALLET */
+function copyWallet(){
+navigator.clipboard.writeText("1JxRkqmF31wb8zJWYGanDNBK2aWKxg9pJ8");
+alert("Copied");
+}
 
 </script>
 
