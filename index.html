@@ -1,836 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>imovercovidmaylee · hot video's pussy</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChrisFlix</title>
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #0a0a0c;
-      color: #ffffff;
-      line-height: 1.5;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    header {
-      background: rgba(10, 10, 12, 0.95);
-      backdrop-filter: blur(8px);
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid rgba(229, 9, 20, 0.25);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  background:#0b0b0b;
+  color:white;
+}
 
-    header h1 {
-      color: #e50914;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      background: linear-gradient(145deg, #e50914, #ff4d4d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+/* header */
+header {
+  display:flex;
+  justify-content:space-between;
+  padding:15px 20px;
+  background:#111;
+  position:sticky;
+  top:0;
+}
 
-    nav a {
-      color: #eee;
-      margin-left: 1.2rem;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-    nav a:hover {
-      color: #e50914;
-    }
-    nav a i {
-      margin-right: 4px;
-    }
+header h1 { color:#e50914; }
+#adminDots { cursor:pointer; font-size:24px; }
 
-    #adminDots {
-      font-size: 2rem;
-      line-height: 1;
-      cursor: pointer;
-      color: #aaa;
-      margin-left: 1rem;
-      transition: color 0.2s;
-    }
-    #adminDots:hover {
-      color: #e50914;
-    }
+/* banner */
+#banner {
+  background:#1a1a1a;
+  padding:12px;
+  text-align:center;
+}
 
-    /* HERO with video background */
-    .hero {
-      position: relative;
-      height: 60vh;
-      min-height: 400px;
-      width: 100%;
-      overflow: hidden;
-      isolation: isolate;
-      background: #111; /* fallback */
-    }
-    .hero video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      filter: brightness(0.45) saturate(1.2);
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, #0a0a0c 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 2;
-    }
-    .hero-content {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 1.5rem;
-      right: 1.5rem;
-      max-width: 500px;
-      z-index: 3;
-    }
-    .hero-content h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-    .hero-content p {
-      font-size: 1rem;
-      color: #ddd;
-      margin-bottom: 1.2rem;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    }
-    .hero-content button {
-      background: #e50914;
-      border: none;
-      padding: 0.7rem 1.8rem;
-      color: white;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 40px;
-      cursor: pointer;
-      box-shadow: 0 8px 22px rgba(229, 9, 20, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: background 0.2s;
-    }
-    .hero-content button:hover {
-      background: #ff1f2b;
-    }
+/* grid */
+.videos {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:15px;
+  padding:20px;
+}
 
-    /* subscribe banner */
-    #subscribeBanner {
-      background: linear-gradient(135deg, #1e1e24, #141417);
-      padding: 0.8rem 1.5rem;
-      border-bottom: 2px solid #e50914;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 1rem;
-    }
-    #subscribeBanner p i {
-      color: #ffd966;
-    }
-    #subscribeBanner strong {
-      color: #e50914;
-      background: rgba(229,9,20,0.15);
-      padding: 0.2rem 0.8rem;
-      border-radius: 40px;
-      margin-left: 0.3rem;
-    }
-    #subscribeBanner button {
-      background: transparent;
-      border: 2px solid #e50914;
-      padding: 0.4rem 1.5rem;
-      border-radius: 40px;
-      color: white;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    #subscribeBanner button:hover {
-      background: #e50914;
-      border-color: #e50914;
-    }
+.video-card {
+  position:relative;
+  cursor:pointer;
+  transition:0.3s;
+}
 
-    .container {
-      padding: 2rem 1.5rem;
-      max-width: 1600px;
-      margin: 0 auto;
-    }
+.video-card:hover { transform:scale(1.05); }
 
-    .row {
-      margin-bottom: 3rem;
-    }
-    .row h2 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      border-left: 6px solid #e50914;
-      padding-left: 1rem;
-    }
+.video-card img {
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:8px;
+}
 
-    /* image grid */
-    .image-grid {
-      display: flex;
-      gap: 1.2rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      scrollbar-width: thin;
-      scrollbar-color: #e50914 #1f1f1f;
-    }
-    .image-grid::-webkit-scrollbar {
-      height: 5px;
-    }
-    .image-grid::-webkit-scrollbar-track {
-      background: #1f1f1f;
-      border-radius: 12px;
-    }
-    .image-grid::-webkit-scrollbar-thumb {
-      background: #e50914;
-      border-radius: 12px;
-    }
+/* play overlay */
+.video-card::after {
+  content:"▶ Play";
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  background:rgba(0,0,0,0.7);
+  padding:5px 10px;
+  border-radius:5px;
+  font-size:12px;
+}
 
-    .image-card {
-      min-width: 180px;
-      width: 180px;
-      cursor: pointer;
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-    }
-    .image-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 18px 30px rgba(229, 9, 20, 0.25);
-    }
-    .image-card img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-    }
-    .image-card .card-title {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent);
-      color: white;
-      padding: 1.2rem 0.8rem 0.8rem 0.8rem;
-      font-size: 1rem;
-      font-weight: 500;
-      transform: translateY(100%);
-      transition: transform 0.25s ease;
-      pointer-events: none;
-    }
-    .image-card:hover .card-title {
-      transform: translateY(0);
-    }
-    .vip-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: linear-gradient(145deg, #fbbf24, #f59e0b);
-      color: #0a0a0c;
-      font-weight: 800;
-      font-size: 0.7rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 40px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      z-index: 2;
-    }
+/* VIP badge */
+.vip {
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:gold;
+  color:black;
+  padding:3px 6px;
+  font-size:12px;
+  border-radius:3px;
+}
 
-    /* admin panel – with video banner upload */
-    #adminPanel {
-      display: none;
-      position: fixed;
-      top: 70px;
-      right: 10px;
-      width: 94%;
-      max-width: 440px;
-      max-height: 80vh;
-      background: rgba(18, 18, 22, 0.98);
-      backdrop-filter: blur(24px);
-      padding: 1.8rem 1.8rem 2rem 1.8rem;
-      border-radius: 32px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(229,9,20,0.3);
-      z-index: 200;
-      border: 1px solid rgba(255,255,255,0.06);
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #e50914 #2b2b31;
-    }
-    #adminPanel::-webkit-scrollbar {
-      width: 4px;
-    }
-    #adminPanel::-webkit-scrollbar-track {
-      background: #2b2b31;
-      border-radius: 12px;
-    }
-    #adminPanel::-webkit-scrollbar-thumb {
-      background: #e50914;
-      border-radius: 12px;
-    }
+/* delete btn */
+.delete {
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:red;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+}
 
-    #adminPanel h3 {
-      font-size: 1.6rem;
-      margin: 0 0 1.2rem 0;
-      color: #e50914;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid #333;
-      padding-bottom: 0.8rem;
-      position: sticky;
-      top: 0;
-      background: rgba(18,18,22,0.98);
-      z-index: 3;
-    }
+/* modal */
+#modal {
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
 
-    .admin-section {
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px dashed #2a2a2a;
-    }
-    .admin-section:last-of-type {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
+#modal img, #modal video {
+  max-width:90%;
+  border-radius:10px;
+}
 
-    .admin-section h4 {
-      color: #ddd;
-      margin-bottom: 1rem;
-      font-weight: 500;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+/* admin */
+#adminPanel {
+  display:none;
+  position:fixed;
+  right:20px;
+  top:80px;
+  background:#222;
+  padding:15px;
+  border-radius:10px;
+  width:250px;
+}
 
-    #adminPanel input,
-    #adminPanel select {
-      margin-bottom: 1.2rem;
-      padding: 0.9rem 1.2rem;
-      width: 100%;
-      border-radius: 40px;
-      border: none;
-      background: #2b2b31;
-      color: #fff;
-      font-size: 0.95rem;
-      outline: 1px solid transparent;
-    }
-    #adminPanel input:focus,
-    #adminPanel select:focus {
-      outline: 1px solid #e50914;
-    }
+input, select, button {
+  width:100%;
+  margin:5px 0;
+  padding:10px;
+}
 
-    #adminPanel input[type="file"] {
-      padding: 0.6rem 1rem;
-      color: #aaa;
-      background: #1f1f25;
-    }
-    #adminPanel input[type="file"]::file-selector-button {
-      background: #e50914;
-      border: none;
-      color: white;
-      padding: 0.4rem 1rem;
-      border-radius: 40px;
-      font-weight: 600;
-      margin-right: 0.8rem;
-      cursor: pointer;
-    }
+button {
+  background:#e50914;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
 
-    #adminPanel button {
-      padding: 0.9rem 1.2rem;
-      background: #e50914;
-      color: #fff;
-      border: none;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      transition: background 0.2s;
-      box-shadow: 0 6px 14px rgba(229,9,20,0.4);
-      width: 100%;
-      margin-top: 0.5rem;
-    }
-    #adminPanel button:hover {
-      background: #ff1f2b;
-    }
-
-    .panel-close {
-      position: absolute;
-      top: 18px;
-      right: 20px;
-      font-size: 2rem;
-      color: #aaa;
-      cursor: pointer;
-      z-index: 10;
-    }
-    .panel-close:hover {
-      color: #e50914;
-    }
-
-    .banner-preview {
-      margin: 0.8rem 0 1.2rem 0;
-      border-radius: 16px;
-      overflow: hidden;
-      max-width: 100%;
-      border: 2px solid #333;
-      background: #111;
-    }
-    .banner-preview video,
-    .banner-preview img {
-      width: 100%;
-      max-height: 120px;
-      object-fit: cover;
-      display: block;
-    }
-    .placeholder-text {
-      color: #555;
-      font-style: italic;
-      padding: 1rem 0;
-    }
-
-    /* subscription modal */
-    #subscribeModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-    }
-    .modal-content {
-      background: #1c1c24;
-      max-width: 380px;
-      width: 90%;
-      border-radius: 48px;
-      padding: 2rem 2rem 1.8rem;
-      box-shadow: 0 30px 60px rgba(229,9,20,0.3);
-      border: 1px solid rgba(229,9,20,0.4);
-      text-align: center;
-    }
-    .modal-content i {
-      font-size: 3.5rem;
-      color: gold;
-      margin-bottom: 1rem;
-    }
-    .modal-content h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      color: #e50914;
-    }
-    .modal-content p {
-      font-size: 1.1rem;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
-    .modal-btn {
-      background: #e50914;
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      width: 100%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      transition: 0.2s;
-      box-shadow: 0 8px 22px rgba(229,9,20,0.5);
-      margin-bottom: 1rem;
-    }
-    .modal-btn:hover {
-      background: #ff1f2b;
-      transform: scale(1.02);
-    }
-    .modal-skip {
-      background: transparent;
-      border: none;
-      color: #888;
-      font-size: 0.9rem;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-    .modal-skip:hover {
-      color: #ccc;
-    }
-  </style>
+button:hover { background:#b2070f; }
+</style>
 </head>
+
 <body>
-  <!-- SUBSCRIPTION MODAL (first visit) -->
-  <div id="subscribeModal">
-    <div class="modal-content">
-      <i class="fa-solid fa-crown"></i>
-      <h2>Unlock everything</h2>
-      <p>Subscribe to get unlimited access to all sexy videos and content.</p>
-      <button class="modal-btn" id="subscribeNowBtn">
-        <i class="fa-brands fa-telegram"></i> Subscribe via Telegram
-      </button>
-      <button class="modal-skip" id="closeModalBtn">Maybe later</button>
-    </div>
-  </div>
 
-  <header>
-    <h1>imovercovidmaylee</h1>
-    <nav>
-      <a href="#"><i class="fa-solid fa-house"></i></a>
-      <a href="#"><i class="fa-solid fa-crown" style="color: gold;"></i></a>
-      <a href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
-    </nav>
-    <div id="adminDots" onclick="toggleAdmin()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
-  </header>
+<header>
+<h1>ChrisFlix</h1>
+<div id="adminDots" onclick="toggleAdmin()">⋮</div>
+</header>
 
-  <!-- HERO with video background (fallback image if no video) -->
-  <div class="hero">
-    <video id="heroVideo" autoplay muted loop playsinline></video>
-    <div class="hero-content">
-      <h2>Your <span style="color:#e50914;">gallery</span></h2>
-      <p>I love do you want hot videos. Subscribe to unlock everything.</p>
-      <button onclick="alert('▶ Play featured (demo)')"><i class="fa-solid fa-play"></i> Watch</button>
-    </div>
-  </div>
+<div id="banner">
+🔒 VIP content locked — Contact admin after payment
+</div>
 
-  <!-- SUBSCRIBE BANNER -->
-  <div id="subscribeBanner">
-    <p><i class="fa-solid fa-gem"></i> Get unlimited access to all content – <strong>Subscribe now</strong></p>
-    <button onclick="window.open('https://t.me/maylee_covid0001', '_blank'); markSubscribed();">
-      <i class="fa-brands fa-telegram"></i> Join Telegram
-    </button>
-  </div>
+<h2 style="padding-left:20px;">🎬 Free</h2>
+<div id="free" class="videos"></div>
 
-  <!-- ADMIN PANEL – with banner video upload and image gallery upload -->
-  <div id="adminPanel">
-    <div class="panel-close" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></div>
-    <h3><i class="fa-solid fa-lock"></i> Admin panel</h3>
-    
-    <!-- Banner video upload (muted autoplay) -->
-    <div class="admin-section">
-      <h4><i class="fa-solid fa-video"></i> Banner video (muted)</h4>
-      <input type="file" id="bannerVideoUpload" accept="video/mp4, video/webm, video/quicktime">
-      <div class="banner-preview">
-        <video id="bannerPreviewVideo" muted loop playsinline style="display: none;"></video>
-        <img id="bannerPreviewFallback" src="#" alt="" style="display: none;">
-      </div>
-      <button onclick="uploadBannerVideo()"><i class="fa-solid fa-upload"></i> Set banner video</button>
-      <p style="font-size:0.75rem; color:#aaa; margin-top:0.3rem;">Video will autoplay muted. Keep it short.</p>
-    </div>
+<h2 style="padding-left:20px;">👑 VIP</h2>
+<div id="vip" class="videos"></div>
 
-    <!-- Image upload section -->
-    <div class="admin-section">
-      <h4><i class="fa-regular fa-images"></i> Add new image</h4>
-      <input type="text" id="imageTitle" placeholder="Image title / caption">
-      <input type="file" id="imageUpload" accept="image/*">
-      <select id="imageType">
-        <option value="free">Free</option>
-        <option value="vip">VIP</option>
-      </select>
-      <button onclick="addImage()"><i class="fa-solid fa-plus"></i> Add image</button>
-      <p style="font-size:0.75rem; color:#666; margin-top:0.8rem;">Images stored in browser.</p>
-    </div>
-  </div>
+<!-- modal -->
+<div id="modal" onclick="closeModal()"></div>
 
-  <div class="container">
-    <!-- Free images row -->
-    <div class="row">
-      <h2><i class="fa-regular fa-eye" style="color:#e50914;"></i> Free preview</h2>
-      <div class="image-grid" id="freeImages"></div>
-    </div>
-    <!-- VIP images row -->
-    <div class="row">
-      <h2><i class="fa-solid fa-crown" style="color:gold;"></i> VIP preview</h2>
-      <div class="image-grid" id="vipImages"></div>
-    </div>
-  </div>
+<!-- admin -->
+<div id="adminPanel">
+<input id="title" placeholder="Title">
+<input id="thumb" placeholder="Thumbnail URL">
+<input id="src" placeholder="Video/Image URL">
+<select id="type">
+<option value="free">Free</option>
+<option value="vip">VIP</option>
+</select>
+<button onclick="addContent()">Add Content</button>
+</div>
 
-  <script>
-    (function() {
-      // ---------- data ----------
-      let freeImages = [];
-      let vipImages = [];
+<script>
+let freeVideos=[];
+let vipVideos=[];
+let paid = localStorage.getItem("paid")==="true";
+let adminOpen=false;
 
-      const freeContainer = document.getElementById('freeImages');
-      const vipContainer = document.getElementById('vipImages');
-      const adminPanel = document.getElementById('adminPanel');
-      const heroVideo = document.getElementById('heroVideo');
-      const bannerPreviewVideo = document.getElementById('bannerPreviewVideo');
-      const bannerPreviewFallback = document.getElementById('bannerPreviewFallback');
+/* render */
+function render(){
+  document.getElementById("free").innerHTML="";
+  document.getElementById("vip").innerHTML="";
 
-      const ADMIN_PASSWORD = "1234";
-      const BANNER_VIDEO_KEY = "banner_video";
-      const IMAGES_KEY = "user_images";
-      const SUBSCRIBED_KEY = "has_subscribed";
+  freeVideos.forEach(v=>createCard(v,"free"));
+  vipVideos.forEach(v=>createCard(v,"vip"));
+}
 
-      // ----- subscription modal logic -----
-      const modal = document.getElementById('subscribeModal');
-      const subscribeBtn = document.getElementById('subscribeNowBtn');
-      const closeModalBtn = document.getElementById('closeModalBtn');
-      const bannerBtn = document.querySelector('#subscribeBanner button');
+/* create card */
+function createCard(v,type){
+  let div=document.createElement("div");
+  div.className="video-card";
 
-      window.markSubscribed = function() {
-        localStorage.setItem(SUBSCRIBED_KEY, 'true');
-        modal.style.display = 'none';
-      };
+  let img=document.createElement("img");
+  img.src=v.thumb || "https://via.placeholder.com/300x170";
+  div.appendChild(img);
 
-      if (!localStorage.getItem(SUBSCRIBED_KEY)) {
-        setTimeout(() => {
-          modal.style.display = 'flex';
-        }, 500);
-      }
+  if(type==="vip"){
+    let vip=document.createElement("div");
+    vip.className="vip";
+    vip.innerText="VIP";
+    div.appendChild(vip);
+  }
 
-      subscribeBtn.addEventListener('click', function() {
-        window.open('https://t.me/maylee_covid0001', '_blank');
-        markSubscribed();
-      });
+  if(adminOpen){
+    let del=document.createElement("div");
+    del.className="delete";
+    del.innerHTML="🗑";
+    del.onclick=(e)=>{
+      e.stopPropagation();
+      deleteContent(v.id,type);
+    };
+    div.appendChild(del);
+  }
 
-      closeModalBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-      });
+  div.onclick=()=>playMedia(v.src,type);
+  document.getElementById(type).appendChild(div);
+}
 
-      bannerBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open('https://t.me/maylee_covid0001', '_blank');
-        markSubscribed();
-      });
+/* play media */
+function playMedia(src,type){
+  if(type==="vip" && !paid){
+    alert("VIP locked. Contact admin.");
+    return;
+  }
 
-      // ----- load banner video from localStorage -----
-      function loadBannerVideo() {
-        const savedVideo = localStorage.getItem(BANNER_VIDEO_KEY);
-        if (savedVideo) {
-          heroVideo.src = savedVideo;
-          heroVideo.load();
-          heroVideo.play().catch(() => {}); // autoplay may be prevented, but muted helps
-          bannerPreviewVideo.src = savedVideo;
-          bannerPreviewVideo.style.display = 'block';
-          bannerPreviewFallback.style.display = 'none';
-        } else {
-          // fallback image (optional)
-          heroVideo.poster = 'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070&auto=format&fit=crop';
-          // we can keep video empty, or use a default image via background? we have video element only, but poster shows.
-        }
-      }
+  let modal=document.getElementById("modal");
+  modal.innerHTML="";
 
-      // ----- load images from localStorage -----
-      function loadImages() {
-        const saved = localStorage.getItem(IMAGES_KEY);
-        if (saved) {
-          try {
-            const data = JSON.parse(saved);
-            freeImages = data.free || [];
-            vipImages = data.vip || [];
-          } catch (e) {}
-        } else {
-          freeImages = [];
-          vipImages = [];
-        }
-        renderImages('free');
-        renderImages('vip');
-      }
+  if(src.match(/\.(jpg|png|jpeg|gif|webp)$/i)){
+    let img=document.createElement("img");
+    img.src=src;
+    modal.appendChild(img);
+  } else {
+    let vid=document.createElement("video");
+    vid.src=src;
+    vid.controls=true;
+    vid.autoplay=true;
+    modal.appendChild(vid);
+  }
 
-      function saveImages() {
-        localStorage.setItem(IMAGES_KEY, JSON.stringify({
-          free: freeImages,
-          vip: vipImages
-        }));
-      }
+  modal.style.display="flex";
+}
 
-      function renderImages(type) {
-        const container = type === 'free' ? freeContainer : vipContainer;
-        const images = type === 'free' ? freeImages : vipImages;
-        container.innerHTML = '';
-        if (images.length === 0) {
-          const msg = document.createElement('div');
-          msg.className = 'placeholder-text';
-          msg.innerHTML = type === 'free' ? '✨ No free images yet. Add via admin.' : '👑 No VIP images yet. Add via admin.';
-          container.appendChild(msg);
-          return;
-        }
-        images.forEach(imgItem => {
-          const card = document.createElement('div');
-          card.className = 'image-card';
+/* close modal */
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
 
-          const img = document.createElement('img');
-          img.src = imgItem.src;
-          img.alt = imgItem.title;
-          card.appendChild(img);
+/* admin */
+function toggleAdmin(){
+  let pass=prompt("Admin password:");
+  if(pass==="1234"){
+    adminOpen=!adminOpen;
+    document.getElementById("adminPanel").style.display=adminOpen?"block":"none";
+    render();
+  } else if(pass!==null){
+    alert("Wrong password");
+  }
+}
 
-          const titleSpan = document.createElement('span');
-          titleSpan.className = 'card-title';
-          titleSpan.textContent = imgItem.title;
-          card.appendChild(titleSpan);
+/* add */
+function addContent(){
+  let v={
+    id:Date.now(),
+    title:title.value,
+    thumb:thumb.value,
+    src:src.value
+  };
 
-          if (type === 'vip') {
-            const badge = document.createElement('div');
-            badge.className = 'vip-badge';
-            badge.innerHTML = '<i class="fa-solid fa-crown"></i> VIP';
-            card.appendChild(badge);
-          }
+  if(type.value==="free") freeVideos.push(v);
+  else vipVideos.push(v);
 
-          // On click, always show subscription prompt (both free and VIP)
-          card.onclick = function() {
-            if (confirm('🔒 This content requires subscription. Open Telegram to subscribe?')) {
-              window.open('https://t.me/maylee_covid0001', '_blank');
-              markSubscribed();
-            }
-          };
+  save();
+  render();
+}
 
-          container.appendChild(card);
-        });
-      }
+/* delete */
+function deleteContent(id,type){
+  if(type==="free"){
+    freeVideos=freeVideos.filter(v=>v.id!==id);
+  } else {
+    vipVideos=vipVideos.filter(v=>v.id!==id);
+  }
+  save();
+  render();
+}
 
-      // ----- admin functions -----
-      window.toggleAdmin = function() {
-        if (adminPanel.style.display === 'block') {
-          adminPanel.style.display = 'none';
-        } else {
-          let pwd = prompt('Enter admin password');
-          if (pwd === ADMIN_PASSWORD) {
-            adminPanel.style.display = 'block';
-          } else if (pwd !== null) alert('Wrong password');
-        }
-      };
+/* save/load */
+function save(){
+  localStorage.setItem("free",JSON.stringify(freeVideos));
+  localStorage.setItem("vip",JSON.stringify(vipVideos));
+}
 
-      window.closeAdminPanel = function() {
-        adminPanel.style.display = 'none';
-      };
+function load(){
+  freeVideos=JSON.parse(localStorage.getItem("free")||"[]");
+  vipVideos=JSON.parse(localStorage.getItem("vip")||"[]");
 
-      // Banner video upload
-      window.uploadBannerVideo = function() {
-        const input = document.getElementById('bannerVideoUpload');
-        if (!input.files.length) { alert('Select a video file'); return; }
-        const file = input.files[0];
-        if (file.size > 50 * 1024 * 1024) {
-          alert('Video is larger than 50MB. It may not store well. Try a smaller file.');
-          return;
-        }
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const videoData = e.target.result;
-          localStorage.setItem(BANNER_VIDEO_KEY, videoData);
-          heroVideo.src = videoData;
-          heroVideo.load();
-          heroVideo.play().catch(() => {});
-          bannerPreviewVideo.src = videoData;
-          bannerPreviewVideo.style.display = 'block';
-          bannerPreviewFallback.style.display = 'none';
-          alert('Banner video updated');
-        };
-        reader.readAsDataURL(file);
-      };
+  /* default samples */
+  if(freeVideos.length===0){
+    freeVideos.push({
+      id:1,
+      thumb:"https://via.placeholder.com/300x170?text=Free",
+      src:"https://www.w3schools.com/html/mov_bbb.mp4"
+    });
+  }
 
-      // Add image
-      window.addImage = function() {
-        const title = document.getElementById('imageTitle').value.trim();
-        const fileInput = document.getElementById('imageUpload');
-        const type = document.getElementById('imageType').value;
+  if(vipVideos.length===0){
+    vipVideos.push({
+      id:2,
+      thumb:"https://via.placeholder.com/300x170?text=VIP",
+      src:"https://www.w3schools.com/html/mov_bbb.mp4"
+    });
+  }
+}
 
-        if (!title) { alert('Enter a title'); return; }
-        if (fileInput.files.length === 0) { alert('Select an image file'); return; }
+load();
+render();
+</script>
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const imageData = e.target.result;
-          const newImage = {
-            id: Date.now(),
-            title: title,
-            src: imageData
-          };
-
-          if (type === 'free') {
-            freeImages.push(newImage);
-          } else {
-            vipImages.push(newImage);
-          }
-
-          try {
-            saveImages();
-          } catch (e) {
-            alert('Storage limit exceeded. Try smaller images.');
-            // rollback
-            if (type === 'free') freeImages.pop();
-            else vipImages.pop();
-            return;
-          }
-
-          renderImages('free');
-          renderImages('vip');
-
-          // Clear inputs
-          document.getElementById('imageTitle').value = '';
-          document.getElementById('imageUpload').value = '';
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-      };
-
-      // initial load
-      loadBannerVideo();
-      loadImages();
-
-      // live preview for banner video (optional)
-      document.getElementById('bannerVideoUpload').addEventListener('change', function(e) {
-        if (this.files.length) {
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            bannerPreviewVideo.src = ev.target.result;
-            bannerPreviewVideo.style.display = 'block';
-            bannerPreviewFallback.style.display = 'none';
-          };
-          reader.readAsDataURL(this.files[0]);
-        }
-      });
-    })();
-  </script>
 </body>
-  </html>
+</html>
